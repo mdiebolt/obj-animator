@@ -13,7 +13,7 @@ Renderer
     document.body.appendChild container
 
     container.appendChild renderer.domElement
-    renderer.setSize window.innerWidth, window.innerHeight
+    renderer.setSize 800, 600 #window.innerWidth, window.innerHeight
 
     camera.position.set 0, 100, 200
 

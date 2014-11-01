@@ -28,6 +28,9 @@ Create a basic floor of dimension `size`
           [0...size].forEach (z) ->
             addCube new Vector3(x * CUBE_SIZE, -5, z * CUBE_SIZE)
 
+Load all the characters. Provide a callback that receives an array
+of the characters when they're done loading.
+
       populateCharacters: (cb) ->
         loadingManager = load [{
           name: "bartender"
@@ -61,5 +64,4 @@ Create a basic floor of dimension `size`
           position: new Vector3(90, 0, 0)
         }]
         
-        loadingManager.onLoad (characters) ->
-          cb? characters
+        loadingManager.onLoad cb

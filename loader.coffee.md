@@ -45,6 +45,7 @@ Load a model by name, passing in an optional position.
         loader = new THREE.OBJLoader(manager)
         loader.crossOrigin = true
         loader.load "#{BUCKET_PATH}/#{attrs.name}.obj?doot2", (object) ->
+          object.name = attrs.name
           object.traverse (child) ->
             if child instanceof THREE.Mesh
 
@@ -55,24 +56,22 @@ Apply the color palette texture we loaded above
               object.position.set position.x, position.y, position.z
               
               characters.push object
-              scene.add object
-  
-          , onProgress
-          , onError
-          
-        loader.load "#{BUCKET_PATH}/#{attrs.name}_test.obj?doot2", (object) ->
-          object.traverse (child) ->
-            if child instanceof THREE.Mesh
-
-              child.material.map = texture
-  
-              object.position.set position.x, position.y, position.z
               
-              characters.push object
+              loader.load "#{BUCKET_PATH}/#{attrs.name}_test.obj?doot2", (innerObj) ->
+                innerObj.traverse (child) ->
+                  if child instanceof THREE.Mesh
+      
+                    child.material.map = texture
+                            
+                    object.add innerObj
+        
+                , onProgress
+                , onError              
+              
               scene.add object
+              debugger 
   
           , onProgress
           , onError
-
-        
+                  
       return manager

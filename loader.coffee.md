@@ -60,7 +60,7 @@ Apply the color palette texture we loaded above
           , onProgress
           , onError
           
-        loader.load "#{BUCKET_PATH}/#{attrs.name}_idle.obj?doot2", (object) ->
+        loader.load "#{BUCKET_PATH}/#{attrs.name}_test.obj?doot2", (object) ->
           object.traverse (child) ->
             if child instanceof THREE.Mesh
 

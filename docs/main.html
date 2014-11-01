@@ -50,12 +50,6 @@ renderer.setSize window.innerWidth, window.innerHeight
 
 camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
 
-<span class="function"><span class="title">onWindowResize</span></span> = -&gt;
-  camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-
-    renderer.setSize window.innerWidth, window.innerHeight
-
 <span class="function"><span class="title">init</span></span> = -&gt;
   addLights()
 
@@ -78,8 +72,6 @@ camera.position.set <span class="number">0</span>, <span class="number">100</spa
   camera.lookAt scene.position
 
   renderer.render scene, camera
-
-window.addEventListener <span class="string">"resize"</span>, onWindowResize, <span class="literal">false</span>
 
 init()
 animate()</code></pre>

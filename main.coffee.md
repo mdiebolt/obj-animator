@@ -20,7 +20,7 @@ Renderer
     init = ->
       addLights()
 
-      map.generateGrid(10)
+      map.generateGrid 10
       map.populateCharacters()
 
     animate = ->

@@ -19,15 +19,6 @@ Renderer
 
     camera.position.set 0, 100, 200
 
-Return 1 if `probability` percent of the time.
-Return -1 otherwise
-
-    randomSign = (probability) ->
-      if Math.random() <= probability
-        1
-      else
-        -1
-
     init = ->
       addLights()
 
@@ -48,16 +39,6 @@ Return -1 otherwise
 
     render = ->
       camera.lookAt scene.position
-
-      particles.update (p) ->
-        p.age ||= 0
-        p.age += 1
-
-        p.material.opacity = p.material.opacity - 0.01
-        scene.remove(p) if p.age > 100
-
-        p.position.x += randomSign(0.5)
-        p.position.z += randomSign(0.5)
 
       renderer.render scene, camera
 

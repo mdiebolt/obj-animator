@@ -101,14 +101,15 @@ Load up one from an arbitrary model we use.</p>
               <p>Load a model by name, passing in an optional position.</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = (name, opts={}) -&gt;
-  position = opts.position
+            <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = (objects) -&gt;
+  objects.forEach (attrs) -&gt;
+    position = attrs.position
 
-  loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
-  loader.crossOrigin = <span class="literal">true</span>
-  loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{name}</span>.obj?doot2"</span>, (object) -&gt;
-    object.traverse (child) -&gt;
-      <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh</code></pre>
+    loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
+    loader.crossOrigin = <span class="literal">true</span>
+    loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj?doot2"</span>, (object) -&gt;
+      object.traverse (child) -&gt;
+        <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh</code></pre>
 </div>
         </li>
         
@@ -121,14 +122,18 @@ Load up one from an arbitrary model we use.</p>
               <p>Apply the color palette texture we loaded above</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">        child.material.map = texture
+            <div class="content"><pre><code class="lang-coffeescript">          child.material.map = texture
 
-        object.position.set position.x, position.y, position.z
+          object.position.set position.x, position.y, position.z
 
-        scene.add object
+          scene.add object
 
-    , onProgress
-    , onError</code></pre>
+      , onProgress
+      , onError
+
+    <span class="keyword">return</span> manager
+
+  <span class="keyword">return</span> manager</code></pre>
 </div>
         </li>
         

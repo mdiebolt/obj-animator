@@ -40,6 +40,7 @@
 {Vector3} = THREE
 
 CUBE_SIZE = <span class="number">10</span>
+mapCubes = []
 
 <span class="function"><span class="title">addCube</span></span> = (position) -&gt;
   geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
@@ -49,6 +50,7 @@ CUBE_SIZE = <span class="number">10</span>
 
   cube = <span class="keyword">new</span> THREE.Mesh geometry, material
   cube.position.set position.x, position.y, position.z
+  mapCubes.push cube
   scene.add cube</code></pre>
 </div>
         </li>
@@ -64,10 +66,12 @@ CUBE_SIZE = <span class="number">10</span>
             </div>
             <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = -&gt;
 
-  generateGrid: (size) -&gt;
+  generateGrid: (size, cb) -&gt;
     [<span class="number">0.</span>..size].forEach (x) -&gt;
       [<span class="number">0.</span>..size].forEach (z) -&gt;
-        addCube <span class="keyword">new</span> Vector3(x * CUBE_SIZE, -<span class="number">5</span>, z * CUBE_SIZE)</code></pre>
+        addCube <span class="keyword">new</span> Vector3(x * CUBE_SIZE, -<span class="number">5</span>, z * CUBE_SIZE)
+
+    cb? mapCubes</code></pre>
 </div>
         </li>
         

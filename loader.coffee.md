@@ -42,34 +42,31 @@ Load a model by name, passing in an optional position.
       objects.forEach (attrs) ->
         position = attrs.position
   
+        parent = new THREE.Object3d()
+        parent.position.set position.x, position.y, position.z
+  
         loader = new THREE.OBJLoader(manager)
         loader.crossOrigin = true
-        loader.load "#{BUCKET_PATH}/#{attrs.name}.obj?doot2", (object) ->
-          object.name = attrs.name
-          object.traverse (child) ->
+        loader.load "#{BUCKET_PATH}/#{attrs.name}.obj?doot2", (defaultModel) ->
+          parent.name = attrs.name
+          defaultModel.traverse (child) ->
             if child instanceof THREE.Mesh
-
-Apply the color palette texture we loaded above
-
               child.material.map = texture
-  
-              object.position.set position.x, position.y, position.z
-              
-              characters.push object
-              
-              loader.load "#{BUCKET_PATH}/#{attrs.name}_test.obj?doot2", (innerObj) ->
-                innerObj.traverse (child) ->
+                            
+              loader.load "#{BUCKET_PATH}/#{attrs.name}_test.obj?doot2", (testModel) ->
+                testModel.traverse (child) ->
                   if child instanceof THREE.Mesh
-      
                     child.material.map = texture
                             
-                    object.add innerObj
+                    parent.add testModel
         
                 , onProgress
                 , onError              
               
-              scene.add object
-              debugger 
+              characters.push parent
+              scene.add parent
+              
+              object.visible = false if parent.name is "bartender"
   
           , onProgress
           , onError

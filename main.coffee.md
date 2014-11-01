@@ -3,9 +3,6 @@ Renderer
 
     require "./globals"
     require "./lib/obj_renderer"
-    require "./event_handlers"
-
-    ParticleSystem = require "./particles"
 
     util = require "util"
     util.applyStylesheet(require("./style"))
@@ -36,12 +33,6 @@ Return -1 otherwise
 
       map.generateGrid(10)
       map.populateCharacters()
-
-      particles = ParticleSystem()
-
-      particles.generate
-        number: 100
-        position: new THREE.Vector3(0, 0, 0)
 
     animate = ->
       requestAnimationFrame animate

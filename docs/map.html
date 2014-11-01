@@ -69,7 +69,7 @@ CUBE_SIZE = <span class="number">10</span>
       [<span class="number">0.</span>..size].forEach (z) -&gt;
         addCube <span class="keyword">new</span> Vector3(x * CUBE_SIZE, -<span class="number">5</span>, z * CUBE_SIZE)
 
-  populateCharacters: -&gt;
+  populateCharacters: (cb) -&gt;
     loadingManager = load [{
       name: <span class="string">"bartender"</span>
       position: <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)
@@ -100,7 +100,10 @@ CUBE_SIZE = <span class="number">10</span>
     }, {
       name: <span class="string">"jetpack_bandit"</span>
       position: <span class="keyword">new</span> Vector3(<span class="number">90</span>, <span class="number">0</span>, <span class="number">0</span>)
-    }]</code></pre>
+    }]
+
+    loadingManager.onLoad (characters) -&gt;
+      cb? characters</code></pre>
 </div>
         </li>
         

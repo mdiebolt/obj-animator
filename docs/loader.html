@@ -109,7 +109,7 @@ Load up one from an arbitrary model we use.</p>
   objects.forEach (attrs) -&gt;
     position = attrs.position
 
-    parent = <span class="keyword">new</span> THREE.Object3d()
+    parent = <span class="keyword">new</span> THREE.Object3D()
     parent.position.set position.x, position.y, position.z
 
     loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
@@ -121,19 +121,18 @@ Load up one from an arbitrary model we use.</p>
           child.material.map = texture
 
           loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>_test.obj?doot2"</span>, (testModel) -&gt;
-            testModel.traverse (child) -&gt;
-              <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
-                child.material.map = texture
+            testModel.traverse (c) -&gt;
+              <span class="keyword">if</span> c <span class="keyword">instanceof</span> THREE.Mesh
+                c.material.map = texture
 
                 parent.add testModel
 
             , onProgress
             , onError              
 
+          parent.add defaultModel
           characters.push parent
           scene.add parent
-
-          object.visible = <span class="literal">false</span> <span class="keyword">if</span> parent.name <span class="keyword">is</span> <span class="string">"bartender"</span>
 
       , onProgress
       , onError

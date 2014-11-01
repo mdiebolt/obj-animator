@@ -3,6 +3,8 @@ Loader
 
 Loads voxel models from .obj files
 
+Pass in the characters collection when the loading manager finishes
+
     manager = new THREE.LoadingManager (cb) ->
       cb? characters
     

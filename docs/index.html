@@ -36,9 +36,6 @@
             </div>
             <div class="content"><pre><code class="lang-coffeescript">require <span class="string">"./globals"</span>
 require <span class="string">"./lib/obj_renderer"</span>
-require <span class="string">"./event_handlers"</span>
-
-ParticleSystem = require <span class="string">"./particles"</span>
 
 util = require <span class="string">"util"</span>
 util.applyStylesheet(require(<span class="string">"./style"</span>))
@@ -78,12 +75,6 @@ Return -1 otherwise</p>
 
   map.generateGrid(<span class="number">10</span>)
   map.populateCharacters()
-
-  particles = ParticleSystem()
-
-  particles.generate
-    number: <span class="number">100</span>
-    position: <span class="keyword">new</span> THREE.Vector3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)
 
 <span class="function"><span class="title">animate</span></span> = -&gt;
   requestAnimationFrame animate

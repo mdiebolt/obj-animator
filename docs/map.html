@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>main</title>
+  <title>map</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="http://strd6.github.io/cdn/parallel/docco.css" />
@@ -18,7 +18,7 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="renderer">Renderer</h1>
+              <h1 id="map">Map</h1>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">
@@ -32,25 +32,24 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              
+              <p>Generate a simple map, populating it with a cube floor and characters.</p>
+
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">require <span class="string">"./globals"</span>
-require <span class="string">"./lib/obj_renderer"</span>
+            <div class="content"><pre><code class="lang-coffeescript">load = require <span class="string">"./loader"</span>
 
-util = require <span class="string">"util"</span>
-util.applyStylesheet(require(<span class="string">"./style"</span>))
+{Vector3} = THREE
 
-map = require(<span class="string">"./map"</span>)()
+CUBE_SIZE = <span class="number">10</span>
 
-particles = []
+<span class="function"><span class="title">addCube</span></span> = (position) -&gt;
+  geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
+  material = <span class="keyword">new</span> THREE.MeshBasicMaterial
+    color: <span class="number">0xfffff</span>
+    wireframe: <span class="literal">true</span>
 
-container = document.createElement <span class="string">"div"</span>
-document.body.appendChild container
-
-container.appendChild renderer.domElement
-renderer.setSize window.innerWidth, window.innerHeight
-
-camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span></code></pre>
+  cube = <span class="keyword">new</span> THREE.Mesh geometry, material
+  cube.position.set position.x, position.y, position.z
+  scene.add cube</code></pre>
 </div>
         </li>
         
@@ -60,51 +59,46 @@ camera.position.set <span class="number">0</span>, <span class="number">100</spa
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Return 1 if <code>probability</code> percent of the time.
-Return -1 otherwise</p>
+              <p>Create a basic floor of dimension <code>size</code></p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript"><span class="function"><span class="title">randomSign</span></span> = (probability) -&gt;
-  <span class="keyword">if</span> Math.random() &lt;= probability
-    <span class="number">1</span>
-  <span class="keyword">else</span>
-    -<span class="number">1</span>
+            <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = -&gt;
 
-<span class="function"><span class="title">init</span></span> = -&gt;
-  addLights()
+  generateGrid: (size) -&gt;
+    [<span class="number">0.</span>..size].forEach (x) -&gt;
+      [<span class="number">0.</span>..size].forEach (z) -&gt;
+        addCube <span class="keyword">new</span> Vector3(x * CUBE_SIZE, -<span class="number">5</span>, z * CUBE_SIZE)
 
-  map.generateGrid(<span class="number">10</span>)
-  map.populateCharacters()
+  populateCharacters: -&gt;
+    load <span class="string">"bartender"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-<span class="function"><span class="title">animate</span></span> = -&gt;
-  requestAnimationFrame animate
-  render()
+    load <span class="string">"robo_sheriff"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">10</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-<span class="function"><span class="title">addLights</span></span> = -&gt;
-  ambient = <span class="keyword">new</span> THREE.AmbientLight <span class="number">0x101030</span>
-  scene.add ambient
+    load <span class="string">"cactus"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">20</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-  directionalLight = <span class="keyword">new</span> THREE.DirectionalLight <span class="number">0xffeedd</span>
-  directionalLight.position.set <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>
-  scene.add directionalLight
+    load <span class="string">"arrow"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">30</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-<span class="function"><span class="title">render</span></span> = -&gt;
-  camera.lookAt scene.position
+    load <span class="string">"beam_sword"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">40</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-  particles.update (p) -&gt;
-    p.age ||= <span class="number">0</span>
-    p.age += <span class="number">1</span>
+    load <span class="string">"branding_iron"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">50</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-    p.material.opacity = p.material.opacity - <span class="number">0.01</span>
-    scene.remove(p) <span class="keyword">if</span> p.age &gt; <span class="number">100</span>
+    load <span class="string">"character"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">60</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-    p.position.x += randomSign(<span class="number">0.5</span>)
-    p.position.z += randomSign(<span class="number">0.5</span>)
+    load <span class="string">"gun"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">70</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-  renderer.render scene, camera
+    load <span class="string">"hoverboard"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">80</span>, <span class="number">0</span>, <span class="number">0</span>)
 
-init()
-animate()</code></pre>
+    load <span class="string">"jetpack_bandit"</span>,
+      position: <span class="keyword">new</span> Vector3(<span class="number">90</span>, <span class="number">0</span>, <span class="number">0</span>)</code></pre>
 </div>
         </li>
         

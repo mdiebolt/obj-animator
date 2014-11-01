@@ -112,6 +112,7 @@ Load up one from an arbitrary model we use.</p>
     loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
     loader.crossOrigin = <span class="literal">true</span>
     loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj?doot2"</span>, (object) -&gt;
+      object.name = attrs.name
       object.traverse (child) -&gt;
         <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh</code></pre>
 </div>
@@ -131,25 +132,23 @@ Load up one from an arbitrary model we use.</p>
           object.position.set position.x, position.y, position.z
 
           characters.push object
+
+          loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>_test.obj?doot2"</span>, (innerObj) -&gt;
+            innerObj.traverse (child) -&gt;
+              <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
+
+                child.material.map = texture
+
+                object.add innerObj
+
+            , onProgress
+            , onError              
+
           scene.add object
+          <span class="keyword">debugger</span> 
 
       , onProgress
       , onError
-
-    loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>_test.obj?doot2"</span>, (object) -&gt;
-      object.traverse (child) -&gt;
-        <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
-
-          child.material.map = texture
-
-          object.position.set position.x, position.y, position.z
-
-          characters.push object
-          scene.add object
-
-      , onProgress
-      , onError
-
 
   <span class="keyword">return</span> manager</code></pre>
 </div>

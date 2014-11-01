@@ -1,11 +1,5 @@
 window["mdiebolt/obj-animator:master"]({
   "source": {
-    "README.md": {
-      "path": "README.md",
-      "content": "",
-      "mode": "100644",
-      "type": "blob"
-    },
     "style.styl": {
       "path": "style.styl",
       "content": "body\n  margin: 0\n  overflow: hidden\n",

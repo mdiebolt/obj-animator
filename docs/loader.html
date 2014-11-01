@@ -35,8 +35,8 @@
               <p>Loads voxel models from .obj files</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">manager = <span class="keyword">new</span> THREE.LoadingManager -&gt;
-  <span class="keyword">return</span> characters
+            <div class="content"><pre><code class="lang-coffeescript">manager = <span class="keyword">new</span> THREE.LoadingManager (cb) -&gt;
+  cb? characters
 
 texture = <span class="keyword">new</span> THREE.Texture()
 characters = []</code></pre>

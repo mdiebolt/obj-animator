@@ -109,43 +109,31 @@ Load up one from an arbitrary model we use.</p>
   objects.forEach (attrs) -&gt;
     position = attrs.position
 
+    parent = <span class="keyword">new</span> THREE.Object3d()
+    parent.position.set position.x, position.y, position.z
+
     loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
     loader.crossOrigin = <span class="literal">true</span>
-    loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj?doot2"</span>, (object) -&gt;
-      object.name = attrs.name
-      object.traverse (child) -&gt;
-        <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh</code></pre>
-</div>
-        </li>
-        
-        
-        <li id="section-7">
-            <div class="annotation">
-              <div class="pilwrap">
-                <a class="pilcrow" href="#section-7">&#182;</a>
-              </div>
-              <p>Apply the color palette texture we loaded above</p>
+    loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj?doot2"</span>, (defaultModel) -&gt;
+      parent.name = attrs.name
+      defaultModel.traverse (child) -&gt;
+        <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
+          child.material.map = texture
 
-            </div>
-            <div class="content"><pre><code class="lang-coffeescript">          child.material.map = texture
-
-          object.position.set position.x, position.y, position.z
-
-          characters.push object
-
-          loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>_test.obj?doot2"</span>, (innerObj) -&gt;
-            innerObj.traverse (child) -&gt;
+          loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>_test.obj?doot2"</span>, (testModel) -&gt;
+            testModel.traverse (child) -&gt;
               <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
-
                 child.material.map = texture
 
-                object.add innerObj
+                parent.add testModel
 
             , onProgress
             , onError              
 
-          scene.add object
-          <span class="keyword">debugger</span> 
+          characters.push parent
+          scene.add parent
+
+          object.visible = <span class="literal">false</span> <span class="keyword">if</span> parent.name <span class="keyword">is</span> <span class="string">"bartender"</span>
 
       , onProgress
       , onError

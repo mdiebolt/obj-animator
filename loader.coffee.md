@@ -42,7 +42,7 @@ Load a model by name, passing in an optional position.
       objects.forEach (attrs) ->
         position = attrs.position
   
-        parent = new THREE.Object3d()
+        parent = new THREE.Object3D()
         parent.position.set position.x, position.y, position.z
   
         loader = new THREE.OBJLoader(manager)
@@ -54,20 +54,19 @@ Load a model by name, passing in an optional position.
               child.material.map = texture
                             
               loader.load "#{BUCKET_PATH}/#{attrs.name}_test.obj?doot2", (testModel) ->
-                testModel.traverse (child) ->
-                  if child instanceof THREE.Mesh
-                    child.material.map = texture
+                testModel.traverse (c) ->
+                  if c instanceof THREE.Mesh
+                    c.material.map = texture
                             
                     parent.add testModel
         
                 , onProgress
                 , onError              
               
+              parent.add defaultModel
               characters.push parent
               scene.add parent
-              
-              object.visible = false if parent.name is "bartender"
-  
+                
           , onProgress
           , onError
                   

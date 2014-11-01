@@ -29,32 +29,34 @@ Create a basic floor of dimension `size`
             addCube new Vector3(x * CUBE_SIZE, -5, z * CUBE_SIZE)
 
       populateCharacters: ->
-        load "bartender",
+        load [{
+          name: "bartender"
           position: new Vector3(0, 0, 0)
-
-        load "robo_sheriff",
+        }, {
+          name: "robo_sheriff"
           position: new Vector3(10, 0, 0)
-
-        load "cactus",
+        }, {
+          name: "cactus"
           position: new Vector3(20, 0, 0)
-
-        load "arrow",
+        }, {
+          name: "arrow"
           position: new Vector3(30, 0, 0)
-
-        load "beam_sword",
+        }, {
+          name: "beam_sword"
           position: new Vector3(40, 0, 0)
-
-        load "branding_iron",
+        }, {
+          name: "branding_iron"
           position: new Vector3(50, 0, 0)
-
-        load "character",
+        }, {
+          name: "character"
           position: new Vector3(60, 0, 0)
-
-        load "gun",
+        }, {
+          name: "gun"
           position: new Vector3(70, 0, 0)
-
-        load "hoverboard",
+        }, {
+          name: "hoverboard"
           position: new Vector3(80, 0, 0)
-
-        load "jetpack_bandit",
+        }, {
+          name: "jetpack_bandit"
           position: new Vector3(90, 0, 0)
+        }]

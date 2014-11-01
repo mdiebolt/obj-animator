@@ -35,9 +35,11 @@
               <p>Put all these gross guys in here.</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">window.renderer = <span class="keyword">new</span> THREE.WebGLRenderer()
+            <div class="content"><pre><code class="lang-coffeescript">aspectRatio = <span class="number">800</span> / <span class="number">600</span>
+
+window.renderer = <span class="keyword">new</span> THREE.WebGLRenderer()
 window.scene = <span class="keyword">new</span> THREE.Scene()
-window.camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">45</span>, window.innerWidth / window.innerHeight, <span class="number">1</span>, <span class="number">2000</span>)</code></pre>
+window.camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">45</span>, aspectRatio, <span class="number">1</span>, <span class="number">2000</span>)</code></pre>
 </div>
         </li>
         

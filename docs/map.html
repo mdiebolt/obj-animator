@@ -67,9 +67,21 @@ CUBE_SIZE = <span class="number">10</span>
   generateGrid: (size) -&gt;
     [<span class="number">0.</span>..size].forEach (x) -&gt;
       [<span class="number">0.</span>..size].forEach (z) -&gt;
-        addCube <span class="keyword">new</span> Vector3(x * CUBE_SIZE, -<span class="number">5</span>, z * CUBE_SIZE)
+        addCube <span class="keyword">new</span> Vector3(x * CUBE_SIZE, -<span class="number">5</span>, z * CUBE_SIZE)</code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Load all the characters. Provide a callback that receives an array
+of the characters when they&#39;re done loading.</p>
 
-  populateCharacters: (cb) -&gt;
+            </div>
+            <div class="content"><pre><code class="lang-coffeescript">  populateCharacters: (cb) -&gt;
     loadingManager = load [{
       name: <span class="string">"bartender"</span>
       position: <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)
@@ -102,8 +114,7 @@ CUBE_SIZE = <span class="number">10</span>
       position: <span class="keyword">new</span> Vector3(<span class="number">90</span>, <span class="number">0</span>, <span class="number">0</span>)
     }]
 
-    loadingManager.onLoad (characters) -&gt;
-      cb? characters</code></pre>
+    loadingManager.onLoad cb</code></pre>
 </div>
         </li>
         

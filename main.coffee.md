@@ -20,7 +20,7 @@ Renderer
     init = ->
       addLights()
 
-      map.generateGrid 10 (mapCubes) ->
+      map.generateGrid 10, (mapCubes) ->
         console.log mapCubes
       
       map.populateCharacters (characters) ->

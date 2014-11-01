@@ -47,22 +47,26 @@ Load a model by name, passing in an optional position.
   
         loader = new THREE.OBJLoader(manager)
         loader.crossOrigin = true
-        loader.load "#{BUCKET_PATH}/#{attrs.name}.obj?doot2", (defaultModel) ->
+        loader.load "#{BUCKET_PATH}/#{attrs.name}.obj", (defaultModel) ->
           parent.name = attrs.name
           defaultModel.traverse (child) ->
             if child instanceof THREE.Mesh
               child.material.map = texture
-                            
-              loader.load "#{BUCKET_PATH}/#{attrs.name}_test.obj?doot2", (testModel) ->
-                testModel.traverse (c) ->
-                  if c instanceof THREE.Mesh
-                    c.material.map = texture
-                            
-                    parent.add testModel
-        
-                , onProgress
-                , onError              
               
+              # TODO: default this in the character base class
+              (attrs.animations || []).forEach (animation) ->
+                for animationName, frames in animation
+                  frames.forEach (frame) ->
+                    loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
+                      frameModel.traverse (c) ->
+                        if c instanceof THREE.Mesh
+                          c.material.map = texture
+                                  
+                          parent.add frameModel
+              
+                      , onProgress
+                      , onError              
+                    
               parent.add defaultModel
               characters.push parent
               scene.add parent

@@ -39,6 +39,9 @@ of the characters when they're done loading.
         loadingManager = load [{
           name: "bartender"
           position: new Vector3(0, 0, 0)
+          animations: [
+            test: ["bartender_test"]
+          ]
         }, {
           name: "robo_sheriff"
           position: new Vector3(10, 0, 0)

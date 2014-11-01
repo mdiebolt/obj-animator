@@ -114,21 +114,25 @@ Load up one from an arbitrary model we use.</p>
 
     loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
     loader.crossOrigin = <span class="literal">true</span>
-    loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj?doot2"</span>, (defaultModel) -&gt;
+    loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj"</span>, (defaultModel) -&gt;
       parent.name = attrs.name
       defaultModel.traverse (child) -&gt;
         <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
           child.material.map = texture
 
-          loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>_test.obj?doot2"</span>, (testModel) -&gt;
-            testModel.traverse (c) -&gt;
-              <span class="keyword">if</span> c <span class="keyword">instanceof</span> THREE.Mesh
-                c.material.map = texture
+          <span class="comment"># TODO: default this in the character base class</span>
+          (attrs.animations || []).forEach (animation) -&gt;
+            <span class="keyword">for</span> animationName, frames <span class="keyword">in</span> animation
+              frames.forEach (frame) -&gt;
+                loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{frame}</span>.obj"</span>, (frameModel) -&gt;
+                  frameModel.traverse (c) -&gt;
+                    <span class="keyword">if</span> c <span class="keyword">instanceof</span> THREE.Mesh
+                      c.material.map = texture
 
-                parent.add testModel
+                      parent.add frameModel
 
-            , onProgress
-            , onError              
+                  , onProgress
+                  , onError              
 
           parent.add defaultModel
           characters.push parent

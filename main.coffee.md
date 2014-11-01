@@ -9,8 +9,6 @@ Renderer
 
     map = require("./map")()
 
-    particles = []
-
     container = document.createElement "div"
     document.body.appendChild container
 

@@ -3,8 +3,8 @@ Loader
 
 Loads voxel models from .obj files
 
-    manager = new THREE.LoadingManager ->
-      return characters
+    manager = new THREE.LoadingManager (cb) ->
+      cb? characters
     
     texture = new THREE.Texture()
     characters = []

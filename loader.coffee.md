@@ -55,7 +55,7 @@ Load a model by name, passing in an optional position.
               
               # TODO: default this in the character base class
               (attrs.animations || []).forEach (animation) ->
-                for animationName, frames in animation
+                for animationName, frames of animation
                   frames.forEach (frame) ->
                     loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
                       frameModel.traverse (c) ->

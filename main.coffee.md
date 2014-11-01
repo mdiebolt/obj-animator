@@ -20,8 +20,11 @@ Renderer
     init = ->
       addLights()
 
-      map.generateGrid 10
-      map.populateCharacters()
+      map.generateGrid 10 (mapCubes) ->
+        console.log mapCubes
+      
+      map.populateCharacters (characters) ->
+        console.log characters
 
     animate = ->
       requestAnimationFrame animate

@@ -8,6 +8,7 @@ Generate a simple map, populating it with a cube floor and characters.
     {Vector3} = THREE
 
     CUBE_SIZE = 10
+    mapCubes = []
 
     addCube = (position) ->
       geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
@@ -17,16 +18,19 @@ Generate a simple map, populating it with a cube floor and characters.
 
       cube = new THREE.Mesh geometry, material
       cube.position.set position.x, position.y, position.z
+      mapCubes.push cube
       scene.add cube
 
 Create a basic floor of dimension `size`
 
     module.exports = ->
 
-      generateGrid: (size) ->
+      generateGrid: (size, cb) ->
         [0...size].forEach (x) ->
           [0...size].forEach (z) ->
             addCube new Vector3(x * CUBE_SIZE, -5, z * CUBE_SIZE)
+        
+        cb? mapCubes
 
 Load all the characters. Provide a callback that receives an array
 of the characters when they're done loading.

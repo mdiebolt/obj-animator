@@ -33,22 +33,27 @@ Load up one from an arbitrary model we use.
 
 Load a model by name, passing in an optional position.
 
-    module.exports = (name, opts={}) ->
-      position = opts.position
-
-      loader = new THREE.OBJLoader(manager)
-      loader.crossOrigin = true
-      loader.load "#{BUCKET_PATH}/#{name}.obj?doot2", (object) ->
-        object.traverse (child) ->
-          if child instanceof THREE.Mesh
+    module.exports = (objects) ->
+      objects.forEach (attrs) ->
+        position = attrs.position
+  
+        loader = new THREE.OBJLoader(manager)
+        loader.crossOrigin = true
+        loader.load "#{BUCKET_PATH}/#{attrs.name}.obj?doot2", (object) ->
+          object.traverse (child) ->
+            if child instanceof THREE.Mesh
 
 Apply the color palette texture we loaded above
 
-            child.material.map = texture
-
-            object.position.set position.x, position.y, position.z
-
-            scene.add object
-
-        , onProgress
-        , onError
+              child.material.map = texture
+  
+              object.position.set position.x, position.y, position.z
+  
+              scene.add object
+  
+          , onProgress
+          , onError
+        
+        return manager
+        
+      return manager

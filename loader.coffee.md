@@ -3,8 +3,11 @@ Loader
 
 Loads voxel models from .obj files
 
-    manager = new THREE.LoadingManager()
+    manager = new THREE.LoadingManager ->
+      return characters
+    
     texture = new THREE.Texture()
+    characters = []
 
 Base path to our game's S3 bucket
 
@@ -48,12 +51,12 @@ Apply the color palette texture we loaded above
               child.material.map = texture
   
               object.position.set position.x, position.y, position.z
-  
+              
+              characters.push object
               scene.add object
   
           , onProgress
           , onError
-        
-        return manager
+
         
       return manager

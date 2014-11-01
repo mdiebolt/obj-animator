@@ -29,7 +29,7 @@ Create a basic floor of dimension `size`
             addCube new Vector3(x * CUBE_SIZE, -5, z * CUBE_SIZE)
 
       populateCharacters: ->
-        load [{
+        loadingManager = load [{
           name: "bartender"
           position: new Vector3(0, 0, 0)
         }, {
@@ -60,3 +60,5 @@ Create a basic floor of dimension `size`
           name: "jetpack_bandit"
           position: new Vector3(90, 0, 0)
         }]
+        
+        

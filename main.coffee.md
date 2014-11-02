@@ -29,11 +29,12 @@ Renderer
       addLights()
 
       map.generateGrid 10, 10, (mapCubes) ->
-        mapGeometry = mapCubes   
+        mapGeometry = mapCubes
 
       map.populateCharacters (c) ->
+        console.log c
         characters = c
-        
+
         setTimeout ->
           x = 0
           z = 0

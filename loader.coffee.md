@@ -45,7 +45,7 @@ Load up one from an arbitrary model we use.
 
 Load a model by name, passing in an optional position.
 
-    module.exports = (modelData) ->
+    exports.fromObj = (modelData) ->
       for name, actions of modelData
         models[name] ||= {}
 
@@ -63,4 +63,16 @@ Load a model by name, passing in an optional position.
 
               actionFrames.push obj3D
 
+      return manager
+    
+    exports.fromGeometry = (data={})
+      {name, geometry} = data
+    
+      obj3D = new THREE.Object3D
+      obj3D.name = name
+      obj3D.add geometry
+      obj3D.name = data.name
+      
+      models[name].idle = [obj3D]
+      
       return manager

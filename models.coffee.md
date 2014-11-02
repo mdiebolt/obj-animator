@@ -11,9 +11,7 @@ and their actions (animation states).
           wink: ["bartender_wink_0"]
         robo_sheriff:
           idle: ["robo_sheriff"]
-        character:
-          idle: ["character"]
-        jetpack_bandit:
+        bandit:
           idle: ["jetpack_bandit"]
       terrain:
         cactus:

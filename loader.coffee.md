@@ -46,8 +46,6 @@ Load up one from an arbitrary model we use.
         texture.image = image
         texture.needsUpdate = true
 
-Load a model by name, passing in an optional position.
-
     exports.fromObj = (namespace, modelData) ->
       cache = models[namespace]
       for name, actions of modelData
@@ -59,24 +57,24 @@ Load a model by name, passing in an optional position.
             loader = new THREE.OBJLoader(manager)
             loader.crossOrigin = true
 
-            actionFrames = cache[name][actionName] 
+            actionFrames = cache[name][actionName]
             loader.load "#{BUCKET_PATH}/#{file}.obj", (obj3D) ->
               obj3D.name = file
               obj3D.children[0].material.map = texture
 
-              actionFrames.push obj3D 
+              actionFrames.push obj3D
 
       return manager
-    
+
     exports.fromMesh = (data={}) ->
       {name, mesh} = data
-    
-      obj3D = new THREE.Object3D 
+
+      obj3D = new THREE.Object3D
       obj3D.name = name
       obj3D.add mesh
       obj3D.name = data.name
-      
+
       models[data.type][name] =
         idle: [obj3D]
-      
-      return manager 
+
+      return manager

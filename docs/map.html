@@ -39,7 +39,6 @@
 modelData = require <span class="string">"./characters"</span>
 
 CUBE_SIZE = <span class="number">10</span>
-mapCubes = []
 
 <span class="function"><span class="title">cubeMesh</span></span> = -&gt;
   geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
@@ -50,11 +49,12 @@ mapCubes = []
 
   <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh geometry, material    
 
-<span class="function"><span class="title">addCube</span></span> = (position) -&gt;
-  cube = cubeMesh()
-  cube.position.set position.x, position.y, position.z
-  mapCubes.push cube
-  scene.add cube</code></pre>
+cube = cubeMesh()
+
+<span class="function"><span class="title">addCubeAt</span></span> = (position) -&gt;
+  clone = cube.clone()
+  clone.position.set position.x, position.y, position.z
+  scene.add clone</code></pre>
 </div>
         </li>
         
@@ -68,23 +68,20 @@ mapCubes = []
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = -&gt;
-
-  generateGrid: (width, depth, cb) -&gt;
-    Loader.fromMesh
-      name: <span class="string">"floor"</span> 
-      type: <span class="string">"terrain"</span>
-      mesh: cubeMesh()
-
+  generateGrid: (width, depth, cb) -&gt;        
     [<span class="number">0.</span>..width].forEach (x) -&gt;
       [<span class="number">0.</span>..depth].forEach (z) -&gt;
-        addCube <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
-
-    cb mapCubes
+        addCubeAt <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
   populateItems: (cb) -&gt;
     Loader.fromObj(<span class="string">"items"</span>, modelData.items).onLoad cb
 
   populateTerrain: (cb) -&gt;
+    Loader.fromMesh
+      name: <span class="string">"floor"</span> 
+      type: <span class="string">"terrain"</span>
+      mesh: cube
+
     Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain).onLoad cb</code></pre>
 </div>
         </li>

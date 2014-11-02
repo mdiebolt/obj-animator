@@ -45,11 +45,6 @@ CUBE_SIZE = <span class="number">10</span>
 
 cachedModels = {}
 
-Loader.fromMesh
-  name: <span class="string">"floor"</span>
-  type: <span class="string">"terrain"</span>
-  mesh: cube
-
 Loader.fromObj(<span class="string">"items"</span>, modelData.items)
 Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain)
 
@@ -62,9 +57,20 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
     color: <span class="number">0xfffff</span>
     wireframe: <span class="literal">true</span>
 
-  <span class="keyword">new</span> THREE.Mesh geometry, material
+  <span class="keyword">if</span> cachedModels.terrain?.floor?.idle?
+    cube = cachedModels.terrain.floor.idle
+  <span class="keyword">else</span>
+    container = <span class="keyword">new</span> THREE.Object3D()
+    mesh = <span class="keyword">new</span> THREE.Mesh geometry, material
+    container.add(mesh)
 
-cube = cubeMesh()
+    cachedModels.terrain ||= {}
+    cachedModels.terrain.floor ||= {}
+    cachedModels.terrain.floor.idle = container
+
+    cube = container
+
+  cube
 
 <span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
   x = <span class="number">0</span>
@@ -82,19 +88,19 @@ cube = cubeMesh()
     scene.add idle    
 
 <span class="function"><span class="title">addMapCubes</span></span> = (scene) -&gt;
-
-
   [<span class="number">0.</span>.<span class="number">.10</span>].forEach (x) -&gt;
     [<span class="number">0.</span>.<span class="number">.10</span>].forEach (z) -&gt;
       {cx, cy, cz} = <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
-      clone = cube.clone()
+      clone = cubeMesh().clone()
       clone.position.set(cx, cy, cz)       
 
       scene.add clone
 
 manager.onLoad (loadedData) -&gt;
-  cachedModels = loadedData
+  <span class="comment"># TODO: merge here instead of overwrite </span>
+  cachedModels = loadedData 
+  console.log cachedModels
 
   setTimeout -&gt;
     scene = gameLoop.start()

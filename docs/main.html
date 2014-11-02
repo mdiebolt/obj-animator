@@ -62,9 +62,10 @@ mapGeometry = []
   addLights()
 
   map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
-    mapGeometry = mapCubes   
+    mapGeometry = mapCubes
 
   map.populateCharacters (c) -&gt;
+    console.log c
     characters = c
 
     setTimeout -&gt;

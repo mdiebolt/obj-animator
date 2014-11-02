@@ -67,22 +67,21 @@ cube = cubeMesh()
               <p>Create a basic floor of dimension <code>size</code></p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = -&gt;
-  generateGrid: (width, depth, cb) -&gt;        
-    [<span class="number">0.</span>..width].forEach (x) -&gt;
-      [<span class="number">0.</span>..depth].forEach (z) -&gt;
-        addCubeAt <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
+            <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">generateGrid</span></span> = (width, depth, cb) -&gt;        
+  [<span class="number">0.</span>..width].forEach (x) -&gt;
+    [<span class="number">0.</span>..depth].forEach (z) -&gt;
+      addCubeAt <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
-  populateItems: (cb) -&gt;
-    Loader.fromObj(<span class="string">"items"</span>, modelData.items).onLoad cb
+exports.<span class="function"><span class="title">populateItems</span></span> = (cb) -&gt;
+  Loader.fromObj(<span class="string">"items"</span>, modelData.items).onLoad cb
 
-  populateTerrain: (cb) -&gt;
-    Loader.fromMesh
-      name: <span class="string">"floor"</span> 
-      type: <span class="string">"terrain"</span>
-      mesh: cube
+exports.<span class="function"><span class="title">populateTerrain</span></span> = (cb) -&gt;
+  Loader.fromMesh
+    name: <span class="string">"floor"</span> 
+    type: <span class="string">"terrain"</span>
+    mesh: cube
 
-    Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain).onLoad cb</code></pre>
+  Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain).onLoad cb</code></pre>
 </div>
         </li>
         
@@ -96,8 +95,8 @@ cube = cubeMesh()
 of the characters when they&#39;re done loading. </p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">  populateCharacters: (cb) -&gt;
-    Loader.fromObj(<span class="string">"characters"</span>, modelData.characters).onLoad cb</code></pre>
+            <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">populateCharacters</span></span> = (cb) -&gt;
+  Loader.fromObj(<span class="string">"characters"</span>, modelData.characters).onLoad cb</code></pre>
 </div>
         </li>
         

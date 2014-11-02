@@ -40,7 +40,7 @@ require <span class="string">"./lib/obj_renderer"</span>
 util = require <span class="string">"util"</span>
 util.applyStylesheet require(<span class="string">"./style"</span>)
 
-map = require(<span class="string">"./map"</span>)()
+Map = require <span class="string">"./map"</span>
 
 core = require <span class="string">"core"</span>
 
@@ -60,16 +60,16 @@ characters = {}
 <span class="function"><span class="title">init</span></span> = -&gt;
   addLights()
 
-  map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
+  Map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
     console.log mapCubes
 
-  map.populateItems (modelData) -&gt;
+  Map.populateItems (modelData) -&gt;
     console.log <span class="string">"items"</span>, modelData
 
-  map.populateTerrain (modelData) -&gt;
+  Map.populateTerrain (modelData) -&gt;
     console.log <span class="string">"terrain"</span>, modelData
 
-  map.populateCharacters (modelData) -&gt;
+  Map.populateCharacters (modelData) -&gt;
     console.log <span class="string">"characters"</span>, modelData
     characters = modelData.characters
 

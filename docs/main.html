@@ -37,9 +37,9 @@
             <div class="content"><pre><code class="lang-coffeescript">gameLoop = require <span class="string">"./game_loop"</span>
 
 Loader = require <span class="string">"./loader"</span>
-modelData = require <span class="string">"./models"</span> 
+modelData = require <span class="string">"./models"</span>
 
-scene = <span class="literal">null</span> 
+scene = <span class="literal">null</span>
 
 CUBE_SIZE = <span class="number">10</span>
 
@@ -66,7 +66,7 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
 
     cachedModels.terrain ||= {}
     cachedModels.terrain.floor ||= {}
-    cachedModels.terrain.floor.idle = [container] 
+    cachedModels.terrain.floor.idle = [container]
 
     cube = cachedModels.terrain.floor.idle[<span class="number">0</span>]
 
@@ -84,7 +84,7 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
 
 <span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
   x = <span class="number">0</span>
-  z = <span class="number">0</span>        
+  z = <span class="number">0</span>
 
   <span class="keyword">for</span> name, actions <span class="keyword">of</span> cachedModels.characters
     idle = actions.idle[<span class="number">0</span>]
@@ -92,14 +92,14 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
     idle.position.setX(x)
     idle.position.setZ(z)
 
-    x += <span class="number">10</span> 
+    x += <span class="number">10</span>
     z += <span class="number">10</span>
 
-    scene.add idle    
+    scene.add idle
 
 manager.onLoad (loadedData) -&gt;
-  <span class="comment"># TODO: merge here instead of overwrite </span>
-  cachedModels = loadedData 
+  <span class="comment"># TODO: merge here instead of overwrite</span>
+  cachedModels = loadedData
   console.log cachedModels
 
   setTimeout -&gt;

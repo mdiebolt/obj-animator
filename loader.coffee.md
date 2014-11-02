@@ -14,6 +14,7 @@ The models hash keeps our 3D models in memory.
 Its structure looks like this.
 Object3D is the THREE.js scene primitive
 
+###
 characters:
   bartender:
     idle: [Object3D, Object3D, Object3D, Object3D]
@@ -30,6 +31,7 @@ Object3D
 Object3D
   name: "bartender_idle_1"
   children: [Mesh]
+###
 
     models =
       characters: {}

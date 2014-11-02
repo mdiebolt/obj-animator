@@ -8,22 +8,21 @@ Character data for rendering
     module.exports =
       [{
         name: "bartender"
-        position: new Vector3(0, 0, 0)
-        animations: 
+        models: 
           wink: ["bartender_wink_0"]
       }, {
         name: "robo_sheriff"
-        position: new Vector3(10, 0, 0)
+        models: {}
       }, {
         name: "cactus"
-        position: new Vector3(20, 0, 0)
+        models: {}
       }, {
         name: "arrow"
-        position: new Vector3(30, 0, 0)
+        models: {}
       }, {
         name: "beam_sword"
-        position: new Vector3(40, 0, 0)
-        animations:
+        models:
+          idle: ["beam_sword_idle_0"}
           grow: [
             "beam_sword_grow_0"
             "beam_sword_grow_1"
@@ -32,17 +31,17 @@ Character data for rendering
           ]
       }, {
         name: "branding_iron"
-        position: new Vector3(50, 0, 0)
+        models: {}
       }, {
         name: "character"
-        position: new Vector3(60, 0, 0)
+        models: {}
       }, {
         name: "gun"
-        position: new Vector3(70, 0, 0)
+        models: {}
       }, {
         name: "hoverboard"
-        position: new Vector3(80, 0, 0)
+        models: {}
       }, {
         name: "jetpack_bandit"
-        position: new Vector3(90, 0, 0)
+        models: {}
       }]

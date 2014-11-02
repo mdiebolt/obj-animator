@@ -192,7 +192,7 @@
     },
     "map.coffee.md": {
       "path": "map.coffee.md",
-      "content": "Map\n===\n\nGenerate a simple map, populating it with a cube floor and characters.\n\n    Loader = require \"./loader\"\n    modelData = require \"./models\"\n\n    CUBE_SIZE = 10\n\n    cubeMesh = ->\n      geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)\n\n      material = new THREE.MeshBasicMaterial\n        color: 0xfffff\n        wireframe: true\n\n      return new THREE.Mesh geometry, material    \n\n    cube = cubeMesh()\n\n    addCubeAt = (position) ->\n      clone = cube.clone()\n      clone.position.set position.x, position.y, position.z\n      scene.add clone\n\nCreate a basic floor of dimension `size`\n\n    exports.generateGrid = (width, depth, cb) ->        \n      [0...width].forEach (x) ->\n        [0...depth].forEach (z) ->\n          addCubeAt new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)\n\n    exports.populateItems = (cb) ->\n      Loader.fromObj(\"items\", modelData.items).onLoad cb\n    \n    exports.populateTerrain = (cb) ->\n      Loader.fromMesh\n        name: \"floor\" \n        type: \"terrain\"\n        mesh: cube\n\n      Loader.fromObj(\"terrain\", modelData.terrain).onLoad cb\n\nLoad all the characters. Provide a callback that receives an array\nof the characters when they're done loading. \n\n    exports.populateCharacters = (cb) ->\n      Loader.fromObj(\"characters\", modelData.characters).onLoad cb\n",
+      "content": "Map\n===\n\nGenerate a simple map, populating it with a cube floor and characters.\n\n    Loader = require \"./loader\"\n    modelData = require \"./models\"\n\n    CUBE_SIZE = 10\n\n    cubeMesh = ->\n      geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)\n\n      material = new THREE.MeshBasicMaterial\n        color: 0xfffff\n        wireframe: true\n\n      return new THREE.Mesh geometry, material\n\n    cube = cubeMesh()\n\n    addCubeAt = (position) ->\n      clone = cube.clone()\n      clone.position.set position.x, position.y, position.z\n      scene.add clone\n\nCreate a basic floor of dimension `size`\n\n    exports.generateGrid = (width, depth, cb) ->\n      [0...width].forEach (x) ->\n        [0...depth].forEach (z) ->\n          addCubeAt new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)\n\n    exports.populateItems = (cb) ->\n      Loader.fromObj(\"items\", modelData.items).onLoad cb\n\n    exports.populateTerrain = (cb) ->\n      Loader.fromMesh\n        name: \"floor\"\n        type: \"terrain\"\n        mesh: cube\n\n      Loader.fromObj(\"terrain\", modelData.terrain).onLoad cb\n\nLoad all the characters. Provide a callback that receives an array\nof the characters when they're done loading.\n\n    exports.populateCharacters = (cb) ->\n      Loader.fromObj(\"characters\", modelData.characters).onLoad cb\n",
       "mode": "100644",
       "type": "blob"
     },
@@ -210,7 +210,7 @@
     },
     "style.styl": {
       "path": "style.styl",
-      "content": "body\n  margin: 0\n  overflow: hidden\n",
+      "content": "body\n  background-color: #000\n  margin: 0\n  overflow: hidden\n",
       "mode": "100644",
       "type": "blob"
     }
@@ -253,7 +253,7 @@
     },
     "style": {
       "path": "style",
-      "content": "module.exports = \"body {\\n  margin: 0;\\n  overflow: hidden;\\n}\";",
+      "content": "module.exports = \"body {\\n  background-color: #000;\\n  margin: 0;\\n  overflow: hidden;\\n}\";",
       "type": "blob"
     }
   },

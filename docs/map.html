@@ -47,7 +47,7 @@ CUBE_SIZE = <span class="number">10</span>
     color: <span class="number">0xfffff</span>
     wireframe: <span class="literal">true</span>
 
-  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh geometry, material    
+  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh geometry, material
 
 cube = cubeMesh()
 
@@ -67,7 +67,7 @@ cube = cubeMesh()
               <p>Create a basic floor of dimension <code>size</code></p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">generateGrid</span></span> = (width, depth, cb) -&gt;        
+            <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">generateGrid</span></span> = (width, depth, cb) -&gt;
   [<span class="number">0.</span>..width].forEach (x) -&gt;
     [<span class="number">0.</span>..depth].forEach (z) -&gt;
       addCubeAt <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
@@ -77,7 +77,7 @@ exports.<span class="function"><span class="title">populateItems</span></span> =
 
 exports.<span class="function"><span class="title">populateTerrain</span></span> = (cb) -&gt;
   Loader.fromMesh
-    name: <span class="string">"floor"</span> 
+    name: <span class="string">"floor"</span>
     type: <span class="string">"terrain"</span>
     mesh: cube
 
@@ -92,7 +92,7 @@ exports.<span class="function"><span class="title">populateTerrain</span></span>
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p>Load all the characters. Provide a callback that receives an array
-of the characters when they&#39;re done loading. </p>
+of the characters when they&#39;re done loading.</p>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">populateCharacters</span></span> = (cb) -&gt;

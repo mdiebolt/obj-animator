@@ -59,7 +59,7 @@ Main
           x += 10 
           z += 10
           
-          scene.add(idle)
+          scene.add idle
       , 1500
 
     gameLoop.update (t) ->

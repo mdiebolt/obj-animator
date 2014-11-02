@@ -56,11 +56,11 @@ Load a model by name, passing in an optional position.
             loader = new THREE.OBJLoader(manager)
             loader.crossOrigin = true
             
+            actionFrames = models[name][actionName]
             loader.load "#{BUCKET_PATH}/#{file}.obj", (obj3D) ->
               obj3D.name = file
-              obj3D.traverse (child) ->
-                child.material.map = texture if child instanceof THREE.Mesh
-                  
-              models[name][actionName].push obj3D
+              obj3D.children[0].material.map = texture
+            
+              actionFrames.push obj3D
 
       return manager

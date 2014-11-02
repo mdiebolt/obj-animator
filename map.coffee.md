@@ -27,7 +27,7 @@ Create a basic floor of dimension `size`
       generateGrid: (width, depth, cb) ->
         [0...width].forEach (x) ->
           [0...depth].forEach (z) ->
-            addCube new THREE.Vector3(x * CUBE_SIZE, -5, z * CUBE_SIZE)
+            addCube new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
 
         cb? mapCubes
 

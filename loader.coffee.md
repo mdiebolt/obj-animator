@@ -45,38 +45,42 @@ Load up one from an arbitrary model we use.
 
 Load a model by name, passing in an optional position.
 
-    module.exports = (objects) ->
-      objects.forEach (attrs) ->
-        position = attrs.position
-
-        parent = new THREE.Object3D()
-        parent.position.set position.x, position.y, position.z
-        parent.name = attrs.name
-        parent.userData.animations = attrs.animations
-
-        loader = new THREE.OBJLoader(manager)
-        loader.crossOrigin = true
-        loader.load "#{BUCKET_PATH}/#{attrs.name}.obj", (defaultModel) ->
-          defaultModel.traverse (child) ->
-            if child instanceof THREE.Mesh
-              child.material.map = texture
-
-              # TODO: default this in the character base class
-              for animationName, frames of (attrs.animations || {})
-                frames.forEach (frame) ->
-                  loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
-                    frameModel.name = frame
-                    frameModel.visible = false
+    module.exports = (models) ->
+      ###
+        name: "bartender"
+        actions: 
+          idle: []
+          walk: []
+      ###
+      for name, actions of models
+        ###
+          actionName: "idle"
+          modelNames: ["idle_0", "idle_1"]
+        ###
+        for actionName, modelNames of actions
+          loader = new THREE.OBJLoader(manager)
+          loader.crossOrigin = true
+          loader.load "#{BUCKET_PATH}/#{attrs.name}.obj", (defaultModel) ->
+            defaultModel.traverse (child) ->
+              if child instanceof THREE.Mesh
+                child.material.map = texture
+  
+                # TODO: default this in the character base class
+                for animationName, frames of (attrs.animations || {})
+                  frames.forEach (frame) ->
+                    loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
+                      frameModel.name = frame
+                      frameModel.visible = false
+                      
                     
-                  
-                    frameModel.traverse (c) ->
-                      if c instanceof THREE.Mesh
-                        c.material.map = texture
-
-                        parent.add frameModel
-
-              parent.add defaultModel
-              characters[attrs.name] = parent
-              scene.add parent
+                      frameModel.traverse (c) ->
+                        if c instanceof THREE.Mesh
+                          c.material.map = texture
+  
+                          parent.add frameModel
+  
+                parent.add defaultModel
+                characters[attrs.name] = parent
+                scene.add parent
 
       return manager

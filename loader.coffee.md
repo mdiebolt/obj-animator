@@ -75,4 +75,4 @@ Load a model by name, passing in an optional position.
       
       models[name].idle = [obj3D]
       
-      return manager
+      return manager 

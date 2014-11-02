@@ -48,17 +48,18 @@ Load up one from an arbitrary model we use.
 
 Load a model by name, passing in an optional position.
 
-    exports.fromObj = (modelData) ->
+    exports.fromObj = (namespace, modelData) ->
+      cache = models[namespace]
       for name, actions of modelData
-        models.characters[name] ||= {}
+        cache[name] ||= {}
         for actionName, fileNames of actions
-          models.characters[name][actionName] ||= []
+          cache[name][actionName] ||= []
 
           fileNames.forEach (file) ->
             loader = new THREE.OBJLoader(manager)
             loader.crossOrigin = true
 
-            actionFrames = models.characters[name][actionName] 
+            actionFrames = cache[name][actionName] 
             loader.load "#{BUCKET_PATH}/#{file}.obj", (obj3D) ->
               obj3D.name = file
               obj3D.children[0].material.map = texture
@@ -67,7 +68,7 @@ Load a model by name, passing in an optional position.
 
       return manager
     
-    exports.fromMesh = (data={}) ->
+    exports.fromMesh = (namespace, data={}) ->
       {name, mesh} = data
     
       obj3D = new THREE.Object3D 
@@ -75,7 +76,7 @@ Load a model by name, passing in an optional position.
       obj3D.add mesh
       obj3D.name = data.name
       
-      models.terrain[name] =
+      models[namespace][name] =
         idle: [obj3D]
       
       return manager 

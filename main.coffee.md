@@ -4,11 +4,9 @@ Main
     require "core"
     require "./lib/obj_renderer"
 
-    util = require "util"
-    util.applyStylesheet require("./style")
-
-    Loader = require "./loader"
     gameLoop = require "./game_loop"
+    
+    Loader = require "./loader"
     modelData = require "./models" 
     
     scene = null 

@@ -35,14 +35,13 @@ Main
     cubePositions = [0...10].map (x) ->
       [0...10].map (z) ->
         new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
- 
-    Loader.fromObj("items", modelData.items)
- 
+  
     Loader.fromMesh
       name: "floor"
       type: "terrain"
       mesh: cube
 
+    Loader.fromObj("items", modelData.items)
     Loader.fromObj("terrain", modelData.terrain)
 
     manager = Loader.fromObj("characters", modelData.characters)

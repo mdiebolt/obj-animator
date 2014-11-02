@@ -37,11 +37,9 @@
             <div class="content"><pre><code class="lang-coffeescript">require <span class="string">"core"</span>
 require <span class="string">"./lib/obj_renderer"</span>
 
-util = require <span class="string">"util"</span>
-util.applyStylesheet require(<span class="string">"./style"</span>)
+gameLoop = require <span class="string">"./game_loop"</span>
 
 Loader = require <span class="string">"./loader"</span>
-gameLoop = require <span class="string">"./game_loop"</span>
 modelData = require <span class="string">"./models"</span> 
 
 scene = <span class="literal">null</span> 

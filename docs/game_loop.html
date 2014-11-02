@@ -35,6 +35,7 @@
               
             </div>
             <div class="content"><pre><code class="lang-coffeescript">lights = require <span class="string">"./lights"</span>
+util = require <span class="string">"util"</span>
 
 t = <span class="number">0</span>
 dt = <span class="number">1</span> / <span class="number">60</span>
@@ -47,6 +48,7 @@ scene = <span class="keyword">new</span> THREE.Scene()
 camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">45</span>, aspectRatio, <span class="number">1</span>, <span class="number">2000</span>)
 
 <span class="keyword">do</span> -&gt;
+  util.applyStylesheet require(<span class="string">"./style"</span>)
   camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
 
   scene.add lights.ambient()
@@ -54,7 +56,6 @@ camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="n
 
   renderer.setSize <span class="number">800</span>, <span class="number">600</span> <span class="comment">#window.innerWidth, window.innerHeight</span>
   document.body.appendChild renderer.domElement 
-
 
 <span class="function"><span class="title">animate</span></span> = -&gt;
   requestAnimationFrame animate

@@ -29,8 +29,9 @@ Create a basic floor of dimension `size`
     module.exports = ->
 
       generateGrid: (width, depth, cb) ->
-        Loader.fromMesh 
+        Loader.fromMesh
           name: "floor" 
+          type: "terrain"
           mesh: cubeMesh()
         
         [0...width].forEach (x) ->
@@ -39,8 +40,14 @@ Create a basic floor of dimension `size`
 
         cb mapCubes
 
+      populateItems: (cb) ->
+        Loader.fromObj("items", modelData.items).onLoad cb
+        
+      populateTerrain: (cb) ->
+        Loader.fromObj("terrain", modelData.terrain).onLoad cb
+
 Load all the characters. Provide a callback that receives an array
 of the characters when they're done loading. 
 
       populateCharacters: (cb) ->
-        Loader.fromObj(modelData.characters).onLoad cb
+        Loader.fromObj("characters", modelData.characters).onLoad cb

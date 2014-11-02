@@ -68,7 +68,7 @@ Load a model by name, passing in an optional position.
 
       return manager
     
-    exports.fromMesh = (namespace, data={}) ->
+    exports.fromMesh = (data={}) ->
       {name, mesh} = data
     
       obj3D = new THREE.Object3D 
@@ -76,7 +76,7 @@ Load a model by name, passing in an optional position.
       obj3D.add mesh
       obj3D.name = data.name
       
-      models[namespace][name] =
+      models[data.type][name] =
         idle: [obj3D]
       
       return manager 

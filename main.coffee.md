@@ -30,8 +30,14 @@ Renderer
       map.generateGrid 10, 10, (mapCubes) ->
         console.log mapCubes
 
+      map.populateItems (modelData) ->
+        console.log "items", modelData
+      
+      map.populateTerrain (modelData) ->
+        console.log "terrain", modelData
+  
       map.populateCharacters (modelData) ->
-        console.log modelData
+        console.log "characters", modelData
         characters = modelData.characters
 
         setTimeout ->

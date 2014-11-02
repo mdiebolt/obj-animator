@@ -11,6 +11,7 @@ Main
     Loader.fromObj "items", modelData.items
     Loader.fromObj "terrain", modelData.terrain
     Loader.fromObj "characters", modelData.characters
+    
     core.Loader.characters().then (data) ->
       console.log data
 

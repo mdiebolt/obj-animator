@@ -74,15 +74,4 @@ Load up one from an arbitrary model we use.
               actionFrames.push obj3D
 
       return manager
-
-    exports.fromMesh = (data={}) ->
-      {mesh, name, type} = data
-
-      obj3D = new THREE.Object3D()
-      obj3D.name = name
-      obj3D.add mesh
-
-      models[type][name] =
-        idle: [obj3D]
-
-      return manager
+      

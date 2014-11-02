@@ -44,8 +44,7 @@ Main
         scene.add idle
 
     manager.onLoad (loadedData) ->
-      # TODO: merge here instead of overwrite
-      cachedModels = loadedData
+      cachedModels = extend {}, loadedData
       console.log cachedModels
 
       # TODO: figure out why some cachedModel animation states are empty

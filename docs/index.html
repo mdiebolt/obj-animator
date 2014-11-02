@@ -64,6 +64,7 @@ characters = {}
     console.log mapCubes
 
   map.populateCharacters (c) -&gt;
+    console.log c
     characters = c
 
 <span class="function"><span class="title">animate</span></span> = -&gt;
@@ -90,7 +91,7 @@ characters = {}
   scene.add directionalLight
 
 <span class="function"><span class="title">render</span></span> = -&gt;
-  animateCharacters(t)
+  <span class="comment">#animateCharacters(t)</span>
 
   camera.lookAt scene.position
 

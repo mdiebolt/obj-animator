@@ -63,8 +63,14 @@ characters = {}
   map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
     console.log mapCubes
 
+  map.populateItems (modelData) -&gt;
+    console.log <span class="string">"items"</span>, modelData
+
+  map.populateTerrain (modelData) -&gt;
+    console.log <span class="string">"terrain"</span>, modelData
+
   map.populateCharacters (modelData) -&gt;
-    console.log modelData
+    console.log <span class="string">"characters"</span>, modelData
     characters = modelData.characters
 
     setTimeout -&gt;

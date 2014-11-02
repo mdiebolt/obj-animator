@@ -70,15 +70,22 @@ mapCubes = []
             <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = -&gt;
 
   generateGrid: (width, depth, cb) -&gt;
-    Loader.fromMesh 
+    Loader.fromMesh
       name: <span class="string">"floor"</span> 
+      type: <span class="string">"terrain"</span>
       mesh: cubeMesh()
 
     [<span class="number">0.</span>..width].forEach (x) -&gt;
       [<span class="number">0.</span>..depth].forEach (z) -&gt;
         addCube <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
-    cb mapCubes</code></pre>
+    cb mapCubes
+
+  populateItems: (cb) -&gt;
+    Loader.fromObj(<span class="string">"items"</span>, modelData.items).onLoad cb
+
+  populateTerrain: (cb) -&gt;
+    Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain).onLoad cb</code></pre>
 </div>
         </li>
         
@@ -93,7 +100,7 @@ of the characters when they&#39;re done loading. </p>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">  populateCharacters: (cb) -&gt;
-    Loader.fromObj(modelData.characters).onLoad cb</code></pre>
+    Loader.fromObj(<span class="string">"characters"</span>, modelData.characters).onLoad cb</code></pre>
 </div>
         </li>
         

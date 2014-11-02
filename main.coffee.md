@@ -51,8 +51,7 @@ Main
       # TODO: figure out why some cachedModel animation states are empty
       # even though THREE js manager has fired its onload event
       setTimeout ->
-        scene = core.init {}, ->
-
-        addCharacters scene
-        addItems scene
+        core.init {}, (scene, t, dt) ->
+          addCharacters scene
+          addItems scene
       , 1000

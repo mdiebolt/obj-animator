@@ -43,6 +43,8 @@ t = <span class="number">0</span>
 dt = <span class="number">1</span> / <span class="number">60</span>
 started = <span class="literal">false</span>
 
+updateFn = <span class="literal">null</span>
+
 aspectRatio = window.innerWidth / window.innerHeight
 
 renderer = <span class="keyword">new</span> THREE.WebGLRenderer()
@@ -74,8 +76,9 @@ camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="n
 
   renderer.render scene, camera
   t += dt
+  updateFn?(t)
 
-exports.<span class="function"><span class="title">start</span></span> = -&gt;  
+exports.<span class="function"><span class="title">start</span></span> = (updateFn) -&gt;  
   started = <span class="literal">true</span>
 
   resize()  
@@ -83,8 +86,8 @@ exports.<span class="function"><span class="title">start</span></span> = -&gt;
 
   scene
 
-exports.<span class="function"><span class="title">update</span></span> = (updateFn) -&gt;
-  updateFn(t) <span class="keyword">if</span> started</code></pre>
+exports.<span class="function"><span class="title">update</span></span> = (fn) -&gt;
+  updateFn = fn</code></pre>
 </div>
         </li>
         

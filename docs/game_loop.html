@@ -34,7 +34,9 @@
               </div>
               
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">t = <span class="number">0</span>
+            <div class="content"><pre><code class="lang-coffeescript">lights = require <span class="string">"./lgihts"</span>
+
+t = <span class="number">0</span>
 dt = <span class="number">1</span> / <span class="number">60</span>
 started = <span class="literal">false</span>
 
@@ -44,10 +46,15 @@ renderer = <span class="keyword">new</span> THREE.WebGLRenderer()
 scene = <span class="keyword">new</span> THREE.Scene()
 camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">45</span>, aspectRatio, <span class="number">1</span>, <span class="number">2000</span>)
 
-document.body.appendChild renderer.domElement
-renderer.setSize <span class="number">800</span>, <span class="number">600</span> <span class="comment">#window.innerWidth, window.innerHeight</span>
+<span class="keyword">do</span> -&gt;
+  camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
 
-camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
+  scene.add lights.ambient()
+  scene.add lights.directional()
+
+  renderer.setSize <span class="number">800</span>, <span class="number">600</span> <span class="comment">#window.innerWidth, window.innerHeight</span>
+  document.body.appendChild renderer.domElement 
+
 
 <span class="function"><span class="title">animate</span></span> = -&gt;
   requestAnimationFrame animate

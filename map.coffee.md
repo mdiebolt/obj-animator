@@ -29,7 +29,7 @@ Create a basic floor of dimension `size`
         [0...size].forEach (x) ->
           [0...size].forEach (z) ->
             addCube new Vector3(x * CUBE_SIZE, -5, z * CUBE_SIZE)
-        
+
         cb? mapCubes
 
 Load all the characters. Provide a callback that receives an array
@@ -70,5 +70,5 @@ of the characters when they're done loading.
           name: "jetpack_bandit"
           position: new Vector3(90, 0, 0)
         }]
-        
+
         loadingManager.onLoad cb

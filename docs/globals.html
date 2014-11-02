@@ -37,6 +37,7 @@
             </div>
             <div class="content"><pre><code class="lang-coffeescript">t = <span class="number">0</span>
 dt = <span class="number">1</span> / <span class="number">60</span>
+started = <span class="literal">false</span>
 
 aspectRatio = <span class="number">800</span> / <span class="number">600</span>
 
@@ -58,7 +59,14 @@ camera.position.set <span class="number">0</span>, <span class="number">100</spa
   camera.lookAt scene.position
 
   renderer.render scene, camera
-  t += dt</code></pre>
+  t += dt
+
+exports.<span class="function"><span class="title">start</span></span> = -&gt;
+  started = <span class="literal">true</span>
+  animate()
+
+exports.<span class="function"><span class="title">update</span></span> = (updateFn) -&gt;
+  updateFn(t) <span class="keyword">if</span> started</code></pre>
 </div>
         </li>
         

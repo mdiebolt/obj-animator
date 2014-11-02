@@ -46,20 +46,12 @@ Load up one from an arbitrary model we use.
 Load a model by name, passing in an optional position.
 
     module.exports = (modelData) ->
-      ###
-        name: "bartender"
-        actions: 
-          idle: []
-          walk: []
-      ###
       for name, actions of modelData
         models[name] ||= {}
-        ###
-          actionName: "idle"
-          modelNames: ["idle_0", "idle_1"]
-        ###
+        
         for actionName, fileNames of actions
           models[name][actionName] ||= []
+          
           fileNames.forEach (file) ->
             loader = new THREE.OBJLoader(manager)
             loader.crossOrigin = true

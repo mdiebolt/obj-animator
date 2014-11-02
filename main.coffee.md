@@ -41,7 +41,6 @@ Main
 
     manager.onLoad (loadedData) ->
       extend cachedModels, loadedData
-      console.log cachedModels
 
       core.init {}, (scene, t, dt) ->
         addCharacters scene

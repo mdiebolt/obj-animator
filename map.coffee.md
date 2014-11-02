@@ -29,7 +29,7 @@ Create a basic floor of dimension `size`
           [0...depth].forEach (z) ->
             addCube new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
 
-        cb? mapCubes
+        cb mapCubes
 
 Load all the characters. Provide a callback that receives an array
 of the characters when they're done loading.

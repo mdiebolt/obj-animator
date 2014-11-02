@@ -9,9 +9,8 @@ Character data for rendering
       [{
         name: "bartender"
         position: new Vector3(0, 0, 0)
-        animations: [
+        animations: 
           wink: ["bartender_wink_0"]
-        ]
       }, {
         name: "robo_sheriff"
         position: new Vector3(10, 0, 0)

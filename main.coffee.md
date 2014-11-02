@@ -11,11 +11,6 @@ Main
     CUBE_SIZE = 10
 
     cachedModels = {}
-    
-    Loader.fromMesh
-      name: "floor"
-      type: "terrain"
-      mesh: cube
 
     Loader.fromObj("items", modelData.items)
     Loader.fromObj("terrain", modelData.terrain)
@@ -29,9 +24,20 @@ Main
         color: 0xfffff
         wireframe: true
 
-      new THREE.Mesh geometry, material
+      if cachedModels.terrain?.floor?.idle?
+        cube = cachedModels.terrain.floor.idle
+      else
+        container = new THREE.Object3D()
+        mesh = new THREE.Mesh geometry, material
+        container.add(mesh)
+        
+        cachedModels.terrain ||= {}
+        cachedModels.terrain.floor ||= {}
+        cachedModels.terrain.floor.idle = container
+        
+        cube = container
 
-    cube = cubeMesh()
+      cube
     
     addCharacters = (scene) ->
       x = 0
@@ -49,19 +55,19 @@ Main
         scene.add idle    
   
     addMapCubes = (scene) ->
-      
-    
       [0...10].forEach (x) ->
         [0...10].forEach (z) ->
           {cx, cy, cz} = new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
           
-          clone = cube.clone()
+          clone = cubeMesh().clone()
           clone.position.set(cx, cy, cz)       
       
           scene.add clone
 
     manager.onLoad (loadedData) ->
-      cachedModels = loadedData
+      # TODO: merge here instead of overwrite 
+      cachedModels = loadedData 
+      console.log cachedModels
 
       setTimeout ->
         scene = gameLoop.start()

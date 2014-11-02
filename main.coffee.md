@@ -62,5 +62,5 @@ Renderer
           gameLoop.start()
       , 1500
 
-    gameLoop.update (dt) ->
-      console.log dt
+    gameLoop.update (t) ->
+      console.log t

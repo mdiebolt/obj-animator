@@ -5,6 +5,7 @@ Put all these gross guys in here.
 
     t = 0
     dt = 1 / 60
+    started = false
 
     aspectRatio = 800 / 600
 
@@ -27,3 +28,10 @@ Put all these gross guys in here.
 
       renderer.render scene, camera
       t += dt
+      
+    exports.start = ->
+      started = true
+      animate()
+      
+    exports.update = (updateFn) ->
+      updateFn(t) if started

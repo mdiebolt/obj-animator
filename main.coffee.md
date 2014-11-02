@@ -45,9 +45,8 @@ Renderer
         beamSword.children.forEach (component) ->
           component.visible = false
         
-        debugger
         beamSword.userData.animations.grow.forEach (growFrame) ->
-          if animations.grow[c.animationIndex] is growFrame.name
+          if beamSword.userData.animations.grow[c.animationIndex] is growFrame.name
             growFrame.visible = true             
 
     addLights = ->

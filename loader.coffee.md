@@ -45,19 +45,18 @@ Load a model by name, passing in an optional position.
               child.material.map = texture
 
               # TODO: default this in the character base class
-              (attrs.animations || []).forEach (animation) ->
-                for animationName, frames of animation
-                  frames.forEach (frame) ->
-                    loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
-                      frameModel.name = "#{animationName}_#{frame}"
-                      frameModel.visible = false
-                      
+              for animationName, frames of (attrs.animations || {})
+                frames.forEach (frame) ->
+                  loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
+                    frameModel.name = "#{animationName}_#{frame}"
+                    frameModel.visible = false
                     
-                      frameModel.traverse (c) ->
-                        if c instanceof THREE.Mesh
-                          c.material.map = texture
+                  
+                    frameModel.traverse (c) ->
+                      if c instanceof THREE.Mesh
+                        c.material.map = texture
 
-                          parent.add frameModel
+                        parent.add frameModel
 
               parent.add defaultModel
               characters[attrs.name] = parent

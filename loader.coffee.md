@@ -67,14 +67,13 @@ Load up one from an arbitrary model we use.
       return manager
 
     exports.fromMesh = (data={}) ->
-      {name, mesh} = data
+      {mesh, name, type} = data
 
       obj3D = new THREE.Object3D()
       obj3D.name = name
       obj3D.add mesh
-      obj3D.name = data.name
 
-      models[data.type][name] =
+      models[type][name] =
         idle: [obj3D]
 
       return manager

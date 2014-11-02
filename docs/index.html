@@ -63,9 +63,9 @@ characters = {}
   map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
     console.log mapCubes
 
-  map.populateCharacters (c) -&gt;
-    console.log c
-    characters = c
+  map.populateCharacters (modelData) -&gt;
+    console.log modelData
+    characters = modelData.characters
 
     setTimeout -&gt;
       x = <span class="number">0</span>
@@ -77,7 +77,7 @@ characters = {}
         scene.add(idle)
         x += <span class="number">10</span>
         z += <span class="number">10</span>
-    , <span class="number">500</span>
+    , <span class="number">1500</span>
 
 <span class="function"><span class="title">animate</span></span> = -&gt;
   requestAnimationFrame animate

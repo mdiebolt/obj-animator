@@ -63,7 +63,10 @@ cactus:
   name: &quot;bartender_idle_1&quot;</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">models = {}</code></pre>
+            <div class="content"><pre><code class="lang-coffeescript">models =
+  characters: {}
+  terrain: {}
+  items: {}</code></pre>
 </div>
         </li>
         
@@ -111,33 +114,32 @@ Load up one from an arbitrary model we use.</p>
             </div>
             <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">fromObj</span></span> = (modelData) -&gt;
   <span class="keyword">for</span> name, actions <span class="keyword">of</span> modelData
-    models[name] ||= {}
-
+    models.characters[name] ||= {}
     <span class="keyword">for</span> actionName, fileNames <span class="keyword">of</span> actions
-      models[name][actionName] ||= []
+      models.characters[name][actionName] ||= []
 
       fileNames.forEach (file) -&gt;
         loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
         loader.crossOrigin = <span class="literal">true</span>
 
-        actionFrames = models[name][actionName]
+        actionFrames = models.characters[name][actionName] 
         loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{file}</span>.obj"</span>, (obj3D) -&gt;
           obj3D.name = file
           obj3D.children[<span class="number">0</span>].material.map = texture
 
-          actionFrames.push obj3D
+          actionFrames.push obj3D 
 
   <span class="keyword">return</span> manager
 
 exports.<span class="function"><span class="title">fromGeometry</span></span> = (data={}) -&gt;
   {name, geometry} = data
 
-  obj3D = <span class="keyword">new</span> THREE.Object3D
+  obj3D = <span class="keyword">new</span> THREE.Object3D 
   obj3D.name = name
   obj3D.add geometry
   obj3D.name = data.name
 
-  models[name] =
+  models.terrain[name] =
     idle: [obj3D]
 
   <span class="keyword">return</span> manager</code></pre>

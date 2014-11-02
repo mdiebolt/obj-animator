@@ -7,7 +7,7 @@ Pass in the characters collection when the loading manager finishes
 
     manager = new THREE.LoadingManager (cb) ->
       cb? characters
-    
+
     texture = new THREE.Texture()
     characters = []
 
@@ -41,10 +41,10 @@ Load a model by name, passing in an optional position.
     module.exports = (objects) ->
       objects.forEach (attrs) ->
         position = attrs.position
-  
+
         parent = new THREE.Object3D()
         parent.position.set position.x, position.y, position.z
-  
+
         loader = new THREE.OBJLoader(manager)
         loader.crossOrigin = true
         loader.load "#{BUCKET_PATH}/#{attrs.name}.obj", (defaultModel) ->
@@ -52,7 +52,7 @@ Load a model by name, passing in an optional position.
           defaultModel.traverse (child) ->
             if child instanceof THREE.Mesh
               child.material.map = texture
-              
+
               # TODO: default this in the character base class
               (attrs.animations || []).forEach (animation) ->
                 for animationName, frames of animation
@@ -61,17 +61,17 @@ Load a model by name, passing in an optional position.
                       frameModel.traverse (c) ->
                         if c instanceof THREE.Mesh
                           c.material.map = texture
-                                  
+
                           parent.add frameModel
-              
+
                       , onProgress
-                      , onError              
-                    
+                      , onError
+
               parent.add defaultModel
               characters.push parent
               scene.add parent
-                
+
           , onProgress
           , onError
-                  
+
       return manager

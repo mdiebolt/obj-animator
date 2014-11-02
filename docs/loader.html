@@ -120,12 +120,12 @@ Load up one from an arbitrary model we use.</p>
         loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
         loader.crossOrigin = <span class="literal">true</span>
 
+        actionFrames = models[name][actionName]
         loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{file}</span>.obj"</span>, (obj3D) -&gt;
           obj3D.name = file
-          obj3D.traverse (child) -&gt;
-            child.material.map = texture <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
+          obj3D.children[<span class="number">0</span>].material.map = texture
 
-          models[name][actionName].push obj3D
+          actionFrames.push obj3D
 
   <span class="keyword">return</span> manager</code></pre>
 </div>

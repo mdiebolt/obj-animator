@@ -5,8 +5,8 @@ Loads voxel models from .obj files
 
 Pass model data to the callback when the loading manager finishes
 
-    manager = new THREE.LoadingManager (cb) ->
-      cb? models
+    manager = new THREE.LoadingManager (loadingComplete) ->
+      loadingComplete? models
 
     texture = new THREE.Texture()
 

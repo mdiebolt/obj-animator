@@ -69,19 +69,19 @@ cubePositions = [<span class="number">0.</span>.<span class="number">.10</span>]
   [<span class="number">0.</span>.<span class="number">.10</span>].map (z) -&gt;
     <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
-Loader.fromObj(<span class="string">"items"</span>, modelData.items).onLoad (loadedData) -&gt;
-  console.log <span class="string">"items"</span>, loadedData 
+Loader.fromObj(<span class="string">"items"</span>, modelData.items)
 
 Loader.fromMesh
   name: <span class="string">"floor"</span>
   type: <span class="string">"terrain"</span>
   mesh: cube
 
-Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain).onLoad (loadedData) -&gt;
-  console.log <span class="string">"terrain"</span>, loadedData
+Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain)
 
-Loader.fromObj(<span class="string">"characters"</span>, modelData.characters).onLoad (loadedData) -&gt;
-  console.log <span class="string">"characters"</span>, loadedData
+manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.characters)
+
+manager.onLoad (loadedData) -&gt;
+  console.log <span class="string">"cached models"</span>, loadedData
   characters = loadedData.characters
 
   setTimeout -&gt;
@@ -95,7 +95,7 @@ Loader.fromObj(<span class="string">"characters"</span>, modelData.characters).o
       idle.position.setX(x)
       idle.position.setZ(z)
 
-      x += <span class="number">10</span>
+      x += <span class="number">10</span> 
       z += <span class="number">10</span>
 
       scene.add(idle)

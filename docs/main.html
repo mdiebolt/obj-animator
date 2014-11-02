@@ -49,20 +49,11 @@ CUBE_SIZE = <span class="number">10</span>
     color: <span class="number">0xfffff</span>
     wireframe: <span class="literal">true</span>
 
-  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh geometry, material
+  <span class="keyword">new</span> THREE.Mesh geometry, material
 
 cube = cubeMesh()
 
-<span class="function"><span class="title">addCubeAt</span></span> = (position) -&gt;
-  clone = cube.clone()
-  clone.position.set position.x, position.y, position.z
-  scene.add clone
-
 characters = {}
-
-cubePositions = [<span class="number">0.</span>.<span class="number">.10</span>].map (x) -&gt;
-  [<span class="number">0.</span>.<span class="number">.10</span>].map (z) -&gt;
-    <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
 Loader.fromMesh
   name: <span class="string">"floor"</span>
@@ -81,8 +72,16 @@ manager.onLoad (loadedData) -&gt;
   setTimeout -&gt;
     scene = gameLoop.start()
 
+    [<span class="number">0.</span>.<span class="number">.10</span>].forEach (x) -&gt;
+      [<span class="number">0.</span>.<span class="number">.10</span>].forEach (z) -&gt;
+        {cx, cy, cz} = <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
+        clone = cube.clone()
+        clone.position.set(cx, cy, cz)       
+
+        scene.add clone
+
     x = <span class="number">0</span>
-    z = <span class="number">0</span>
+    z = <span class="number">0</span>        
 
     <span class="keyword">for</span> name, actions <span class="keyword">of</span> characters
       idle = actions.idle[<span class="number">0</span>]

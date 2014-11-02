@@ -42,18 +42,8 @@ modelData = require <span class="string">"./models"</span>
 scene = <span class="literal">null</span> 
 
 CUBE_SIZE = <span class="number">10</span>
-<span class="function"><span class="title">cubeMesh</span></span> = -&gt;
-  geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
 
-  material = <span class="keyword">new</span> THREE.MeshBasicMaterial
-    color: <span class="number">0xfffff</span>
-    wireframe: <span class="literal">true</span>
-
-  <span class="keyword">new</span> THREE.Mesh geometry, material
-
-cube = cubeMesh()
-
-characters = {}
+cachedModels = {}
 
 Loader.fromMesh
   name: <span class="string">"floor"</span>
@@ -65,35 +55,53 @@ Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain)
 
 manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.characters)
 
+<span class="function"><span class="title">cubeMesh</span></span> = -&gt;
+  geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
+
+  material = <span class="keyword">new</span> THREE.MeshBasicMaterial
+    color: <span class="number">0xfffff</span>
+    wireframe: <span class="literal">true</span>
+
+  <span class="keyword">new</span> THREE.Mesh geometry, material
+
+cube = cubeMesh()
+
+<span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
+  x = <span class="number">0</span>
+  z = <span class="number">0</span>        
+
+  <span class="keyword">for</span> name, actions <span class="keyword">of</span> characters
+    idle = actions.idle[<span class="number">0</span>]
+
+    idle.position.setX(x)
+    idle.position.setZ(z)
+
+    x += <span class="number">10</span> 
+    z += <span class="number">10</span>
+
+    scene.add idle    
+
+<span class="function"><span class="title">addMapCubes</span></span> = (scene) -&gt;
+
+
+  [<span class="number">0.</span>.<span class="number">.10</span>].forEach (x) -&gt;
+    [<span class="number">0.</span>.<span class="number">.10</span>].forEach (z) -&gt;
+      {cx, cy, cz} = <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
+
+      clone = cube.clone()
+      clone.position.set(cx, cy, cz)       
+
+      scene.add clone
+
 manager.onLoad (loadedData) -&gt;
-  console.log <span class="string">"cached models"</span>, loadedData
-  characters = loadedData.characters
+  cachedModels = loadedData
 
   setTimeout -&gt;
     scene = gameLoop.start()
 
-    [<span class="number">0.</span>.<span class="number">.10</span>].forEach (x) -&gt;
-      [<span class="number">0.</span>.<span class="number">.10</span>].forEach (z) -&gt;
-        {cx, cy, cz} = <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
-        clone = cube.clone()
-        clone.position.set(cx, cy, cz)       
-
-        scene.add clone
-
-    x = <span class="number">0</span>
-    z = <span class="number">0</span>        
-
-    <span class="keyword">for</span> name, actions <span class="keyword">of</span> characters
-      idle = actions.idle[<span class="number">0</span>]
-
-      idle.position.setX(x)
-      idle.position.setZ(z)
-
-      x += <span class="number">10</span> 
-      z += <span class="number">10</span>
-
-      scene.add idle
-  , <span class="number">1500</span>
+    addMapCubes scene
+    addCharacters scene
+  , <span class="number">1000</span>
 
 gameLoop.update (t) -&gt;
   console.log t</code></pre>

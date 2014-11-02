@@ -8,6 +8,11 @@ Renderer
     util.applyStylesheet(require("./style"))
 
     map = require("./map")()
+    
+    core = require "core"
+    
+    t = 0
+    dt = 1 / 60
 
     container = document.createElement "div"
     document.body.appendChild container
@@ -18,7 +23,6 @@ Renderer
     camera.position.set 0, 100, 200
     
     characters = {}
-    lastAnimated = +new Date()
 
     init = ->
       addLights()
@@ -34,23 +38,16 @@ Renderer
       
       render()
 
-    animateCharacters = ->
-      now = +new Date()
-      
-      if now - lastAnimated > 100
-        lastAnimated = now
-    
-        beamSword = characters.beam_sword
-        beamSword.animationIndex ?= 0
+    animateCharacters = (t) ->
+      if beamSword = characters.beam_sword
+        animationName = beamSword.userData.animations.grow.wrap (t / 0.25).floor()
         beamSword.children.forEach (component) ->
           component.visible = false
-      
-        currentIndex = beamSword.animationIndex
+  
         beamSword.children.forEach (c) ->
-          if beamSword.userData.animations.grow[currentIndex] is c.name
-            c.visible = true 
-            beamSword.animationIndex = (currentIndex + 1) % beamSword.userData.animations.grow.length
-
+          if animationName is c.name
+            c.visible = true
+         
     addLights = ->
       ambient = new THREE.AmbientLight 0x101030
       scene.add ambient
@@ -60,11 +57,12 @@ Renderer
       scene.add directionalLight
 
     render = ->
-      animateCharacters()
+      animateCharacters(t)
     
       camera.lookAt scene.position
 
       renderer.render scene, camera
+      t += dt
 
     init()
     animate()

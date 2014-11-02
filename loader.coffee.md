@@ -14,11 +14,16 @@ The models hash keeps our 3D models in memory.
 Its structure looks like this.
 Object3D is the THREE.js scene primitive
 
-bartender:
-  idle: [Object3D, Object3D, Object3D, Object3D]
+characters:
+  bartender:
+    idle: [Object3D, Object3D, Object3D, Object3D]
   walk: [Object3D, ...]
-cactus:
-  idle: [...]
+terrain:
+  cactus:
+    idle: [...]
+items:
+  gun:
+    idle: [...]
 
 Object3D
   name: "bartender_idle_0"

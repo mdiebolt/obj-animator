@@ -17,9 +17,7 @@ Main
       x = 0
       z = 0
 
-      Object.keys(cachedModels.characters).forEach (name) -> 
-        actions = cachedModels.characters[name]
-        
+      keyValues cachedModels.characters, (name, actions) ->         
         if idle = actions.idle[0]
           idle.position.set x, 0, z
   
@@ -32,9 +30,7 @@ Main
       x = 90
       z = 0
 
-      Object.keys(cachedModels.items).forEach (name) ->
-        actions = cachedModels.items[name]
-        
+      keyValues cachedModels.items, (name, actions) ->
         if idle = actions.idle[0]
           idle.position.set x, 0, z
   

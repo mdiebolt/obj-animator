@@ -2,7 +2,6 @@ Renderer
 ========
 
     require "core"
-    require "./globals"
     require "./lib/obj_renderer"
 
     util = require "util"

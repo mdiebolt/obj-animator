@@ -8,7 +8,7 @@ Character data for rendering
         idle: ["bartender"]
         wink: ["bartender_wink_0"]
       robo_sheriff:
-        idle: ["robot_sheriff"]
+        idle: ["robo_sheriff"]
       cactus:
         idle: ["cactus"]
       arrow:

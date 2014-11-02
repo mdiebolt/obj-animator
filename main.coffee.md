@@ -5,7 +5,7 @@ Renderer
     require "./lib/obj_renderer"
 
     util = require "util"
-    util.applyStylesheet(require("./style"))
+    util.applyStylesheet require("./style")
 
     map = require("./map")()
 

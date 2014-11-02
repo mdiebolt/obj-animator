@@ -45,7 +45,7 @@ Renderer
         beamSword.children.forEach (component) ->
           component.visible = false
       
-        beamSword.children.traverse (c) ->
+        beamSword.children.forEach (c) ->
           if beamSword.userData.animations.grow[beamSword.animationIndex] is c.name
             c.visible = true 
             beamSword.animationIndex += 1      

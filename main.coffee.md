@@ -7,7 +7,7 @@ Renderer
     util = require "util"
     util.applyStylesheet require("./style")
 
-    map = require("./map")()
+    Map = require "./map"
 
     core = require "core"
 
@@ -27,16 +27,16 @@ Renderer
     init = ->
       addLights()
 
-      map.generateGrid 10, 10, (mapCubes) ->
+      Map.generateGrid 10, 10, (mapCubes) ->
         console.log mapCubes
 
-      map.populateItems (modelData) ->
+      Map.populateItems (modelData) ->
         console.log "items", modelData
       
-      map.populateTerrain (modelData) ->
+      Map.populateTerrain (modelData) ->
         console.log "terrain", modelData
   
-      map.populateCharacters (modelData) ->
+      Map.populateCharacters (modelData) ->
         console.log "characters", modelData
         characters = modelData.characters
 

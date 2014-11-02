@@ -26,25 +26,24 @@ Generate a simple map, populating it with a cube floor and characters.
 
 Create a basic floor of dimension `size`
 
-    module.exports = ->
-      generateGrid: (width, depth, cb) ->        
-        [0...width].forEach (x) ->
-          [0...depth].forEach (z) ->
-            addCubeAt new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
+    exports.generateGrid = (width, depth, cb) ->        
+      [0...width].forEach (x) ->
+        [0...depth].forEach (z) ->
+          addCubeAt new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
 
-      populateItems: (cb) ->
-        Loader.fromObj("items", modelData.items).onLoad cb
-        
-      populateTerrain: (cb) ->
-        Loader.fromMesh
-          name: "floor" 
-          type: "terrain"
-          mesh: cube
+    exports.populateItems = (cb) ->
+      Loader.fromObj("items", modelData.items).onLoad cb
+    
+    exports.populateTerrain = (cb) ->
+      Loader.fromMesh
+        name: "floor" 
+        type: "terrain"
+        mesh: cube
 
-        Loader.fromObj("terrain", modelData.terrain).onLoad cb
+      Loader.fromObj("terrain", modelData.terrain).onLoad cb
 
 Load all the characters. Provide a callback that receives an array
 of the characters when they're done loading. 
 
-      populateCharacters: (cb) ->
-        Loader.fromObj("characters", modelData.characters).onLoad cb
+    exports.populateCharacters = (cb) ->
+      Loader.fromObj("characters", modelData.characters).onLoad cb

@@ -50,17 +50,25 @@ renderer.setSize <span class="number">800</span>, <span class="number">600</span
 
 camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
 
+characters = []
+framesElapsed = <span class="number">0</span>
+
 <span class="function"><span class="title">init</span></span> = -&gt;
   addLights()
 
   map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
     console.log mapCubes
 
-  map.populateCharacters (characters) -&gt;
-    console.log characters
+  map.populateCharacters (c) -&gt;
+    characters = c
 
 <span class="function"><span class="title">animate</span></span> = -&gt;
+  framesElapsed += <span class="number">1</span>
   requestAnimationFrame animate
+
+  characters.forEach (c) -&gt;
+    <span class="keyword">debugger</span>
+
   render()
 
 <span class="function"><span class="title">addLights</span></span> = -&gt;

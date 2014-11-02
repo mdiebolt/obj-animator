@@ -9,7 +9,7 @@ Game Loop
     t = 0
     dt = 1 / 60
     started = false
-    
+
     updateFn = null
 
     aspectRatio = window.innerWidth / window.innerHeight
@@ -24,14 +24,14 @@ Game Loop
 
       scene.add lights.ambient()
       scene.add lights.directional()
-      
+
       document.body.appendChild renderer.domElement
 
     resize = ->
       renderer.setSize window.innerWidth, window.innerHeight
-      
+
       camera.aspect  = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()        
+      camera.updateProjectionMatrix()
 
     animate = ->
       requestAnimationFrame animate
@@ -45,10 +45,10 @@ Game Loop
       t += dt
       updateFn?(t)
 
-    exports.start = (updateFn) ->  
+    exports.start = (updateFn) ->
       started = true
-      
-      resize()  
+
+      resize()
       animate()
 
       scene

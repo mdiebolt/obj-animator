@@ -50,7 +50,9 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
   x = <span class="number">0</span>
   z = <span class="number">0</span>
 
-  <span class="keyword">for</span> name, actions <span class="keyword">of</span> cachedModels.characters
+  Object.keys(cachedModels.characters).forEach (name) -&gt; 
+    actions = cachedModels.characters[name]
+
     idle = actions.idle[<span class="number">0</span>]
 
     idle.position.setX(x)
@@ -77,7 +79,7 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
     scene.add idle
 
 manager.onLoad (loadedData) -&gt;
-  cachedModels = extend {}, loadedData
+  extend cachedModels, loadedData
   console.log cachedModels
 
   <span class="comment"># TODO: figure out why some cachedModel animation states are empty</span>

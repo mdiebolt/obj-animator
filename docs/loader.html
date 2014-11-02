@@ -110,20 +110,12 @@ Load up one from an arbitrary model we use.</p>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = (modelData) -&gt;
-  <span class="comment">###
-    name: "bartender"
-    actions: 
-      idle: []
-      walk: []
-  ###</span>
   <span class="keyword">for</span> name, actions <span class="keyword">of</span> modelData
     models[name] ||= {}
-    <span class="comment">###
-      actionName: "idle"
-      modelNames: ["idle_0", "idle_1"]
-    ###</span>
+
     <span class="keyword">for</span> actionName, fileNames <span class="keyword">of</span> actions
       models[name][actionName] ||= []
+
       fileNames.forEach (file) -&gt;
         loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
         loader.crossOrigin = <span class="literal">true</span>

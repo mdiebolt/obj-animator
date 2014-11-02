@@ -69,7 +69,7 @@ Load up one from an arbitrary model we use.
     exports.fromMesh = (data={}) ->
       {name, mesh} = data
 
-      obj3D = new THREE.Object3D
+      obj3D = new THREE.Object3D()
       obj3D.name = name
       obj3D.add mesh
       obj3D.name = data.name

@@ -16,21 +16,12 @@ Main
         color: 0xfffff
         wireframe: true
 
-      return new THREE.Mesh geometry, material
+      new THREE.Mesh geometry, material
 
     cube = cubeMesh()
 
-    addCubeAt = (position) ->
-      clone = cube.clone()
-      clone.position.set position.x, position.y, position.z
-      scene.add clone
-
     characters = {}
-
-    cubePositions = [0...10].map (x) ->
-      [0...10].map (z) ->
-        new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
-  
+    
     Loader.fromMesh
       name: "floor"
       type: "terrain"
@@ -47,9 +38,17 @@ Main
 
       setTimeout ->
         scene = gameLoop.start()
+                
+        [0...10].forEach (x) ->
+          [0...10].forEach (z) ->
+            {cx, cy, cz} = new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
+            clone = cube.clone()
+            clone.position.set(cx, cy, cz)       
+        
+            scene.add clone
         
         x = 0
-        z = 0
+        z = 0        
         
         for name, actions of characters
           idle = actions.idle[0]

@@ -2,12 +2,12 @@ Main
 ====
 
     gameLoop = require "./game_loop"
-    
+
     Loader = require "./loader"
-    modelData = require "./models" 
-    
-    scene = null 
-    
+    modelData = require "./models"
+
+    scene = null
+
     CUBE_SIZE = 10
 
     cachedModels = {}
@@ -30,11 +30,11 @@ Main
         container = new THREE.Object3D()
         mesh = new THREE.Mesh geometry, material
         container.add(mesh)
-        
+
         cachedModels.terrain ||= {}
         cachedModels.terrain.floor ||= {}
-        cachedModels.terrain.floor.idle = [container] 
-        
+        cachedModels.terrain.floor.idle = [container]
+
         cube = cachedModels.terrain.floor.idle[0]
 
       cube
@@ -43,35 +43,35 @@ Main
       [0...10].forEach (x) ->
         [0...10].forEach (z) ->
           p = new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
-          
+
           clone = cubeModel().clone()
           clone.position.set(p.x, p.y, p.z)
-      
+
           scene.add clone
 
     addCharacters = (scene) ->
       x = 0
-      z = 0        
-      
+      z = 0
+
       for name, actions of cachedModels.characters
         idle = actions.idle[0]
-        
+
         idle.position.setX(x)
         idle.position.setZ(z)
-      
-        x += 10 
+
+        x += 10
         z += 10
-        
-        scene.add idle    
-  
+
+        scene.add idle
+
     manager.onLoad (loadedData) ->
-      # TODO: merge here instead of overwrite 
-      cachedModels = loadedData 
+      # TODO: merge here instead of overwrite
+      cachedModels = loadedData
       console.log cachedModels
 
       setTimeout ->
         scene = gameLoop.start()
-                
+
         addMapCubes scene
         addCharacters scene
       , 1000

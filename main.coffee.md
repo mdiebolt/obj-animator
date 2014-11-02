@@ -2,7 +2,6 @@ Main
 ====
 
     require "core"
-    require "./lib/obj_renderer"
 
     gameLoop = require "./game_loop"
     

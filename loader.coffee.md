@@ -1,6 +1,8 @@
 Loader
 ======
 
+    require "./lib/obj_renderer"
+
 Loads voxel models from .obj files
 
 Pass model data to the callback when the loading manager finishes

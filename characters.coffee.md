@@ -22,7 +22,7 @@ Character data for rendering
       }, {
         name: "beam_sword"
         models:
-          idle: ["beam_sword_idle_0"}
+          idle: ["beam_sword_idle_0"]
           grow: [
             "beam_sword_grow_0"
             "beam_sword_grow_1"

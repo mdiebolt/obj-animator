@@ -24,6 +24,14 @@ Character data for rendering
       }, {
         name: "beam_sword"
         position: new Vector3(40, 0, 0)
+        animations: [
+          grow: [
+            "beamsword_grow_0"
+            "beamsword_grow_1"
+            "beamsword_grow_2"
+            "beamsword_grow_3"
+          ]
+        ]
       }, {
         name: "branding_iron"
         position: new Vector3(50, 0, 0)

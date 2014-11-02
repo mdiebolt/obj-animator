@@ -49,6 +49,7 @@ Load a model by name, passing in an optional position.
                   frames.forEach (frame) ->
                     loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
                       frameModel.name = "#{animationName}_#{frame}"
+                      frameModel.visible = false
                     
                       frameModel.traverse (c) ->
                         if c instanceof THREE.Mesh

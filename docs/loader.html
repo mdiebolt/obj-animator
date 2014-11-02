@@ -137,7 +137,8 @@ exports.<span class="function"><span class="title">fromGeometry</span></span> = 
   obj3D.add geometry
   obj3D.name = data.name
 
-  models[name].idle = [obj3D]
+  models[name] =
+    idle: [obj3D]
 
   <span class="keyword">return</span> manager</code></pre>
 </div>

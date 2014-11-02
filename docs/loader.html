@@ -50,35 +50,26 @@ texture = <span class="keyword">new</span> THREE.Texture()</code></pre>
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>The models hash keeps our 3D models in memory.
-Its structure looks like this.
-Object3D is the THREE.js scene primitive</p>
-<h2 id="-">#</h2>
-<p>characters:
-  bartender:</p>
-
-            </div>
-            <div class="content"><pre><code class="lang-coffeescript">idle: [Object3D, Object3D, Object3D, Object3D]</code></pre>
-</div>
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              <div class="pilwrap">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p>  walk: [Object3D, ...]
-terrain:
-  cactus: { idle: [...] }
-items:
-  gun: { idle: [...] }</p>
-<p>Object3D
-  name: &quot;bartender_idle_0&quot;
-  children: [Mesh]</p>
-<p>Object3D
-  name: &quot;bartender_idle_1&quot;
-  children: [Mesh]</p>
-<h2 id="-">#</h2>
+Its structure looks like this. </p>
+<h1 id="characters-">characters:</h1>
+<h1 id="bartender-">bartender:</h1>
+<h1 id="idle-object3d-object3d-object3d-object3d-">idle: [Object3D, Object3D, Object3D, Object3D]</h1>
+<h1 id="walk-object3d-">walk: [Object3D, ...]</h1>
+<h1 id="terrain-">terrain:</h1>
+<h1 id="cactus-">cactus:</h1>
+<h1 id="idle-">idle: [...]</h1>
+<h1 id="items-">items:</h1>
+<h1 id="gun-">gun:</h1>
+<h1 id="idle-">idle: [...]</h1>
+<p>#</p>
+<h1 id="object3d-is-the-three-js-scene-primitive">Object3D is the THREE.js scene primitive</h1>
+<h1 id="object3d">Object3D</h1>
+<h1 id="name-bartender_idle_0-">name: &quot;bartender_idle_0&quot;</h1>
+<h1 id="children-mesh-">children: [Mesh]</h1>
+<p>#</p>
+<h1 id="object3d">Object3D</h1>
+<h1 id="name-bartender_idle_1-">name: &quot;bartender_idle_1&quot;</h1>
+<h1 id="children-mesh-">children: [Mesh]</h1>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">models =
@@ -89,10 +80,10 @@ items:
         </li>
         
         
-        <li id="section-5">
+        <li id="section-4">
             <div class="annotation">
               <div class="pilwrap">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p>Base path to our game&#39;s S3 bucket</p>
 
@@ -102,10 +93,10 @@ items:
         </li>
         
         
-        <li id="section-6">
+        <li id="section-5">
             <div class="annotation">
               <div class="pilwrap">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>We&#39;re sharing the same palette across all of our models.
 Load up one from an arbitrary model we use.</p>

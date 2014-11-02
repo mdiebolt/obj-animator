@@ -66,7 +66,10 @@ mapCubes = []
             <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = -&gt;
 
   generateGrid: (width, depth, cb) -&gt;
-    Loader.fromGeometry <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
+    Loader.fromGeometry 
+      name: <span class="string">"floor"</span> 
+      geometry: <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
+
     [<span class="number">0.</span>..width].forEach (x) -&gt;
       [<span class="number">0.</span>..depth].forEach (z) -&gt;
         addCube <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)

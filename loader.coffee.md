@@ -45,42 +45,30 @@ Load up one from an arbitrary model we use.
 
 Load a model by name, passing in an optional position.
 
-    module.exports = (models) ->
+    module.exports = (modelData) ->
       ###
         name: "bartender"
         actions: 
           idle: []
           walk: []
       ###
-      for name, actions of models
+      for name, actions of modelData
+        models[name] ||= {}
         ###
           actionName: "idle"
           modelNames: ["idle_0", "idle_1"]
         ###
-        for actionName, modelNames of actions
-          loader = new THREE.OBJLoader(manager)
-          loader.crossOrigin = true
-          loader.load "#{BUCKET_PATH}/#{attrs.name}.obj", (defaultModel) ->
-            defaultModel.traverse (child) ->
-              if child instanceof THREE.Mesh
-                child.material.map = texture
-  
-                # TODO: default this in the character base class
-                for animationName, frames of (attrs.animations || {})
-                  frames.forEach (frame) ->
-                    loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
-                      frameModel.name = frame
-                      frameModel.visible = false
-                      
-                    
-                      frameModel.traverse (c) ->
-                        if c instanceof THREE.Mesh
-                          c.material.map = texture
-  
-                          parent.add frameModel
-  
-                parent.add defaultModel
-                characters[attrs.name] = parent
-                scene.add parent
+        for actionName, fileNames of actions
+          models[name][actionName] ||= []
+          fileNames.forEach (file) ->
+            loader = new THREE.OBJLoader(manager)
+            loader.crossOrigin = true
+            
+            loader.load "#{BUCKET_PATH}/#{file}.obj", (obj3D) ->
+              obj3D.name = file
+              obj3D.traverse (child) ->
+                child.material.map = texture if child instanceof THREE.Mesh
+                  
+              models[name][actionName].push obj3D
 
       return manager

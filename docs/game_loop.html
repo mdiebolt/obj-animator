@@ -58,6 +58,12 @@ camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="n
 
   document.body.appendChild renderer.domElement
 
+<span class="function"><span class="title">resize</span></span> = -&gt;
+  renderer.setSize window.innerWidth, window.innerHeight
+
+  camera.aspect  = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()        
+
 <span class="function"><span class="title">animate</span></span> = -&gt;
   requestAnimationFrame animate
 
@@ -72,11 +78,7 @@ camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="n
 exports.<span class="function"><span class="title">start</span></span> = -&gt;  
   started = <span class="literal">true</span>
 
-  renderer.setSize window.innerWidth, window.innerHeight
-
-  camera.aspect  = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()      
-
+  resize()  
   animate()
 
   scene

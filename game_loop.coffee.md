@@ -1,6 +1,8 @@
 Game Loop
 =========
 
+    lights = require "./lgihts"
+
     t = 0
     dt = 1 / 60
     started = false
@@ -11,10 +13,15 @@ Game Loop
     scene = new THREE.Scene()
     camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000)
 
-    document.body.appendChild renderer.domElement
-    renderer.setSize 800, 600 #window.innerWidth, window.innerHeight
-
-    camera.position.set 0, 100, 200
+    do ->
+      camera.position.set 0, 100, 200
+      
+      scene.add lights.ambient()
+      scene.add lights.directional()
+      
+      renderer.setSize 800, 600 #window.innerWidth, window.innerHeight
+      document.body.appendChild renderer.domElement 
+      
 
     animate = ->
       requestAnimationFrame animate

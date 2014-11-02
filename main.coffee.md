@@ -58,6 +58,7 @@ Main
         
         for name, actions of characters
           idle = actions.idle[0]
+          
           idle.position.setX(x)
           idle.position.setZ(z)
         

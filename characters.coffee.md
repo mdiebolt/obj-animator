@@ -2,8 +2,6 @@ Characters
 ==========
 
 Character data for rendering
-
-    {Vector3} = THREE
  
     module.exports =
       bartender:

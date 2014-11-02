@@ -69,6 +69,8 @@ Main
       cachedModels = loadedData
       console.log cachedModels
 
+      # TODO: figure out why some cachedModel animation states are empty 
+      # even though THREE js manager has fired its onload event
       setTimeout ->
         scene = gameLoop.start()
 

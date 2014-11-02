@@ -212,6 +212,11 @@
       "path": "lights.coffee.md",
       "content": "Lights\n======\n    \n    exports.ambient = ->\n      new THREE.AmbientLight 0x101030\n\n    exports.directional = ->\n      directionalLight = new THREE.DirectionalLight 0xffeedd\n      directionalLight.position.set 0, 0, 10\n      \n      directionalLight\n      ",
       "mode": "100644"
+    },
+    "game_loop.coffee.md": {
+      "path": "game_loop.coffee.md",
+      "content": "Game Loop\n=========\n\n    t = 0\n    dt = 1 / 60\n    started = false\n\n    aspectRatio = 800 / 600\n\n    renderer = new THREE.WebGLRenderer()\n    scene = new THREE.Scene()\n    camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000)\n\n    document.body.appendChild renderer.domElement\n    renderer.setSize 800, 600 #window.innerWidth, window.innerHeight\n\n    camera.position.set 0, 100, 200\n\n    animate = ->\n      requestAnimationFrame animate\n\n      render()\n\n    render = ->\n      camera.lookAt scene.position\n\n      renderer.render scene, camera\n      t += dt\n      \n    exports.start = ->\n      started = true\n      animate()\n      \n    exports.update = (updateFn) ->\n      updateFn(t) if started",
+      "mode": "100644"
     }
   },
   "distribution": {
@@ -253,6 +258,11 @@
     "lights": {
       "path": "lights",
       "content": "(function() {\n  exports.ambient = function() {\n    return new THREE.AmbientLight(0x101030);\n  };\n\n  exports.directional = function() {\n    var directionalLight;\n    directionalLight = new THREE.DirectionalLight(0xffeedd);\n    directionalLight.position.set(0, 0, 10);\n    return directionalLight;\n  };\n\n}).call(this);\n",
+      "type": "blob"
+    },
+    "game_loop": {
+      "path": "game_loop",
+      "content": "(function() {\n  var animate, aspectRatio, camera, dt, render, renderer, scene, started, t;\n\n  t = 0;\n\n  dt = 1 / 60;\n\n  started = false;\n\n  aspectRatio = 800 / 600;\n\n  renderer = new THREE.WebGLRenderer();\n\n  scene = new THREE.Scene();\n\n  camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000);\n\n  document.body.appendChild(renderer.domElement);\n\n  renderer.setSize(800, 600);\n\n  camera.position.set(0, 100, 200);\n\n  animate = function() {\n    requestAnimationFrame(animate);\n    return render();\n  };\n\n  render = function() {\n    camera.lookAt(scene.position);\n    renderer.render(scene, camera);\n    return t += dt;\n  };\n\n  exports.start = function() {\n    started = true;\n    return animate();\n  };\n\n  exports.update = function(updateFn) {\n    if (started) {\n      return updateFn(t);\n    }\n  };\n\n}).call(this);\n",
       "type": "blob"
     }
   },

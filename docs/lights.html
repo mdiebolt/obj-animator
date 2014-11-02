@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>globals</title>
+  <title>lights</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="http://strd6.github.io/cdn/parallel/docco.css" />
@@ -18,7 +18,7 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="globals">Globals</h1>
+              <h1 id="lights">Lights</h1>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">
@@ -32,33 +32,16 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Put all these gross guys in here.</p>
-
+              
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">t = <span class="number">0</span>
-dt = <span class="number">1</span> / <span class="number">60</span>
+            <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">ambient</span></span> = -&gt;
+  <span class="keyword">new</span> THREE.AmbientLight <span class="number">0x101030</span>
 
-aspectRatio = <span class="number">800</span> / <span class="number">600</span>
+exports.<span class="function"><span class="title">directional</span></span> = -&gt;
+  directionalLight = <span class="keyword">new</span> THREE.DirectionalLight <span class="number">0xffeedd</span>
+  directionalLight.position.set <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>
 
-renderer = <span class="keyword">new</span> THREE.WebGLRenderer()
-scene = <span class="keyword">new</span> THREE.Scene()
-camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">45</span>, aspectRatio, <span class="number">1</span>, <span class="number">2000</span>)
-
-document.body.appendChild renderer.domElement
-renderer.setSize <span class="number">800</span>, <span class="number">600</span> <span class="comment">#window.innerWidth, window.innerHeight</span>
-
-camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
-
-<span class="function"><span class="title">animate</span></span> = -&gt;
-  requestAnimationFrame animate
-
-  render()
-
-<span class="function"><span class="title">render</span></span> = -&gt;
-  camera.lookAt scene.position
-
-  renderer.render scene, camera
-  t += dt</code></pre>
+  directionalLight</code></pre>
 </div>
         </li>
         

@@ -2,7 +2,7 @@ window["mdiebolt/obj-animator:master"]({
   "source": {
     "globals.coffee.md": {
       "path": "globals.coffee.md",
-      "content": "Globals\n=======\n\nPut all these gross guys in here.\n\n    aspectRatio = 800 / 600\n\n    window.renderer = new THREE.WebGLRenderer()\n    window.scene = new THREE.Scene()\n    window.camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000)\n",
+      "content": "Globals\n=======\n\nPut all these gross guys in here.\n\n    t = 0\n    dt = 1 / 60\n\n    aspectRatio = 800 / 600\n\n    renderer = new THREE.WebGLRenderer()\n    scene = new THREE.Scene()\n    camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000)\n\n    document.body.appendChild renderer.domElement\n    renderer.setSize 800, 600 #window.innerWidth, window.innerHeight\n\n    camera.position.set 0, 100, 200\n\n    animate = ->\n      requestAnimationFrame animate\n\n      render()\n\n    render = ->\n      camera.lookAt scene.position\n\n      renderer.render scene, camera\n      t += dt",
       "mode": "100644",
       "type": "blob"
     },
@@ -20,7 +20,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "main.coffee.md": {
       "path": "main.coffee.md",
-      "content": "Renderer\n========\n\n    require \"core\"\n    require \"./globals\"\n    require \"./lib/obj_renderer\"\n\n    util = require \"util\"\n    util.applyStylesheet require(\"./style\")\n\n    Map = require \"./map\"\n\n    t = 0\n    dt = 1 / 60\n\n    container = document.createElement \"div\"\n    document.body.appendChild container\n\n    container.appendChild renderer.domElement\n    renderer.setSize 800, 600 #window.innerWidth, window.innerHeight\n\n    camera.position.set 0, 100, 200\n\n    characters = {}\n\n    init = ->\n      addLights()\n\n      Map.generateGrid 10, 10, (mapCubes) ->\n        console.log mapCubes\n\n      Map.populateItems (modelData) ->\n        console.log \"items\", modelData\n      \n      Map.populateTerrain (modelData) ->\n        console.log \"terrain\", modelData\n  \n      Map.populateCharacters (modelData) ->\n        console.log \"characters\", modelData\n        characters = modelData.characters\n\n        setTimeout ->\n          x = 0\n          z = 0\n          for name, actions of characters\n            idle = actions.idle[0]\n            idle.position.setX(x)\n            idle.position.setZ(z)\n            scene.add(idle)\n            x += 10\n            z += 10\n        , 1500\n\n    animate = ->\n      requestAnimationFrame animate\n\n      render()\n\n    addLights = ->\n      ambient = new THREE.AmbientLight 0x101030\n      scene.add ambient\n\n      directionalLight = new THREE.DirectionalLight 0xffeedd\n      directionalLight.position.set 0, 0, 10\n      scene.add directionalLight\n\n    render = ->\n      camera.lookAt scene.position\n\n      renderer.render scene, camera\n      t += dt\n\n    init()\n    animate()\n",
+      "content": "Renderer\n========\n\n    require \"core\"\n    require \"./globals\"\n    require \"./lib/obj_renderer\"\n\n    util = require \"util\"\n    util.applyStylesheet require(\"./style\")\n\n    Map = require \"./map\"\n\n    t = 0\n    dt = 1 / 60\n\n    container = document.createElement \"div\"\n    document.body.appendChild container\n\n    container.appendChild renderer.domElement\n    renderer.setSize 800, 600 #window.innerWidth, window.innerHeight\n\n    camera.position.set 0, 100, 200\n\n    characters = {}\n\n    init = ->\n      addLights()\n\n      Map.generateGrid 10, 10, (mapCubes) ->\n        console.log mapCubes\n\n      Map.populateItems (modelData) ->\n        console.log \"items\", modelData\n\n      Map.populateTerrain (modelData) ->\n        console.log \"terrain\", modelData\n\n      Map.populateCharacters (modelData) ->\n        console.log \"characters\", modelData\n        characters = modelData.characters\n\n        setTimeout ->\n          x = 0\n          z = 0\n          for name, actions of characters\n            idle = actions.idle[0]\n            idle.position.setX(x)\n            idle.position.setZ(z)\n            scene.add(idle)\n            x += 10\n            z += 10\n        , 1500\n\n    animate = ->\n      requestAnimationFrame animate\n\n      render()\n\n    addLights = ->\n      ambient = new THREE.AmbientLight 0x101030\n      scene.add ambient\n\n      directionalLight = new THREE.DirectionalLight 0xffeedd\n      directionalLight.position.set 0, 0, 10\n      scene.add directionalLight\n\n    render = ->\n      camera.lookAt scene.position\n\n      renderer.render scene, camera\n      t += dt\n\n    init()\n    animate()\n",
       "mode": "100644",
       "type": "blob"
     },
@@ -47,12 +47,17 @@ window["mdiebolt/obj-animator:master"]({
       "content": "body\n  background-color: #000\n  margin: 0\n  overflow: hidden\n",
       "mode": "100644",
       "type": "blob"
+    },
+    "lights.coffee.md": {
+      "path": "lights.coffee.md",
+      "content": "Lights\n======\n    \n    exports.ambient = ->\n      new THREE.AmbientLight 0x101030\n\n    exports.directional = ->\n      directionalLight = new THREE.DirectionalLight 0xffeedd\n      directionalLight.position.set 0, 0, 10\n      \n      directionalLight\n      ",
+      "mode": "100644"
     }
   },
   "distribution": {
     "globals": {
       "path": "globals",
-      "content": "(function() {\n  var aspectRatio;\n\n  aspectRatio = 800 / 600;\n\n  window.renderer = new THREE.WebGLRenderer();\n\n  window.scene = new THREE.Scene();\n\n  window.camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000);\n\n}).call(this);\n",
+      "content": "(function() {\n  var animate, aspectRatio, camera, dt, render, renderer, scene, t;\n\n  t = 0;\n\n  dt = 1 / 60;\n\n  aspectRatio = 800 / 600;\n\n  renderer = new THREE.WebGLRenderer();\n\n  scene = new THREE.Scene();\n\n  camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000);\n\n  document.body.appendChild(renderer.domElement);\n\n  renderer.setSize(800, 600);\n\n  camera.position.set(0, 100, 200);\n\n  animate = function() {\n    requestAnimationFrame(animate);\n    return render();\n  };\n\n  render = function() {\n    camera.lookAt(scene.position);\n    renderer.render(scene, camera);\n    return t += dt;\n  };\n\n}).call(this);\n",
       "type": "blob"
     },
     "lib/obj_renderer": {
@@ -88,6 +93,11 @@ window["mdiebolt/obj-animator:master"]({
     "style": {
       "path": "style",
       "content": "module.exports = \"body {\\n  background-color: #000;\\n  margin: 0;\\n  overflow: hidden;\\n}\";",
+      "type": "blob"
+    },
+    "lights": {
+      "path": "lights",
+      "content": "(function() {\n  exports.ambient = function() {\n    return new THREE.AmbientLight(0x101030);\n  };\n\n  exports.directional = function() {\n    var directionalLight;\n    directionalLight = new THREE.DirectionalLight(0xffeedd);\n    directionalLight.position.set(0, 0, 10);\n    return directionalLight;\n  };\n\n}).call(this);\n",
       "type": "blob"
     }
   },

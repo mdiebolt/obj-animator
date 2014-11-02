@@ -31,5 +31,7 @@ Game Loop
       started = true
       animate()
       
+      scene
+      
     exports.update = (updateFn) ->
       updateFn(t) if started

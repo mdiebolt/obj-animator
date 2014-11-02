@@ -36,19 +36,19 @@ Main
       [0...10].map (z) ->
         new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
  
-    Loader.fromObj("items", modelData.items).onLoad (loadedData) ->
-      console.log "items", loadedData 
+    Loader.fromObj("items", modelData.items)
  
     Loader.fromMesh
       name: "floor"
       type: "terrain"
       mesh: cube
 
-    Loader.fromObj("terrain", modelData.terrain).onLoad (loadedData) ->
-      console.log "terrain", loadedData
+    Loader.fromObj("terrain", modelData.terrain)
 
-    Loader.fromObj("characters", modelData.characters).onLoad (loadedData) ->
-      console.log "characters", loadedData
+    manager = Loader.fromObj("characters", modelData.characters)
+    
+    manager.onLoad (loadedData) ->
+      console.log "cached models", loadedData
       characters = loadedData.characters
 
       setTimeout ->
@@ -62,7 +62,7 @@ Main
           idle.position.setX(x)
           idle.position.setZ(z)
         
-          x += 10
+          x += 10 
           z += 10
           
           scene.add(idle)

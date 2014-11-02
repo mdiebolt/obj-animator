@@ -34,7 +34,9 @@ Main
       x = 90
       z = 0
 
-      for name, actions of cachedModels.items
+      Object.keys(cachedModels.items).forEach (name) ->
+        actions = cachedModels.items[name]
+        
         idle = actions.idle[0]
 
         idle.position.setX(x)

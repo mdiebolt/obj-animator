@@ -39,8 +39,7 @@
             <div class="content"><pre><code class="lang-coffeescript">manager = <span class="keyword">new</span> THREE.LoadingManager (cb) -&gt;
   cb? characters
 
-texture = <span class="keyword">new</span> THREE.Texture()
-characters = {}</code></pre>
+texture = <span class="keyword">new</span> THREE.Texture()</code></pre>
 </div>
         </li>
         
@@ -50,10 +49,19 @@ characters = {}</code></pre>
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Base path to our game&#39;s S3 bucket</p>
+              <!--
+bartender:
+  idle: [Object3D, Object3D, Object3D, Object3D]
+  walk: [Object3D, ...]
 
+Object3D
+  name: "bartender_idle_0"
+
+Object3D
+  name: "bartender_idle_1"
+-->
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">BUCKET_PATH = <span class="string">"https://s3.amazonaws.com/distri-tactics"</span></code></pre>
+            <div class="content"><pre><code class="lang-coffeescript">models = {}</code></pre>
 </div>
         </li>
         
@@ -62,6 +70,19 @@ characters = {}</code></pre>
             <div class="annotation">
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Base path to our game&#39;s S3 bucket</p>
+
+            </div>
+            <div class="content"><pre><code class="lang-coffeescript">BUCKET_PATH = <span class="string">"https://s3.amazonaws.com/distri-tactics"</span></code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>We&#39;re sharing the same palette across all of our models.
 Load up one from an arbitrary model we use.</p>
@@ -78,10 +99,10 @@ Load up one from an arbitrary model we use.</p>
         </li>
         
         
-        <li id="section-5">
+        <li id="section-6">
             <div class="annotation">
               <div class="pilwrap">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Load a model by name, passing in an optional position.</p>
 

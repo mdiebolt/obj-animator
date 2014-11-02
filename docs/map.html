@@ -36,18 +36,22 @@
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">Loader = require <span class="string">"./loader"</span>
-characterData = require <span class="string">"./characters"</span>
+modelData = require <span class="string">"./characters"</span>
 
 CUBE_SIZE = <span class="number">10</span>
 mapCubes = []
 
-<span class="function"><span class="title">addCube</span></span> = (position) -&gt;
+<span class="function"><span class="title">cubeMesh</span></span> = -&gt;
   geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
+
   material = <span class="keyword">new</span> THREE.MeshBasicMaterial
     color: <span class="number">0xfffff</span>
     wireframe: <span class="literal">true</span>
 
-  cube = <span class="keyword">new</span> THREE.Mesh geometry, material
+  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh geometry, material    
+
+<span class="function"><span class="title">addCube</span></span> = (position) -&gt;
+  cube = cubeMesh()
   cube.position.set position.x, position.y, position.z
   mapCubes.push cube
   scene.add cube</code></pre>
@@ -66,9 +70,9 @@ mapCubes = []
             <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = -&gt;
 
   generateGrid: (width, depth, cb) -&gt;
-    Loader.fromGeometry 
+    Loader.fromMesh 
       name: <span class="string">"floor"</span> 
-      geometry: <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
+      mesh: cubeMesh()
 
     [<span class="number">0.</span>..width].forEach (x) -&gt;
       [<span class="number">0.</span>..depth].forEach (z) -&gt;
@@ -89,7 +93,7 @@ of the characters when they&#39;re done loading. </p>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">  populateCharacters: (cb) -&gt;
-    Loader.fromObj(characterData).onLoad cb</code></pre>
+    Loader.fromObj(modelData.characters).onLoad cb</code></pre>
 </div>
         </li>
         

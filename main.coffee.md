@@ -46,9 +46,10 @@ Renderer
           component.visible = false
       
         beamSword.children.forEach (c) ->
+          debugger
           if beamSword.userData.animations.grow[beamSword.animationIndex] is c.name
             c.visible = true 
-            beamSword.animationIndex += 1      
+            beamSword.animationIndex = (beamSword.animationIndex + 1) % beamSword.userData.animations.grow.length     
 
     addLights = ->
       ambient = new THREE.AmbientLight 0x101030

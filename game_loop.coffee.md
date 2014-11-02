@@ -1,7 +1,7 @@
 Game Loop
 =========
 
-    lights = require "./lgihts"
+    lights = require "./lights"
 
     t = 0
     dt = 1 / 60

@@ -14,6 +14,8 @@ Pass in the characters collection when the loading manager finishes
 bartender:
   idle: [Object3D, Object3D, Object3D, Object3D]
   walk: [Object3D, ...]
+cactus:
+  idle: [...]
 
 Object3D
   name: "bartender_idle_0"

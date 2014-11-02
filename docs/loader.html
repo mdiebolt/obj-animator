@@ -140,18 +140,6 @@ exports.<span class="function"><span class="title">fromObj</span></span> = (name
 
           actionFrames.push obj3D
 
-  <span class="keyword">return</span> manager
-
-exports.<span class="function"><span class="title">fromMesh</span></span> = (data={}) -&gt;
-  {mesh, name, type} = data
-
-  obj3D = <span class="keyword">new</span> THREE.Object3D()
-  obj3D.name = name
-  obj3D.add mesh
-
-  models[type][name] =
-    idle: [obj3D]
-
   <span class="keyword">return</span> manager</code></pre>
 </div>
         </li>

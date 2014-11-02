@@ -1,14 +1,10 @@
 Main
 ====
 
-    gameLoop = require "./game_loop"
+    core = require "core"
 
     Loader = require "./loader"
     modelData = require "./models"
-
-    scene = null
-
-    CUBE_SIZE = 10
 
     cachedModels = {}
 
@@ -16,38 +12,6 @@ Main
     Loader.fromObj("terrain", modelData.terrain)
 
     manager = Loader.fromObj("characters", modelData.characters)
-
-    cubeModel = ->
-      geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
-
-      material = new THREE.MeshBasicMaterial
-        color: 0xfffff
-        wireframe: true
-
-      if cachedModels.terrain?.floor?.idle?
-        cube = cachedModels.terrain.floor.idle[0]
-      else
-        container = new THREE.Object3D()
-        mesh = new THREE.Mesh geometry, material
-        container.add(mesh)
-
-        cachedModels.terrain ||= {}
-        cachedModels.terrain.floor ||= {}
-        cachedModels.terrain.floor.idle = [container]
-
-        cube = cachedModels.terrain.floor.idle[0]
-
-      cube
-
-    addMapCubes = (scene) ->
-      [0...10].forEach (x) ->
-        [0...10].forEach (z) ->
-          p = new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
-
-          clone = cubeModel().clone()
-          clone.position.set(p.x, p.y, p.z)
-
-          scene.add clone
 
     addCharacters = (scene) ->
       x = 0
@@ -87,12 +51,8 @@ Main
       # TODO: figure out why some cachedModel animation states are empty
       # even though THREE js manager has fired its onload event
       setTimeout ->
-        scene = gameLoop.start()
+        scene = core.init {}, ->
 
-        addMapCubes scene
         addCharacters scene
         addItems scene
       , 1000
-
-    gameLoop.update (t) ->
-      ;

@@ -97,6 +97,21 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
 
     scene.add idle
 
+<span class="function"><span class="title">addItems</span></span> = (scene) -&gt;
+  x = <span class="number">90</span>
+  z = <span class="number">0</span>
+
+  <span class="keyword">for</span> name, actions <span class="keyword">of</span> cachedModels.items
+    idle = actions.idle[<span class="number">0</span>]
+
+    idle.position.setX(x)
+    idle.position.setZ(z)
+
+    x -= <span class="number">10</span>
+    z += <span class="number">10</span>
+
+    scene.add idle
+
 manager.onLoad (loadedData) -&gt;
   <span class="comment"># TODO: merge here instead of overwrite</span>
   cachedModels = loadedData
@@ -109,10 +124,11 @@ manager.onLoad (loadedData) -&gt;
 
     addMapCubes scene
     addCharacters scene
+    addItems scene
   , <span class="number">1000</span>
 
 gameLoop.update (t) -&gt;
-  console.log t</code></pre>
+  ;</code></pre>
 </div>
         </li>
         

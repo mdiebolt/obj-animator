@@ -92,12 +92,12 @@ Load up one from an arbitrary model we use.</p>
 
     parent = <span class="keyword">new</span> THREE.Object3D()
     parent.position.set position.x, position.y, position.z
+    parent.name = attrs.name
+    parent.userData.animations = attrs.animations
 
     loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
     loader.crossOrigin = <span class="literal">true</span>
     loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj"</span>, (defaultModel) -&gt;
-      parent.name = attrs.name
-      parent.userData.animations = attrs.animations
       defaultModel.traverse (child) -&gt;
         <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
           child.material.map = texture

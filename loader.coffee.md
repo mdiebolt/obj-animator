@@ -67,12 +67,12 @@ Load a model by name, passing in an optional position.
 
       return manager
     
-    exports.fromGeometry = (data={}) ->
-      {name, geometry} = data
+    exports.fromMesh = (data={}) ->
+      {name, mesh} = data
     
       obj3D = new THREE.Object3D 
       obj3D.name = name
-      obj3D.add geometry
+      obj3D.add mesh
       obj3D.name = data.name
       
       models.terrain[name] =

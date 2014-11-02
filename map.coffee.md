@@ -4,18 +4,22 @@ Map
 Generate a simple map, populating it with a cube floor and characters.
 
     Loader = require "./loader"
-    characterData = require "./characters"
+    modelData = require "./characters"
 
     CUBE_SIZE = 10
     mapCubes = []
 
-    addCube = (position) ->
+    cubeMesh = ->
       geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
+
       material = new THREE.MeshBasicMaterial
         color: 0xfffff
         wireframe: true
 
-      cube = new THREE.Mesh geometry, material
+      return new THREE.Mesh geometry, material    
+
+    addCube = (position) ->
+      cube = cubeMesh()
       cube.position.set position.x, position.y, position.z
       mapCubes.push cube
       scene.add cube
@@ -25,9 +29,9 @@ Create a basic floor of dimension `size`
     module.exports = ->
 
       generateGrid: (width, depth, cb) ->
-        Loader.fromGeometry 
+        Loader.fromMesh 
           name: "floor" 
-          geometry: new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
+          mesh: cubeMesh()
         
         [0...width].forEach (x) ->
           [0...depth].forEach (z) ->
@@ -39,4 +43,4 @@ Load all the characters. Provide a callback that receives an array
 of the characters when they're done loading. 
 
       populateCharacters: (cb) ->
-        Loader.fromObj(characterData).onLoad cb
+        Loader.fromObj(modelData.characters).onLoad cb

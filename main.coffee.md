@@ -30,9 +30,9 @@ Renderer
       map.generateGrid 10, 10, (mapCubes) ->
         console.log mapCubes
 
-      map.populateCharacters (c) ->
-        console.log c
-        characters = c
+      map.populateCharacters (modelData) ->
+        console.log modelData
+        characters = modelData.characters
 
         setTimeout ->
           x = 0
@@ -44,7 +44,7 @@ Renderer
             scene.add(idle)
             x += 10
             z += 10
-        , 500
+        , 1500
 
     animate = ->
       requestAnimationFrame animate

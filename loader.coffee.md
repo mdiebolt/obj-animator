@@ -26,7 +26,10 @@ Object3D
 Object3D
   name: "bartender_idle_1"
 
-    models = {}
+    models =
+      characters: {}
+      terrain: {}
+      items: {}
 
 Base path to our game's S3 bucket
 
@@ -47,33 +50,32 @@ Load a model by name, passing in an optional position.
 
     exports.fromObj = (modelData) ->
       for name, actions of modelData
-        models[name] ||= {}
-
+        models.characters[name] ||= {}
         for actionName, fileNames of actions
-          models[name][actionName] ||= []
+          models.characters[name][actionName] ||= []
 
           fileNames.forEach (file) ->
             loader = new THREE.OBJLoader(manager)
             loader.crossOrigin = true
 
-            actionFrames = models[name][actionName]
+            actionFrames = models.characters[name][actionName] 
             loader.load "#{BUCKET_PATH}/#{file}.obj", (obj3D) ->
               obj3D.name = file
               obj3D.children[0].material.map = texture
 
-              actionFrames.push obj3D
+              actionFrames.push obj3D 
 
       return manager
     
     exports.fromGeometry = (data={}) ->
       {name, geometry} = data
     
-      obj3D = new THREE.Object3D
+      obj3D = new THREE.Object3D 
       obj3D.name = name
       obj3D.add geometry
       obj3D.name = data.name
       
-      models[name] =
+      models.terrain[name] =
         idle: [obj3D]
       
       return manager 

@@ -1,7 +1,8 @@
 Models
 ======
 
-Model data for each character and their actions (animation states).
+Model data for each character, item, and terrain
+and their actions (animation states).
 
     module.exports =
       characters:

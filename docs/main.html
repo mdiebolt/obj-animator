@@ -56,13 +56,12 @@ renderer.setSize <span class="number">800</span>, <span class="number">600</span
 camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
 
 characters = {}
-mapGeometry = []
 
 <span class="function"><span class="title">init</span></span> = -&gt;
   addLights()
 
   map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
-    mapGeometry = mapCubes
+    console.log mapCubes
 
   map.populateCharacters (c) -&gt;
     console.log c

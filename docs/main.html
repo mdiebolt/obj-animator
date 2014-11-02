@@ -78,9 +78,8 @@ lastAnimated = +<span class="keyword">new</span> Date()
     beamSword.children.forEach (component) -&gt;
       component.visible = <span class="literal">false</span>
 
-    <span class="keyword">debugger</span>
     beamSword.userData.animations.grow.forEach (growFrame) -&gt;
-      <span class="keyword">if</span> animations.grow[c.animationIndex] <span class="keyword">is</span> growFrame.name
+      <span class="keyword">if</span> beamSword.userData.animations.grow[c.animationIndex] <span class="keyword">is</span> growFrame.name
         growFrame.visible = <span class="literal">true</span>             
 
 <span class="function"><span class="title">addLights</span></span> = -&gt;

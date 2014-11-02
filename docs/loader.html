@@ -112,17 +112,18 @@ Load up one from an arbitrary model we use.</p>
               <p>Load a model by name, passing in an optional position.</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">fromObj</span></span> = (modelData) -&gt;
+            <div class="content"><pre><code class="lang-coffeescript">exports.<span class="function"><span class="title">fromObj</span></span> = (namespace, modelData) -&gt;
+  cache = models[namespace]
   <span class="keyword">for</span> name, actions <span class="keyword">of</span> modelData
-    models.characters[name] ||= {}
+    cache[name] ||= {}
     <span class="keyword">for</span> actionName, fileNames <span class="keyword">of</span> actions
-      models.characters[name][actionName] ||= []
+      cache[name][actionName] ||= []
 
       fileNames.forEach (file) -&gt;
         loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
         loader.crossOrigin = <span class="literal">true</span>
 
-        actionFrames = models.characters[name][actionName] 
+        actionFrames = cache[name][actionName] 
         loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{file}</span>.obj"</span>, (obj3D) -&gt;
           obj3D.name = file
           obj3D.children[<span class="number">0</span>].material.map = texture
@@ -131,7 +132,7 @@ Load up one from an arbitrary model we use.</p>
 
   <span class="keyword">return</span> manager
 
-exports.<span class="function"><span class="title">fromMesh</span></span> = (data={}) -&gt;
+exports.<span class="function"><span class="title">fromMesh</span></span> = (namespace, data={}) -&gt;
   {name, mesh} = data
 
   obj3D = <span class="keyword">new</span> THREE.Object3D 
@@ -139,7 +140,7 @@ exports.<span class="function"><span class="title">fromMesh</span></span> = (dat
   obj3D.add mesh
   obj3D.name = data.name
 
-  models.terrain[name] =
+  models[namespace][name] =
     idle: [obj3D]
 
   <span class="keyword">return</span> manager</code></pre>

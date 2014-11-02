@@ -33,7 +33,7 @@ Main
         
         cachedModels.terrain ||= {}
         cachedModels.terrain.floor ||= {}
-        cachedModels.terrain.floor.idle = container
+        cachedModels.terrain.floor.idle = [container] 
         
         cube = container
 

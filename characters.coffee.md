@@ -3,7 +3,9 @@ Characters
 
 Character data for rendering
 
-    module.exports = ->
+    {Vector3} = THREE
+ 
+    module.exports =
       [{
         name: "bartender"
         position: new Vector3(0, 0, 0)

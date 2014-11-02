@@ -4,8 +4,7 @@ Map
 Generate a simple map, populating it with a cube floor and characters.
 
     load = require "./loader"
-
-    {Vector3} = THREE
+    characterData = require "./characters"
 
     CUBE_SIZE = 10
     mapCubes = []
@@ -25,10 +24,10 @@ Create a basic floor of dimension `size`
 
     module.exports = ->
 
-      generateGrid: (size, cb) ->
-        [0...size].forEach (x) ->
-          [0...size].forEach (z) ->
-            addCube new Vector3(x * CUBE_SIZE, -5, z * CUBE_SIZE)
+      generateGrid: (width, depth, cb) ->
+        [0...width].forEach (x) ->
+          [0...depth].forEach (z) ->
+            addCube new THREE.Vector3(x * CUBE_SIZE, -5, z * CUBE_SIZE)
 
         cb? mapCubes
 
@@ -36,39 +35,4 @@ Load all the characters. Provide a callback that receives an array
 of the characters when they're done loading.
 
       populateCharacters: (cb) ->
-        loadingManager = load [{
-          name: "bartender"
-          position: new Vector3(0, 0, 0)
-          animations: [
-            test: ["bartender_test"]
-          ]
-        }, {
-          name: "robo_sheriff"
-          position: new Vector3(10, 0, 0)
-        }, {
-          name: "cactus"
-          position: new Vector3(20, 0, 0)
-        }, {
-          name: "arrow"
-          position: new Vector3(30, 0, 0)
-        }, {
-          name: "beam_sword"
-          position: new Vector3(40, 0, 0)
-        }, {
-          name: "branding_iron"
-          position: new Vector3(50, 0, 0)
-        }, {
-          name: "character"
-          position: new Vector3(60, 0, 0)
-        }, {
-          name: "gun"
-          position: new Vector3(70, 0, 0)
-        }, {
-          name: "hoverboard"
-          position: new Vector3(80, 0, 0)
-        }, {
-          name: "jetpack_bandit"
-          position: new Vector3(90, 0, 0)
-        }]
-
-        loadingManager.onLoad cb
+        load(characterData).onLoad cb

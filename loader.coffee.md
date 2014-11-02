@@ -3,10 +3,10 @@ Loader
 
 Loads voxel models from .obj files
 
-Pass in the characters collection when the loading manager finishes
+Pass model data to the callback when the loading manager finishes
 
     manager = new THREE.LoadingManager (cb) ->
-      cb? characters
+      cb? models
 
     texture = new THREE.Texture()
   

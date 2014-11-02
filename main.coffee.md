@@ -31,6 +31,7 @@ Renderer
         console.log mapCubes
 
       map.populateCharacters (c) ->
+        console.log c
         characters = c
 
     animate = ->
@@ -57,7 +58,7 @@ Renderer
       scene.add directionalLight
 
     render = ->
-      animateCharacters(t)
+      #animateCharacters(t)
     
       camera.lookAt scene.position
 

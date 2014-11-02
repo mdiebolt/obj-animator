@@ -41,7 +41,7 @@ Renderer
         lastAnimated = now
     
         characters.forEach (c) ->
-          if c.name is "bartender"
+          if c.name is "beam_sword"
             c.children[0].visible = !c.children[0].visible
             c.children[1].visible = !c.children[1].visible
 

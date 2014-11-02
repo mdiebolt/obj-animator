@@ -72,6 +72,16 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
 
   cube
 
+<span class="function"><span class="title">addMapCubes</span></span> = (scene) -&gt;
+  [<span class="number">0.</span>.<span class="number">.10</span>].forEach (x) -&gt;
+    [<span class="number">0.</span>.<span class="number">.10</span>].forEach (z) -&gt;
+      {cx, cy, cz} = <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
+
+      clone = cubeMesh().clone()
+      clone.position.set(cx, cy, cz)       
+
+      scene.add clone
+
 <span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
   x = <span class="number">0</span>
   z = <span class="number">0</span>        
@@ -86,16 +96,6 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
     z += <span class="number">10</span>
 
     scene.add idle    
-
-<span class="function"><span class="title">addMapCubes</span></span> = (scene) -&gt;
-  [<span class="number">0.</span>.<span class="number">.10</span>].forEach (x) -&gt;
-    [<span class="number">0.</span>.<span class="number">.10</span>].forEach (z) -&gt;
-      {cx, cy, cz} = <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
-
-      clone = cubeMesh().clone()
-      clone.position.set(cx, cy, cz)       
-
-      scene.add clone
 
 manager.onLoad (loadedData) -&gt;
   <span class="comment"># TODO: merge here instead of overwrite </span>

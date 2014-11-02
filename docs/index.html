@@ -42,7 +42,11 @@ util.applyStylesheet require(<span class="string">"./style"</span>)
 
 Loader = require <span class="string">"./loader"</span>
 gameLoop = require <span class="string">"./game_loop"</span>
+modelData = require <span class="string">"./models"</span> 
 
+scene = <span class="literal">null</span> 
+
+CUBE_SIZE = <span class="number">10</span>
 <span class="function"><span class="title">cubeMesh</span></span> = -&gt;
   geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
 
@@ -61,37 +65,40 @@ cube = cubeMesh()
 
 characters = {}
 
-CUBE_SIZE = <span class="number">10</span>
-cubePositions = [<span class="number">0.</span>..width].map (x) -&gt;
-  [<span class="number">0.</span>..depth].map (z) -&gt;
+cubePositions = [<span class="number">0.</span>.<span class="number">.10</span>].map (x) -&gt;
+  [<span class="number">0.</span>.<span class="number">.10</span>].map (z) -&gt;
     <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
-Loader.fromObj(<span class="string">"items"</span>, modelData.items).onLoad (modelData) -&gt;
-  console.log <span class="string">"items"</span>, modelData
+Loader.fromObj(<span class="string">"items"</span>, modelData.items).onLoad (loadedData) -&gt;
+  console.log <span class="string">"items"</span>, loadedData 
 
 Loader.fromMesh
   name: <span class="string">"floor"</span>
   type: <span class="string">"terrain"</span>
   mesh: cube
 
-Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain).onLoad (modelData) -&gt;
-  console.log <span class="string">"terrain"</span>, modelData
+Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain).onLoad (loadedData) -&gt;
+  console.log <span class="string">"terrain"</span>, loadedData
 
-Loader.fromObj(<span class="string">"characters"</span>, modelData.characters).onLoad cb (modelData) -&gt;
-  console.log <span class="string">"characters"</span>, modelData
-  characters = modelData.characters
+Loader.fromObj(<span class="string">"characters"</span>, modelData.characters).onLoad (loadedData) -&gt;
+  console.log <span class="string">"characters"</span>, loadedData
+  characters = loadedData.characters
 
   setTimeout -&gt;
+    scene = gameLoop.start()
+
     x = <span class="number">0</span>
     z = <span class="number">0</span>
+
     <span class="keyword">for</span> name, actions <span class="keyword">of</span> characters
       idle = actions.idle[<span class="number">0</span>]
       idle.position.setX(x)
       idle.position.setZ(z)
-      scene.add(idle)
+
       x += <span class="number">10</span>
       z += <span class="number">10</span>
-      gameLoop.start()
+
+      scene.add(idle)
   , <span class="number">1500</span>
 
 gameLoop.update (t) -&gt;

@@ -41,70 +41,62 @@ require <span class="string">"./lib/obj_renderer"</span>
 util = require <span class="string">"util"</span>
 util.applyStylesheet require(<span class="string">"./style"</span>)
 
-Map = require <span class="string">"./map"</span>
+Loader = require <span class="string">"./loader"</span>
+gameLoop = require <span class="string">"./game_loop"</span>
 
-t = <span class="number">0</span>
-dt = <span class="number">1</span> / <span class="number">60</span>
+<span class="function"><span class="title">cubeMesh</span></span> = -&gt;
+  geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
 
-container = document.createElement <span class="string">"div"</span>
-document.body.appendChild container
+  material = <span class="keyword">new</span> THREE.MeshBasicMaterial
+    color: <span class="number">0xfffff</span>
+    wireframe: <span class="literal">true</span>
 
-container.appendChild renderer.domElement
-renderer.setSize <span class="number">800</span>, <span class="number">600</span> <span class="comment">#window.innerWidth, window.innerHeight</span>
+  <span class="keyword">return</span> <span class="keyword">new</span> THREE.Mesh geometry, material
 
-camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
+cube = cubeMesh()
+
+<span class="function"><span class="title">addCubeAt</span></span> = (position) -&gt;
+  clone = cube.clone()
+  clone.position.set position.x, position.y, position.z
+  scene.add clone
 
 characters = {}
 
-<span class="function"><span class="title">init</span></span> = -&gt;
-  addLights()
+CUBE_SIZE = <span class="number">10</span>
+cubePositions = [<span class="number">0.</span>..width].map (x) -&gt;
+  [<span class="number">0.</span>..depth].map (z) -&gt;
+    <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
-  Map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
-    console.log mapCubes
+Loader.fromObj(<span class="string">"items"</span>, modelData.items).onLoad (modelData) -&gt;
+  console.log <span class="string">"items"</span>, modelData
 
-  Map.populateItems (modelData) -&gt;
-    console.log <span class="string">"items"</span>, modelData
+Loader.fromMesh
+  name: <span class="string">"floor"</span>
+  type: <span class="string">"terrain"</span>
+  mesh: cube
 
-  Map.populateTerrain (modelData) -&gt;
-    console.log <span class="string">"terrain"</span>, modelData
+Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain).onLoad (modelData) -&gt;
+  console.log <span class="string">"terrain"</span>, modelData
 
-  Map.populateCharacters (modelData) -&gt;
-    console.log <span class="string">"characters"</span>, modelData
-    characters = modelData.characters
+Loader.fromObj(<span class="string">"characters"</span>, modelData.characters).onLoad cb (modelData) -&gt;
+  console.log <span class="string">"characters"</span>, modelData
+  characters = modelData.characters
 
-    setTimeout -&gt;
-      x = <span class="number">0</span>
-      z = <span class="number">0</span>
-      <span class="keyword">for</span> name, actions <span class="keyword">of</span> characters
-        idle = actions.idle[<span class="number">0</span>]
-        idle.position.setX(x)
-        idle.position.setZ(z)
-        scene.add(idle)
-        x += <span class="number">10</span>
-        z += <span class="number">10</span>
-    , <span class="number">1500</span>
+  setTimeout -&gt;
+    x = <span class="number">0</span>
+    z = <span class="number">0</span>
+    <span class="keyword">for</span> name, actions <span class="keyword">of</span> characters
+      idle = actions.idle[<span class="number">0</span>]
+      idle.position.setX(x)
+      idle.position.setZ(z)
+      scene.add(idle)
+      x += <span class="number">10</span>
+      z += <span class="number">10</span>
+      gameLoop.start()
+  , <span class="number">1500</span>
 
-<span class="function"><span class="title">animate</span></span> = -&gt;
-  requestAnimationFrame animate
-
-  render()
-
-<span class="function"><span class="title">addLights</span></span> = -&gt;
-  ambient = <span class="keyword">new</span> THREE.AmbientLight <span class="number">0x101030</span>
-  scene.add ambient
-
-  directionalLight = <span class="keyword">new</span> THREE.DirectionalLight <span class="number">0xffeedd</span>
-  directionalLight.position.set <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>
-  scene.add directionalLight
-
-<span class="function"><span class="title">render</span></span> = -&gt;
-  camera.lookAt scene.position
-
-  renderer.render scene, camera
-  t += dt
-
-init()
-animate()</code></pre>
+gameLoop.update (dt) -&gt;
+  console.log dt</code></pre>
 </div>
         </li>
         

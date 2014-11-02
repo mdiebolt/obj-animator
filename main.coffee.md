@@ -63,11 +63,11 @@ Main
         z += 10
 
         scene.add idle
-    
+
     addItems = (scene) ->
       x = 90
       z = 0
-      
+
       for name, actions of cachedModels.items
         idle = actions.idle[0]
 
@@ -84,7 +84,7 @@ Main
       cachedModels = loadedData
       console.log cachedModels
 
-      # TODO: figure out why some cachedModel animation states are empty 
+      # TODO: figure out why some cachedModel animation states are empty
       # even though THREE js manager has fired its onload event
       setTimeout ->
         scene = gameLoop.start()

@@ -20,15 +20,14 @@ Main
       Object.keys(cachedModels.characters).forEach (name) -> 
         actions = cachedModels.characters[name]
         
-        idle = actions.idle[0]
-
-        idle.position.setX(x)
-        idle.position.setZ(z)
-
-        x += 10
-        z += 10
-
-        scene.add idle
+        if idle = actions.idle[0]
+          idle.position.setX(x)
+          idle.position.setZ(z)
+  
+          x += 10
+          z += 10
+  
+          scene.add idle
 
     addItems = (scene) ->
       x = 90
@@ -37,24 +36,19 @@ Main
       Object.keys(cachedModels.items).forEach (name) ->
         actions = cachedModels.items[name]
         
-        idle = actions.idle[0]
-
-        idle.position.setX(x)
-        idle.position.setZ(z)
-
-        x -= 10
-        z += 10
-
-        scene.add idle
+        if idle = actions.idle[0]
+          idle.position.setX(x)
+          idle.position.setZ(z)
+  
+          x -= 10
+          z += 10
+  
+          scene.add idle
 
     manager.onLoad (loadedData) ->
       extend cachedModels, loadedData
       console.log cachedModels
 
-      # TODO: figure out why some cachedModel animation states are empty
-      # even though THREE js manager has fired its onload event
-      setTimeout ->
-        core.init {}, (scene, t, dt) ->
-          addCharacters scene
-          addItems scene
-      , 1000
+      core.init {}, (scene, t, dt) ->
+        addCharacters scene
+        addItems scene

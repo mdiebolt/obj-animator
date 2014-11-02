@@ -79,9 +79,10 @@ lastAnimated = +<span class="keyword">new</span> Date()
       component.visible = <span class="literal">false</span>
 
     beamSword.children.forEach (c) -&gt;
+      <span class="keyword">debugger</span>
       <span class="keyword">if</span> beamSword.userData.animations.grow[beamSword.animationIndex] <span class="keyword">is</span> c.name
         c.visible = <span class="literal">true</span> 
-        beamSword.animationIndex += <span class="number">1</span>      
+        beamSword.animationIndex = (beamSword.animationIndex + <span class="number">1</span>) % beamSword.userData.animations.grow.length     
 
 <span class="function"><span class="title">addLights</span></span> = -&gt;
   ambient = <span class="keyword">new</span> THREE.AmbientLight <span class="number">0x101030</span>

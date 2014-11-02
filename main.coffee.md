@@ -1,8 +1,6 @@
 Main
 ====
 
-    require "core"
-
     gameLoop = require "./game_loop"
     
     Loader = require "./loader"

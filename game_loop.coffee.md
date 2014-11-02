@@ -1,6 +1,8 @@
 Game Loop
 =========
 
+    require "core"
+
     lights = require "./lights"
     util = require "util"
     

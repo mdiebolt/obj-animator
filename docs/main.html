@@ -60,27 +60,13 @@ characters = {}
 <span class="function"><span class="title">init</span></span> = -&gt;
   addLights()
 
-  map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
-    console.log mapCubes
-
   map.populateCharacters (c) -&gt;
-    console.log c
     characters = c
 
 <span class="function"><span class="title">animate</span></span> = -&gt;
   requestAnimationFrame animate
 
   render()
-
-<span class="function"><span class="title">animateCharacters</span></span> = (t) -&gt;
-  <span class="keyword">if</span> beamSword = characters.beam_sword
-    animationName = beamSword.userData.animations.grow.wrap (t / <span class="number">0.25</span>).floor()
-    beamSword.children.forEach (component) -&gt;
-      component.visible = <span class="literal">false</span>
-
-    beamSword.children.forEach (c) -&gt;
-      <span class="keyword">if</span> animationName <span class="keyword">is</span> c.name
-        c.visible = <span class="literal">true</span>
 
 <span class="function"><span class="title">addLights</span></span> = -&gt;
   ambient = <span class="keyword">new</span> THREE.AmbientLight <span class="number">0x101030</span>
@@ -90,7 +76,16 @@ characters = {}
   directionalLight.position.set <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>
   scene.add directionalLight
 
+<span class="function"><span class="title">renderCharacters</span></span> = -&gt;
+  ;
+
 <span class="function"><span class="title">render</span></span> = -&gt;
+  scene.clear()
+
+  map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
+    console.log mapCubes   
+
+  renderCharacters()
   <span class="comment">#animateCharacters(t)</span>
 
   camera.lookAt scene.position

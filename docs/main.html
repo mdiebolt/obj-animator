@@ -56,12 +56,28 @@ renderer.setSize <span class="number">800</span>, <span class="number">600</span
 camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
 
 characters = {}
+mapGeometry = []
 
 <span class="function"><span class="title">init</span></span> = -&gt;
   addLights()
 
+  map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
+    mapGeometry = mapCubes   
+
   map.populateCharacters (c) -&gt;
     characters = c
+
+    setTimeout -&gt;
+      x = <span class="number">0</span>
+      z = <span class="number">0</span>
+      <span class="keyword">for</span> name, actions <span class="keyword">of</span> characters
+        idle = actions.idle[<span class="number">0</span>]
+        idle.position.setX(x)
+        idle.position.setZ(z)
+        scene.add(idle)
+        x += <span class="number">10</span>
+        z += <span class="number">10</span>
+    , <span class="number">500</span>
 
 <span class="function"><span class="title">animate</span></span> = -&gt;
   requestAnimationFrame animate
@@ -76,16 +92,7 @@ characters = {}
   directionalLight.position.set <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>
   scene.add directionalLight
 
-<span class="function"><span class="title">renderCharacters</span></span> = -&gt;
-  ;
-
 <span class="function"><span class="title">render</span></span> = -&gt;
-  scene.clear()
-
-  map.generateGrid <span class="number">10</span>, <span class="number">10</span>, (mapCubes) -&gt;
-    console.log mapCubes   
-
-  renderCharacters()
   <span class="comment">#animateCharacters(t)</span>
 
   camera.lookAt scene.position

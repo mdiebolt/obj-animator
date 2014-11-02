@@ -39,7 +39,7 @@ Load up one from an arbitrary model we use.
       loader = new THREE.ImageLoader(manager)
       loader.crossOrigin = true
 
-      loader.load "#{BUCKET_PATH}/bartender.png?doot2", (image) ->
+      loader.load "#{BUCKET_PATH}/bartender.png", (image) ->
         texture.image = image
         texture.needsUpdate = true
 

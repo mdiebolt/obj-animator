@@ -47,6 +47,11 @@ window["mdiebolt/obj-animator:master"]({
       "content": "body\n  margin: 0\n  overflow: hidden\n",
       "mode": "100644",
       "type": "blob"
+    },
+    "models.coffee.md": {
+      "path": "models.coffee.md",
+      "content": "Models\n======\n\nModel data for each character and their actions (animation states).\n\n    module.exports =\n      characters:\n        bartender:\n          idle: [\"bartender\"]\n          wink: [\"bartender_wink_0\"]\n        robo_sheriff:\n          idle: [\"robo_sheriff\"]\n        character:\n          idle: [\"character\"]\n        jetpack_bandit:\n          idle: [\"jetpack_bandit\"]\n      terrain:\n        cactus:\n          idle: [\"cactus\"]\n      items:\n        arrow:\n          idle: [\"arrow\"]\n        beam_sword:\n          idle: [\"beam_sword_idle_0\"]\n          grow: [\n            \"beam_sword_grow_0\"\n            \"beam_sword_grow_1\"\n            \"beam_sword_grow_2\"\n            \"beam_sword_grow_3\"\n          ]\n        branding_iron:\n          idle: [\"branding_iron\"]\n        gun:\n          idle: [\"gun\"]\n        hoverboard:\n          idle: [\"hoverboard\"]\n",
+      "mode": "100644"
     }
   },
   "distribution": {
@@ -88,6 +93,11 @@ window["mdiebolt/obj-animator:master"]({
     "style": {
       "path": "style",
       "content": "module.exports = \"body {\\n  margin: 0;\\n  overflow: hidden;\\n}\";",
+      "type": "blob"
+    },
+    "models": {
+      "path": "models",
+      "content": "(function() {\n  module.exports = {\n    characters: {\n      bartender: {\n        idle: [\"bartender\"],\n        wink: [\"bartender_wink_0\"]\n      },\n      robo_sheriff: {\n        idle: [\"robo_sheriff\"]\n      },\n      character: {\n        idle: [\"character\"]\n      },\n      jetpack_bandit: {\n        idle: [\"jetpack_bandit\"]\n      }\n    },\n    terrain: {\n      cactus: {\n        idle: [\"cactus\"]\n      }\n    },\n    items: {\n      arrow: {\n        idle: [\"arrow\"]\n      },\n      beam_sword: {\n        idle: [\"beam_sword_idle_0\"],\n        grow: [\"beam_sword_grow_0\", \"beam_sword_grow_1\", \"beam_sword_grow_2\", \"beam_sword_grow_3\"]\n      },\n      branding_iron: {\n        idle: [\"branding_iron\"]\n      },\n      gun: {\n        idle: [\"gun\"]\n      },\n      hoverboard: {\n        idle: [\"hoverboard\"]\n      }\n    }\n  };\n\n}).call(this);\n",
       "type": "blob"
     }
   },

@@ -37,17 +37,18 @@ Renderer
     animateCharacters = ->
       now = +new Date()
       
-      #if now - lastAnimated > 1000
-      #  lastAnimated = now
+      if now - lastAnimated > 1000
+        lastAnimated = now
     
-      #  beamSword = characters.beam_sword
-      #  beamSword.animationIndex ?= 0
-      #  beamSword.children.forEach (component) ->
-      #    component.visible = false
+        beamSword = characters.beam_sword
+        beamSword.animationIndex ?= 0
+        beamSword.children.forEach (component) ->
+          component.visible = false
         
-      #  beamSword.animations.grow.forEach (growFrame) ->
-      #    if animations.grow[c.animationIndex] is growFrame.name
-      #      growFrame.visible = true             
+        debugger
+        beamSword.userData.animations.grow.forEach (growFrame) ->
+          if animations.grow[c.animationIndex] is growFrame.name
+            growFrame.visible = true             
 
     addLights = ->
       ambient = new THREE.AmbientLight 0x101030

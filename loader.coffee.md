@@ -39,6 +39,7 @@ Load a model by name, passing in an optional position.
         loader.crossOrigin = true
         loader.load "#{BUCKET_PATH}/#{attrs.name}.obj", (defaultModel) ->
           parent.name = attrs.name
+          parent.userData.animations = attrs.animations
           defaultModel.traverse (child) ->
             if child instanceof THREE.Mesh
               child.material.map = texture
@@ -50,6 +51,7 @@ Load a model by name, passing in an optional position.
                     loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
                       frameModel.name = "#{animationName}_#{frame}"
                       frameModel.visible = false
+                      
                     
                       frameModel.traverse (c) ->
                         if c instanceof THREE.Mesh

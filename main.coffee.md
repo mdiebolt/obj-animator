@@ -60,8 +60,6 @@ Renderer
       scene.add directionalLight
 
     render = ->
-      #animateCharacters(t)
-
       camera.lookAt scene.position
 
       renderer.render scene, camera

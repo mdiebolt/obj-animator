@@ -15,7 +15,7 @@ Generate a simple map, populating it with a cube floor and characters.
         color: 0xfffff
         wireframe: true
 
-      return new THREE.Mesh geometry, material    
+      return new THREE.Mesh geometry, material
 
     cube = cubeMesh()
 
@@ -26,24 +26,24 @@ Generate a simple map, populating it with a cube floor and characters.
 
 Create a basic floor of dimension `size`
 
-    exports.generateGrid = (width, depth, cb) ->        
+    exports.generateGrid = (width, depth, cb) ->
       [0...width].forEach (x) ->
         [0...depth].forEach (z) ->
           addCubeAt new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
 
     exports.populateItems = (cb) ->
       Loader.fromObj("items", modelData.items).onLoad cb
-    
+
     exports.populateTerrain = (cb) ->
       Loader.fromMesh
-        name: "floor" 
+        name: "floor"
         type: "terrain"
         mesh: cube
 
       Loader.fromObj("terrain", modelData.terrain).onLoad cb
 
 Load all the characters. Provide a callback that receives an array
-of the characters when they're done loading. 
+of the characters when they're done loading.
 
     exports.populateCharacters = (cb) ->
       Loader.fromObj("characters", modelData.characters).onLoad cb

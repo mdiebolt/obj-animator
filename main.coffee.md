@@ -17,7 +17,7 @@ Renderer
 
     camera.position.set 0, 100, 200
     
-    characters = []
+    characters = {}
     lastAnimated = +new Date()
 
     init = ->
@@ -42,8 +42,14 @@ Renderer
     
         characters.forEach (c) ->
           if c.name is "beam_sword"
-            c.children[0].visible = !c.children[0].visible
-            c.children[1].visible = !c.children[1].visible
+            c.animationIndex ?= 0
+            c.children.forEach (component) ->
+              component.visible = false
+            
+            c.animations.grow.forEach (growFrame) ->
+              debugger
+              if animations.grow[c.animationIndex] is growFrame.name
+                growFrame.visible = true             
 
     addLights = ->
       ambient = new THREE.AmbientLight 0x101030

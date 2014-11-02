@@ -9,7 +9,7 @@ Pass in the characters collection when the loading manager finishes
       cb? characters
 
     texture = new THREE.Texture()
-    characters = []
+    characters = {}
 
 Base path to our game's S3 bucket
 
@@ -58,7 +58,7 @@ Load a model by name, passing in an optional position.
                           parent.add frameModel
 
               parent.add defaultModel
-              characters.push parent
+              characters[attrs.name] = parent
               scene.add parent
 
       return manager

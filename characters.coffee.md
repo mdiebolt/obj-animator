@@ -10,7 +10,7 @@ Character data for rendering
         name: "bartender"
         position: new Vector3(0, 0, 0)
         animations: [
-          test: ["bartender_wink_0"]
+          wink: ["bartender_wink_0"]
         ]
       }, {
         name: "robo_sheriff"

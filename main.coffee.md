@@ -1,6 +1,7 @@
 Renderer
 ========
 
+    require "core"
     require "./globals"
     require "./lib/obj_renderer"
 
@@ -8,8 +9,6 @@ Renderer
     util.applyStylesheet require("./style")
 
     Map = require "./map"
-
-    core = require "core"
 
     t = 0
     dt = 1 / 60

@@ -45,35 +45,34 @@ Load up one from an arbitrary model we use.
 
 Load a model by name, passing in an optional position.
 
-    exports =
-      fromObj: (modelData) ->
-        for name, actions of modelData
-          models[name] ||= {}
-  
-          for actionName, fileNames of actions
-            models[name][actionName] ||= []
-  
-            fileNames.forEach (file) ->
-              loader = new THREE.OBJLoader(manager)
-              loader.crossOrigin = true
-  
-              actionFrames = models[name][actionName]
-              loader.load "#{BUCKET_PATH}/#{file}.obj", (obj3D) ->
-                obj3D.name = file
-                obj3D.children[0].material.map = texture
-  
-                actionFrames.push obj3D
+    exports.fromObj = (modelData) ->
+      for name, actions of modelData
+        models[name] ||= {}
 
-        return manager
+        for actionName, fileNames of actions
+          models[name][actionName] ||= []
+
+          fileNames.forEach (file) ->
+            loader = new THREE.OBJLoader(manager)
+            loader.crossOrigin = true
+
+            actionFrames = models[name][actionName]
+            loader.load "#{BUCKET_PATH}/#{file}.obj", (obj3D) ->
+              obj3D.name = file
+              obj3D.children[0].material.map = texture
+
+              actionFrames.push obj3D
+
+      return manager
     
-      fromGeometry: (data={}) ->
-        {name, geometry} = data
+    exports.fromGeometry: (data={}) ->
+      {name, geometry} = data
+    
+      obj3D = new THREE.Object3D
+      obj3D.name = name
+      obj3D.add geometry
+      obj3D.name = data.name
       
-        obj3D = new THREE.Object3D
-        obj3D.name = name
-        obj3D.add geometry
-        obj3D.name = data.name
-        
-        models[name].idle = [obj3D]
-        
-        return manager
+      models[name].idle = [obj3D]
+      
+      return manager

@@ -23,13 +23,12 @@ Renderer
     camera.position.set 0, 100, 200
 
     characters = {}
-    mapGeometry = []
 
     init = ->
       addLights()
 
       map.generateGrid 10, 10, (mapCubes) ->
-        mapGeometry = mapCubes
+        console.log mapCubes
 
       map.populateCharacters (c) ->
         console.log c

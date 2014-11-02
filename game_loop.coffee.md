@@ -24,6 +24,10 @@ Game Loop
       scene.add lights.directional()
 
       renderer.setSize window.innerWidth, window.innerHeight
+      
+      camera.aspect	= window.innerWidth / window.innerHeight
+      camera.updateProjectionMatrix()
+      
       document.body.appendChild renderer.domElement
 
     animate = ->

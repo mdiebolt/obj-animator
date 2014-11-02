@@ -66,8 +66,12 @@ framesElapsed = <span class="number">0</span>
   framesElapsed += <span class="number">1</span>
   requestAnimationFrame animate
 
-  characters.forEach (c) -&gt;
-    <span class="keyword">debugger</span>
+  <span class="keyword">if</span> framesElapsed = <span class="number">6000</span>
+    framesElapsed = <span class="number">0</span>
+    characters.forEach (c) -&gt;
+      <span class="keyword">if</span> c.name <span class="keyword">is</span> <span class="string">"bartender"</span>
+        c.children[<span class="number">0</span>].visible = !c.children[<span class="number">0</span>].visible
+        c.children[<span class="number">1</span>].visible = !c.children[<span class="number">1</span>].visible
 
   render()
 

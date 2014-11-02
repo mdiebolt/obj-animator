@@ -64,7 +64,7 @@ Load a model by name, passing in an optional position.
   
                 actionFrames.push obj3D
 
-      return manager
+        return manager
     
       fromGeometry: (data={}) ->
         {name, geometry} = data

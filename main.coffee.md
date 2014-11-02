@@ -17,7 +17,9 @@ Main
       x = 0
       z = 0
 
-      for name, actions of cachedModels.characters
+      Object.keys(cachedModels.characters).forEach (name) -> 
+        actions = cachedModels.characters[name]
+        
         idle = actions.idle[0]
 
         idle.position.setX(x)
@@ -44,7 +46,7 @@ Main
         scene.add idle
 
     manager.onLoad (loadedData) ->
-      cachedModels = extend {}, loadedData
+      extend cachedModels, loadedData
       console.log cachedModels
 
       # TODO: figure out why some cachedModel animation states are empty

@@ -180,7 +180,7 @@
     },
     "main.coffee.md": {
       "path": "main.coffee.md",
-      "content": "Main\n====\n\n    core = require \"core\"\n\n    Loader = require \"./loader\"\n    modelData = require \"./models\"\n\n    cachedModels = {}\n\n    Loader.fromObj \"items\", modelData.items\n    Loader.fromObj \"terrain\", modelData.terrain\n    Loader.fromObj \"characters\", modelData.characters\n    core.Loader.characters().then (data) ->\n      console.log data\n\n    addCharacters = (scene) ->\n      x = 0\n      z = 0\n\n      keyValues cachedModels.characters, (name, actions) ->         \n        if idle = actions.idle[0]\n          idle.position.set x, 5, z\n  \n          x += 10\n          z += 10\n  \n          scene.add idle\n\n    addItems = (scene) ->\n      x = 90\n      z = 0\n\n      keyValues cachedModels.items, (name, actions) ->\n        if idle = actions.idle[0]\n          idle.position.set x, 5, z\n  \n          x -= 10\n          z += 10\n  \n          scene.add idle\n\n    Loader.finished (loadedData) ->\n      extend cachedModels, loadedData\n\n      core.init {}, (scene, t, dt) ->\n        addCharacters scene\n        addItems scene\n",
+      "content": "Main\n====\n\n    core = require \"core\"\n\n    Loader = require \"./loader\"\n    modelData = require \"./models\"\n\n    cachedModels = {}\n\n    Loader.fromObj \"items\", modelData.items\n    Loader.fromObj \"terrain\", modelData.terrain\n    Loader.fromObj \"characters\", modelData.characters\n    \n    core.Loader.characters().then (data) ->\n      console.log data\n\n    addCharacters = (scene) ->\n      x = 0\n      z = 0\n\n      keyValues cachedModels.characters, (name, actions) ->         \n        if idle = actions.idle[0]\n          idle.position.set x, 5, z\n  \n          x += 10\n          z += 10\n  \n          scene.add idle\n\n    addItems = (scene) ->\n      x = 90\n      z = 0\n\n      keyValues cachedModels.items, (name, actions) ->\n        if idle = actions.idle[0]\n          idle.position.set x, 5, z\n  \n          x -= 10\n          z += 10\n  \n          scene.add idle\n\n    Loader.finished (loadedData) ->\n      extend cachedModels, loadedData\n\n      core.init {}, (scene, t, dt) ->\n        addCharacters scene\n        addItems scene\n",
       "mode": "100644",
       "type": "blob"
     },
@@ -192,7 +192,7 @@
     },
     "pixie.cson": {
       "path": "pixie.cson",
-      "content": "version: \"0.1.0\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  util: \"distri/util:v0.1.0\"\n  core: \"distri/tactics-core:v0.2.0\"\n",
+      "content": "version: \"0.1.0\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  util: \"distri/util:v0.1.0\"\n  core: \"distri/tactics-core:v0.2.1\"\n",
       "mode": "100644",
       "type": "blob"
     }
@@ -220,7 +220,7 @@
     },
     "pixie": {
       "path": "pixie",
-      "content": "module.exports = {\"version\":\"0.1.0\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"util\":\"distri/util:v0.1.0\",\"core\":\"distri/tactics-core:v0.2.0\"}};",
+      "content": "module.exports = {\"version\":\"0.1.0\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"util\":\"distri/util:v0.1.0\",\"core\":\"distri/tactics-core:v0.2.1\"}};",
       "type": "blob"
     }
   },
@@ -427,7 +427,7 @@
         },
         "data_loader.coffee.md": {
           "path": "data_loader.coffee.md",
-          "content": "Data Loader\n===========\n\n    Spreadsheet = require \"spreadsheet\"\n    sheetData = null\n\n    loader = null\n    get = ->\n      return loader if loader\n\n      loader = Spreadsheet.load(\"0ArtCBkZR37MmdFJqbjloVEp1OFZLWDJ6M29OcXQ1WkE\")\n\n      return loader\n\n    module.exports =\n      characters: ->\n        get().then (data) ->\n          characterFromRemote(data.Characters)\n      names: ->\n        get().then (data) ->\n          data.Names.map (row) ->\n            name: row.name.trim()\n            gender: row.gender.trim()\n            culture: row.culture.trim()\n\n    characterDataTransform = (data) ->\n      extend data,\n        healthMax: data.healthmax\n        abilities: data.abilities.split(',')\n        passives: (data.passives ? \"\").split(',')\n        spriteName: data.sprite\n\n      delete data.healthmax\n      delete data.sprite\n\n      return data\n\n    characterFromRemote = (data) ->\n      console.log data\n      results = {}\n      data.forEach (datum) ->\n        results[datum.name] = characterDataTransform(datum)\n\n      return results\n",
+          "content": "Data Loader\n===========\n\n    Spreadsheet = require \"spreadsheet\"\n    sheetData = null\n\n    loader = null\n    get = ->\n      return loader if loader\n\n      loader = Spreadsheet.load(\"0ArtCBkZR37MmdFJqbjloVEp1OFZLWDJ6M29OcXQ1WkE\")\n\n      return loader\n\n    module.exports =\n      characters: ->\n        get().then (data) ->\n          characterFromRemote(data.Characters)\n      names: ->\n        get().then (data) ->\n          data.Names.map (row) ->\n            name: row.name.trim()\n            gender: row.gender.trim()\n            culture: row.culture.trim()\n      get: get\n\n    characterDataTransform = (data) ->\n      extend data,\n        healthMax: data.healthmax\n        abilities: data.abilities.split(',')\n        passives: (data.passives ? \"\").split(',')\n        spriteName: data.sprite\n\n      delete data.healthmax\n      delete data.sprite\n\n      return data\n\n    characterFromRemote = (data) ->\n      console.log data\n      results = {}\n      data.forEach (datum) ->\n        results[datum.name] = characterDataTransform(datum)\n\n      return results\n",
           "mode": "100644",
           "type": "blob"
         },
@@ -457,7 +457,7 @@
         },
         "pixie.cson": {
           "path": "pixie.cson",
-          "content": "version: \"0.2.0\"\nentryPoint: \"main\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  cornerstone: \"distri/cornerstone:v0.2.6\"\n  spreadsheet: \"distri/gdocs-spreadsheet:v0.1.0\"\n  util: \"distri/util:v0.1.0\"\n",
+          "content": "version: \"0.2.1\"\nentryPoint: \"main\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  cornerstone: \"distri/cornerstone:v0.2.6\"\n  spreadsheet: \"distri/gdocs-spreadsheet:v0.1.0\"\n  stats: \"distri/stats.js:v0.11.0-pre.1\"\n  util: \"distri/util:v0.1.0\"\n",
           "mode": "100644",
           "type": "blob"
         },
@@ -498,7 +498,7 @@
         },
         "lib/threesome.coffee.md": {
           "path": "lib/threesome.coffee.md",
-          "content": "Three JS Starter Kit\n====================\n\n    Engine = require \"./engine\"\n\n    initCamera = ->\n      aspectRatio = window.innerWidth / window.innerHeight\n\n      camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000)\n      camera.position.set 0, 100, 200\n\n      return camera\n\n    initScene = ->\n      lights = require \"./lights\"\n\n      scene = new THREE.Scene()\n      scene.add lights.ambient()\n      scene.add lights.directional()\n\n      return scene\n\n    initFloor = (scene) ->\n      Cube = require \"./cube\"\n\n      [0...10].forEach (x) ->\n        [0...10].forEach (z) ->\n          scene.add Cube(x, z)\n\n    bindWindowEvents = (camera, renderer) ->\n      resize = ->\n        renderer.setSize window.innerWidth, window.innerHeight\n\n        camera.aspect = window.innerWidth / window.innerHeight\n        camera.updateProjectionMatrix()\n\n      $(window).resize resize\n\n      resize()\n\n    module.exports =\n      init: (data={}, update) ->\n        camera = initCamera()\n        scene = initScene()\n\n        initFloor(scene)\n\n        renderer = new THREE.WebGLRenderer()\n\n        bindWindowEvents(camera, renderer)\n        document.body.appendChild renderer.domElement\n\n        engine = Engine data.engine,\n          update: (t, dt) ->\n            # Update the scene objects!\n            update(scene, t, dt)\n\n          render: (t, dt) ->\n            camera.lookAt scene.position\n\n            renderer.render scene, camera\n\n        engine.start()\n",
+          "content": "Three JS Starter Kit\n====================\n\n    Engine = require \"./engine\"\n    Stats = require \"stats\"\n\n    initCamera = ->\n      aspectRatio = window.innerWidth / window.innerHeight\n\n      camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000)\n      camera.position.set 0, 100, 200\n\n      return camera\n\n    initScene = ->\n      lights = require \"./lights\"\n\n      scene = new THREE.Scene()\n      scene.add lights.ambient()\n      scene.add lights.directional()\n\n      return scene\n\n    initFloor = (scene) ->\n      Cube = require \"./cube\"\n\n      [0...10].forEach (x) ->\n        [0...10].forEach (z) ->\n          scene.add Cube(x, z)\n\n    bindWindowEvents = (camera, renderer) ->\n      resize = ->\n        renderer.setSize window.innerWidth, window.innerHeight\n\n        camera.aspect = window.innerWidth / window.innerHeight\n        camera.updateProjectionMatrix()\n\n      $(window).resize resize\n\n      resize()\n\n    initStats = ->\n      updateStats = new Stats\n      updateStats.setMode(1)\n      renderStats = new Stats\n      renderStats.setMode(1)\n\n      updateStats.domElement.style.position = 'absolute';\n      updateStats.domElement.style.left = '0px';\n      updateStats.domElement.style.top = '0px';\n\n      document.body.appendChild( updateStats.domElement );\n\n      renderStats.domElement.style.position = 'absolute';\n      renderStats.domElement.style.right = '0px';\n      renderStats.domElement.style.top = '0px';\n\n      document.body.appendChild( renderStats.domElement );\n\n      return [updateStats, renderStats]\n\n    module.exports =\n      init: (data={}, update) ->\n        [updateStats, renderStats] = initStats()\n    \n        camera = initCamera()\n        scene = initScene()\n\n        initFloor(scene)\n\n        renderer = new THREE.WebGLRenderer()\n\n        bindWindowEvents(camera, renderer)\n        document.body.appendChild renderer.domElement\n\n        engine = Engine data.engine,\n          update: (t, dt) ->\n            # Update the scene objects!\n            updateStats.begin()\n            update(scene, t, dt)\n            updateStats.end()\n\n          render: (t, dt) ->\n            camera.lookAt scene.position\n\n            renderStats.begin()\n            renderer.render scene, camera\n            renderStats.end()\n\n        engine.start()\n",
           "mode": "100644"
         },
         "lib/lights.coffee.md": {
@@ -508,7 +508,7 @@
         },
         "lib/cube.coffee.md": {
           "path": "lib/cube.coffee.md",
-          "content": "Cube\n====\n\n    CUBE_SIZE = 10\n\n    geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)\n    material = new THREE.MeshBasicMaterial\n      color: 0xffffff\n      wireframe: true\n\n    module.exports = (x, z) ->\n      cube = new THREE.Object3D()\n      cube.position.set(x * CUBE_SIZE, 0, z * CUBE_SIZE)\n\n      mesh = new THREE.Mesh geometry, material\n      cube.add(mesh)\n\n      return cube\n",
+          "content": "Cube\n====\n\n    CUBE_SIZE = 10\n\n    geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)\n    material = new THREE.MeshBasicMaterial\n      color: 0xffffff\n      wireframe: true\n\n    module.exports = (x, z) ->\n      cube = new THREE.Object3D()\n      cube.position.set(x * CUBE_SIZE, -CUBE_SIZE/2, z * CUBE_SIZE)\n\n      mesh = new THREE.Mesh geometry, material\n      cube.add(mesh)\n\n      return cube\n",
           "mode": "100644"
         },
         "test/key_values.coffee": {
@@ -525,7 +525,7 @@
         },
         "data_loader": {
           "path": "data_loader",
-          "content": "(function() {\n  var Spreadsheet, characterDataTransform, characterFromRemote, get, loader, sheetData;\n\n  Spreadsheet = require(\"spreadsheet\");\n\n  sheetData = null;\n\n  loader = null;\n\n  get = function() {\n    if (loader) {\n      return loader;\n    }\n    loader = Spreadsheet.load(\"0ArtCBkZR37MmdFJqbjloVEp1OFZLWDJ6M29OcXQ1WkE\");\n    return loader;\n  };\n\n  module.exports = {\n    characters: function() {\n      return get().then(function(data) {\n        return characterFromRemote(data.Characters);\n      });\n    },\n    names: function() {\n      return get().then(function(data) {\n        return data.Names.map(function(row) {\n          return {\n            name: row.name.trim(),\n            gender: row.gender.trim(),\n            culture: row.culture.trim()\n          };\n        });\n      });\n    }\n  };\n\n  characterDataTransform = function(data) {\n    var _ref;\n    extend(data, {\n      healthMax: data.healthmax,\n      abilities: data.abilities.split(','),\n      passives: ((_ref = data.passives) != null ? _ref : \"\").split(','),\n      spriteName: data.sprite\n    });\n    delete data.healthmax;\n    delete data.sprite;\n    return data;\n  };\n\n  characterFromRemote = function(data) {\n    var results;\n    console.log(data);\n    results = {};\n    data.forEach(function(datum) {\n      return results[datum.name] = characterDataTransform(datum);\n    });\n    return results;\n  };\n\n}).call(this);\n",
+          "content": "(function() {\n  var Spreadsheet, characterDataTransform, characterFromRemote, get, loader, sheetData;\n\n  Spreadsheet = require(\"spreadsheet\");\n\n  sheetData = null;\n\n  loader = null;\n\n  get = function() {\n    if (loader) {\n      return loader;\n    }\n    loader = Spreadsheet.load(\"0ArtCBkZR37MmdFJqbjloVEp1OFZLWDJ6M29OcXQ1WkE\");\n    return loader;\n  };\n\n  module.exports = {\n    characters: function() {\n      return get().then(function(data) {\n        return characterFromRemote(data.Characters);\n      });\n    },\n    names: function() {\n      return get().then(function(data) {\n        return data.Names.map(function(row) {\n          return {\n            name: row.name.trim(),\n            gender: row.gender.trim(),\n            culture: row.culture.trim()\n          };\n        });\n      });\n    },\n    get: get\n  };\n\n  characterDataTransform = function(data) {\n    var _ref;\n    extend(data, {\n      healthMax: data.healthmax,\n      abilities: data.abilities.split(','),\n      passives: ((_ref = data.passives) != null ? _ref : \"\").split(','),\n      spriteName: data.sprite\n    });\n    delete data.healthmax;\n    delete data.sprite;\n    return data;\n  };\n\n  characterFromRemote = function(data) {\n    var results;\n    console.log(data);\n    results = {};\n    data.forEach(function(datum) {\n      return results[datum.name] = characterDataTransform(datum);\n    });\n    return results;\n  };\n\n}).call(this);\n",
           "type": "blob"
         },
         "lib/engine": {
@@ -550,7 +550,7 @@
         },
         "pixie": {
           "path": "pixie",
-          "content": "module.exports = {\"version\":\"0.2.0\",\"entryPoint\":\"main\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"cornerstone\":\"distri/cornerstone:v0.2.6\",\"spreadsheet\":\"distri/gdocs-spreadsheet:v0.1.0\",\"util\":\"distri/util:v0.1.0\"}};",
+          "content": "module.exports = {\"version\":\"0.2.1\",\"entryPoint\":\"main\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"cornerstone\":\"distri/cornerstone:v0.2.6\",\"spreadsheet\":\"distri/gdocs-spreadsheet:v0.1.0\",\"stats\":\"distri/stats.js:v0.11.0-pre.1\",\"util\":\"distri/util:v0.1.0\"}};",
           "type": "blob"
         },
         "test/character": {
@@ -585,7 +585,7 @@
         },
         "lib/threesome": {
           "path": "lib/threesome",
-          "content": "(function() {\n  var Engine, bindWindowEvents, initCamera, initFloor, initScene;\n\n  Engine = require(\"./engine\");\n\n  initCamera = function() {\n    var aspectRatio, camera;\n    aspectRatio = window.innerWidth / window.innerHeight;\n    camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000);\n    camera.position.set(0, 100, 200);\n    return camera;\n  };\n\n  initScene = function() {\n    var lights, scene;\n    lights = require(\"./lights\");\n    scene = new THREE.Scene();\n    scene.add(lights.ambient());\n    scene.add(lights.directional());\n    return scene;\n  };\n\n  initFloor = function(scene) {\n    var Cube;\n    Cube = require(\"./cube\");\n    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(function(x) {\n      return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(function(z) {\n        return scene.add(Cube(x, z));\n      });\n    });\n  };\n\n  bindWindowEvents = function(camera, renderer) {\n    var resize;\n    resize = function() {\n      renderer.setSize(window.innerWidth, window.innerHeight);\n      camera.aspect = window.innerWidth / window.innerHeight;\n      return camera.updateProjectionMatrix();\n    };\n    $(window).resize(resize);\n    return resize();\n  };\n\n  module.exports = {\n    init: function(data, update) {\n      var camera, engine, renderer, scene;\n      if (data == null) {\n        data = {};\n      }\n      camera = initCamera();\n      scene = initScene();\n      initFloor(scene);\n      renderer = new THREE.WebGLRenderer();\n      bindWindowEvents(camera, renderer);\n      document.body.appendChild(renderer.domElement);\n      engine = Engine(data.engine, {\n        update: function(t, dt) {\n          return update(scene, t, dt);\n        },\n        render: function(t, dt) {\n          camera.lookAt(scene.position);\n          return renderer.render(scene, camera);\n        }\n      });\n      return engine.start();\n    }\n  };\n\n}).call(this);\n",
+          "content": "(function() {\n  var Engine, Stats, bindWindowEvents, initCamera, initFloor, initScene, initStats;\n\n  Engine = require(\"./engine\");\n\n  Stats = require(\"stats\");\n\n  initCamera = function() {\n    var aspectRatio, camera;\n    aspectRatio = window.innerWidth / window.innerHeight;\n    camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000);\n    camera.position.set(0, 100, 200);\n    return camera;\n  };\n\n  initScene = function() {\n    var lights, scene;\n    lights = require(\"./lights\");\n    scene = new THREE.Scene();\n    scene.add(lights.ambient());\n    scene.add(lights.directional());\n    return scene;\n  };\n\n  initFloor = function(scene) {\n    var Cube;\n    Cube = require(\"./cube\");\n    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(function(x) {\n      return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(function(z) {\n        return scene.add(Cube(x, z));\n      });\n    });\n  };\n\n  bindWindowEvents = function(camera, renderer) {\n    var resize;\n    resize = function() {\n      renderer.setSize(window.innerWidth, window.innerHeight);\n      camera.aspect = window.innerWidth / window.innerHeight;\n      return camera.updateProjectionMatrix();\n    };\n    $(window).resize(resize);\n    return resize();\n  };\n\n  initStats = function() {\n    var renderStats, updateStats;\n    updateStats = new Stats;\n    updateStats.setMode(1);\n    renderStats = new Stats;\n    renderStats.setMode(1);\n    updateStats.domElement.style.position = 'absolute';\n    updateStats.domElement.style.left = '0px';\n    updateStats.domElement.style.top = '0px';\n    document.body.appendChild(updateStats.domElement);\n    renderStats.domElement.style.position = 'absolute';\n    renderStats.domElement.style.right = '0px';\n    renderStats.domElement.style.top = '0px';\n    document.body.appendChild(renderStats.domElement);\n    return [updateStats, renderStats];\n  };\n\n  module.exports = {\n    init: function(data, update) {\n      var camera, engine, renderStats, renderer, scene, updateStats, _ref;\n      if (data == null) {\n        data = {};\n      }\n      _ref = initStats(), updateStats = _ref[0], renderStats = _ref[1];\n      camera = initCamera();\n      scene = initScene();\n      initFloor(scene);\n      renderer = new THREE.WebGLRenderer();\n      bindWindowEvents(camera, renderer);\n      document.body.appendChild(renderer.domElement);\n      engine = Engine(data.engine, {\n        update: function(t, dt) {\n          updateStats.begin();\n          update(scene, t, dt);\n          return updateStats.end();\n        },\n        render: function(t, dt) {\n          camera.lookAt(scene.position);\n          renderStats.begin();\n          renderer.render(scene, camera);\n          return renderStats.end();\n        }\n      });\n      return engine.start();\n    }\n  };\n\n}).call(this);\n",
           "type": "blob"
         },
         "lib/lights": {
@@ -595,7 +595,7 @@
         },
         "lib/cube": {
           "path": "lib/cube",
-          "content": "(function() {\n  var CUBE_SIZE, geometry, material;\n\n  CUBE_SIZE = 10;\n\n  geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE);\n\n  material = new THREE.MeshBasicMaterial({\n    color: 0xffffff,\n    wireframe: true\n  });\n\n  module.exports = function(x, z) {\n    var cube, mesh;\n    cube = new THREE.Object3D();\n    cube.position.set(x * CUBE_SIZE, 0, z * CUBE_SIZE);\n    mesh = new THREE.Mesh(geometry, material);\n    cube.add(mesh);\n    return cube;\n  };\n\n}).call(this);\n",
+          "content": "(function() {\n  var CUBE_SIZE, geometry, material;\n\n  CUBE_SIZE = 10;\n\n  geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE);\n\n  material = new THREE.MeshBasicMaterial({\n    color: 0xffffff,\n    wireframe: true\n  });\n\n  module.exports = function(x, z) {\n    var cube, mesh;\n    cube = new THREE.Object3D();\n    cube.position.set(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE);\n    mesh = new THREE.Mesh(geometry, material);\n    cube.add(mesh);\n    return cube;\n  };\n\n}).call(this);\n",
           "type": "blob"
         },
         "test/key_values": {
@@ -607,14 +607,14 @@
       "progenitor": {
         "url": "http://www.danielx.net/editor/"
       },
-      "version": "0.2.0",
+      "version": "0.2.1",
       "entryPoint": "main",
       "remoteDependencies": [
         "https://code.jquery.com/jquery-1.10.1.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js"
       ],
       "repository": {
-        "branch": "v0.2.0",
+        "branch": "v0.2.1",
         "default_branch": "master",
         "full_name": "distri/tactics-core",
         "homepage": null,
@@ -2997,6 +2997,60 @@
             "description": "Import data from gdocs.",
             "html_url": "https://github.com/distri/gdocs-spreadsheet",
             "url": "https://api.github.com/repos/distri/gdocs-spreadsheet",
+            "publishBranch": "gh-pages"
+          },
+          "dependencies": {}
+        },
+        "stats": {
+          "source": {
+            "LICENSE": {
+              "path": "LICENSE",
+              "content": "The MIT License (MIT)\n\nCopyright (c) 2014 \n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+              "mode": "100644",
+              "type": "blob"
+            },
+            "README.md": {
+              "path": "README.md",
+              "content": "stats.js\n========\n\nWrapper for stats.js\n",
+              "mode": "100644",
+              "type": "blob"
+            },
+            "lib/stats.js": {
+              "path": "lib/stats.js",
+              "content": "module.exports = function(){var e=Date.now(),t=e,i=0,n=1/0,r=0,s=0,o=1/0,a=0,l=0,h=0,c=document.createElement(\"div\");c.id=\"stats\",c.addEventListener(\"mousedown\",function(e){e.preventDefault(),v(++h%2)},!1),c.style.cssText=\"width:80px;opacity:0.9;cursor:pointer\";var u=document.createElement(\"div\");u.id=\"fps\",u.style.cssText=\"padding:0 0 3px 3px;text-align:left;background-color:#002\",c.appendChild(u);var d=document.createElement(\"div\");d.id=\"fpsText\",d.style.cssText=\"color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px\",d.innerHTML=\"FPS\",u.appendChild(d);var p=document.createElement(\"div\");for(p.id=\"fpsGraph\",p.style.cssText=\"position:relative;width:74px;height:30px;background-color:#0ff\",u.appendChild(p);74>p.children.length;){var f=document.createElement(\"span\");f.style.cssText=\"width:1px;height:30px;float:left;background-color:#113\",p.appendChild(f)}var m=document.createElement(\"div\");m.id=\"ms\",m.style.cssText=\"padding:0 0 3px 3px;text-align:left;background-color:#020;display:none\",c.appendChild(m);var g=document.createElement(\"div\");g.id=\"msText\",g.style.cssText=\"color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px\",g.innerHTML=\"MS\",m.appendChild(g);var y=document.createElement(\"div\");for(y.id=\"msGraph\",y.style.cssText=\"position:relative;width:74px;height:30px;background-color:#0f0\",m.appendChild(y);74>y.children.length;){var f=document.createElement(\"span\");f.style.cssText=\"width:1px;height:30px;float:left;background-color:#131\",y.appendChild(f)}var v=function(e){switch(h=e){case 0:u.style.display=\"block\",m.style.display=\"none\";break;case 1:u.style.display=\"none\",m.style.display=\"block\"}},b=function(e,t){var i=e.appendChild(e.firstChild);i.style.height=t+\"px\"};return{REVISION:11,domElement:c,setMode:v,begin:function(){e=Date.now()},end:function(){var h=Date.now();return i=h-e,n=Math.min(n,i),r=Math.max(r,i),g.textContent=i+\" MS (\"+n+\"-\"+r+\")\",b(y,Math.min(30,30-30*(i/200))),l++,h>t+1e3&&(s=Math.round(1e3*l/(h-t)),o=Math.min(o,s),a=Math.max(a,s),d.textContent=s+\" FPS (\"+o+\"-\"+a+\")\",b(p,Math.min(30,30-30*(s/100))),t=h,l=0),h},update:function(){e=this.end()}}};\n",
+              "mode": "100644"
+            },
+            "pixie.cson": {
+              "path": "pixie.cson",
+              "content": "version: \"0.11.0-pre.1\"\nentryPoint: \"lib/stats\"\n",
+              "mode": "100644"
+            }
+          },
+          "distribution": {
+            "lib/stats": {
+              "path": "lib/stats",
+              "content": "module.exports = function(){var e=Date.now(),t=e,i=0,n=1/0,r=0,s=0,o=1/0,a=0,l=0,h=0,c=document.createElement(\"div\");c.id=\"stats\",c.addEventListener(\"mousedown\",function(e){e.preventDefault(),v(++h%2)},!1),c.style.cssText=\"width:80px;opacity:0.9;cursor:pointer\";var u=document.createElement(\"div\");u.id=\"fps\",u.style.cssText=\"padding:0 0 3px 3px;text-align:left;background-color:#002\",c.appendChild(u);var d=document.createElement(\"div\");d.id=\"fpsText\",d.style.cssText=\"color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px\",d.innerHTML=\"FPS\",u.appendChild(d);var p=document.createElement(\"div\");for(p.id=\"fpsGraph\",p.style.cssText=\"position:relative;width:74px;height:30px;background-color:#0ff\",u.appendChild(p);74>p.children.length;){var f=document.createElement(\"span\");f.style.cssText=\"width:1px;height:30px;float:left;background-color:#113\",p.appendChild(f)}var m=document.createElement(\"div\");m.id=\"ms\",m.style.cssText=\"padding:0 0 3px 3px;text-align:left;background-color:#020;display:none\",c.appendChild(m);var g=document.createElement(\"div\");g.id=\"msText\",g.style.cssText=\"color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px\",g.innerHTML=\"MS\",m.appendChild(g);var y=document.createElement(\"div\");for(y.id=\"msGraph\",y.style.cssText=\"position:relative;width:74px;height:30px;background-color:#0f0\",m.appendChild(y);74>y.children.length;){var f=document.createElement(\"span\");f.style.cssText=\"width:1px;height:30px;float:left;background-color:#131\",y.appendChild(f)}var v=function(e){switch(h=e){case 0:u.style.display=\"block\",m.style.display=\"none\";break;case 1:u.style.display=\"none\",m.style.display=\"block\"}},b=function(e,t){var i=e.appendChild(e.firstChild);i.style.height=t+\"px\"};return{REVISION:11,domElement:c,setMode:v,begin:function(){e=Date.now()},end:function(){var h=Date.now();return i=h-e,n=Math.min(n,i),r=Math.max(r,i),g.textContent=i+\" MS (\"+n+\"-\"+r+\")\",b(y,Math.min(30,30-30*(i/200))),l++,h>t+1e3&&(s=Math.round(1e3*l/(h-t)),o=Math.min(o,s),a=Math.max(a,s),d.textContent=s+\" FPS (\"+o+\"-\"+a+\")\",b(p,Math.min(30,30-30*(s/100))),t=h,l=0),h},update:function(){e=this.end()}}};\n",
+              "type": "blob"
+            },
+            "pixie": {
+              "path": "pixie",
+              "content": "module.exports = {\"version\":\"0.11.0-pre.1\",\"entryPoint\":\"lib/stats\"};",
+              "type": "blob"
+            }
+          },
+          "progenitor": {
+            "url": "http://www.danielx.net/editor/"
+          },
+          "version": "0.11.0-pre.1",
+          "entryPoint": "lib/stats",
+          "repository": {
+            "branch": "v0.11.0-pre.1",
+            "default_branch": "master",
+            "full_name": "distri/stats.js",
+            "homepage": null,
+            "description": "Wrapper for stats.js",
+            "html_url": "https://github.com/distri/stats.js",
+            "url": "https://api.github.com/repos/distri/stats.js",
             "publishBranch": "gh-pages"
           },
           "dependencies": {}

@@ -37,7 +37,7 @@ Main
       x = 0
       z = 0        
       
-      for name, actions of characters
+      for name, actions of cachedModels.characters
         idle = actions.idle[0]
         
         idle.position.setX(x)

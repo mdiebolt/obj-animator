@@ -50,7 +50,7 @@ renderer.setSize <span class="number">800</span>, <span class="number">600</span
 
 camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
 
-characters = []
+characters = {}
 lastAnimated = +<span class="keyword">new</span> Date()
 
 <span class="function"><span class="title">init</span></span> = -&gt;
@@ -73,10 +73,15 @@ lastAnimated = +<span class="keyword">new</span> Date()
   <span class="keyword">if</span> now - lastAnimated &gt; <span class="number">1000</span>
     lastAnimated = now
 
-    characters.forEach (c) -&gt;
-      <span class="keyword">if</span> c.name <span class="keyword">is</span> <span class="string">"beam_sword"</span>
-        c.children[<span class="number">0</span>].visible = !c.children[<span class="number">0</span>].visible
-        c.children[<span class="number">1</span>].visible = !c.children[<span class="number">1</span>].visible
+    beamSword = characters.beam_sword
+    beamSword.animationIndex ?= <span class="number">0</span>
+    beamSword.children.forEach (component) -&gt;
+      component.visible = <span class="literal">false</span>
+
+    <span class="keyword">debugger</span>
+    beamSword.userData.animations.grow.forEach (growFrame) -&gt;
+      <span class="keyword">if</span> animations.grow[c.animationIndex] <span class="keyword">is</span> growFrame.name
+        growFrame.visible = <span class="literal">true</span>             
 
 <span class="function"><span class="title">addLights</span></span> = -&gt;
   ambient = <span class="keyword">new</span> THREE.AmbientLight <span class="number">0x101030</span>

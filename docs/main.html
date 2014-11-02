@@ -74,7 +74,6 @@ manager = Loader.fromObj <span class="string">"characters"</span>, modelData.cha
 
 manager.onLoad (loadedData) -&gt;
   extend cachedModels, loadedData
-  console.log cachedModels
 
   core.init {}, (scene, t, dt) -&gt;
     addCharacters scene

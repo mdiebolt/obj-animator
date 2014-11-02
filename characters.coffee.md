@@ -1,7 +1,7 @@
-Characters
-==========
+Models
+======
 
-Character data for rendering
+Model data for each character and their actions (animation states).
  
     module.exports =
       bartender:

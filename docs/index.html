@@ -102,6 +102,8 @@ manager.onLoad (loadedData) -&gt;
   cachedModels = loadedData
   console.log cachedModels
 
+  <span class="comment"># TODO: figure out why some cachedModel animation states are empty </span>
+  <span class="comment"># even though THREE js manager has fired its onload event</span>
   setTimeout -&gt;
     scene = gameLoop.start()
 

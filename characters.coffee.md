@@ -26,10 +26,10 @@ Character data for rendering
         position: new Vector3(40, 0, 0)
         animations: [
           grow: [
-            "beamsword_grow_0"
-            "beamsword_grow_1"
-            "beamsword_grow_2"
-            "beamsword_grow_3"
+            "beam_sword_grow_0"
+            "beam_sword_grow_1"
+            "beam_sword_grow_2"
+            "beam_sword_grow_3"
           ]
         ]
       }, {

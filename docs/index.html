@@ -78,7 +78,7 @@ lastAnimated = +<span class="keyword">new</span> Date()
     beamSword.children.forEach (component) -&gt;
       component.visible = <span class="literal">false</span>
 
-    beamSword.children.traverse (c) -&gt;
+    beamSword.children.forEach (c) -&gt;
       <span class="keyword">if</span> beamSword.userData.animations.grow[beamSword.animationIndex] <span class="keyword">is</span> c.name
         c.visible = <span class="literal">true</span> 
         beamSword.animationIndex += <span class="number">1</span>      

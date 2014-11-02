@@ -25,9 +25,11 @@ items:
 
 Object3D
   name: "bartender_idle_0"
+  children: [Mesh]
 
 Object3D
   name: "bartender_idle_1"
+  children: [Mesh]
 
     models =
       characters: {}

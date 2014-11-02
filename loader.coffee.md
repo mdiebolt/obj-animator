@@ -13,17 +13,17 @@ Pass model data to the callback when the loading manager finishes
     texture = new THREE.Texture()
 
 The models hash keeps our 3D models in memory.
-Its structure looks like this. 
+Its structure looks like this.
 
 # characters:
 #   bartender:
 #     idle: [Object3D, Object3D, Object3D, Object3D]
 #   walk: [Object3D, ...]
 # terrain:
-#   cactus: 
-#     idle: [...] 
+#   cactus:
+#     idle: [...]
 # items:
-#   gun: 
+#   gun:
 #     idle: [...]
 #
 # Object3D is the THREE.js scene primitive

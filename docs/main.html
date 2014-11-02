@@ -42,6 +42,11 @@ util.applyStylesheet(require(<span class="string">"./style"</span>))
 
 map = require(<span class="string">"./map"</span>)()
 
+core = require <span class="string">"core"</span>
+
+t = <span class="number">0</span>
+dt = <span class="number">1</span> / <span class="number">60</span>
+
 container = document.createElement <span class="string">"div"</span>
 document.body.appendChild container
 
@@ -51,7 +56,6 @@ renderer.setSize <span class="number">800</span>, <span class="number">600</span
 camera.position.set <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>
 
 characters = {}
-lastAnimated = +<span class="keyword">new</span> Date()
 
 <span class="function"><span class="title">init</span></span> = -&gt;
   addLights()
@@ -67,22 +71,15 @@ lastAnimated = +<span class="keyword">new</span> Date()
 
   render()
 
-<span class="function"><span class="title">animateCharacters</span></span> = -&gt;
-  now = +<span class="keyword">new</span> Date()
-
-  <span class="keyword">if</span> now - lastAnimated &gt; <span class="number">100</span>
-    lastAnimated = now
-
-    beamSword = characters.beam_sword
-    beamSword.animationIndex ?= <span class="number">0</span>
+<span class="function"><span class="title">animateCharacters</span></span> = (t) -&gt;
+  <span class="keyword">if</span> beamSword = characters.beam_sword
+    animationName = beamSword.userData.animations.grow.wrap (t / <span class="number">0.25</span>).floor()
     beamSword.children.forEach (component) -&gt;
       component.visible = <span class="literal">false</span>
 
-    currentIndex = beamSword.animationIndex
     beamSword.children.forEach (c) -&gt;
-      <span class="keyword">if</span> beamSword.userData.animations.grow[currentIndex] <span class="keyword">is</span> c.name
-        c.visible = <span class="literal">true</span> 
-        beamSword.animationIndex = (currentIndex + <span class="number">1</span>) % beamSword.userData.animations.grow.length
+      <span class="keyword">if</span> animationName <span class="keyword">is</span> c.name
+        c.visible = <span class="literal">true</span>
 
 <span class="function"><span class="title">addLights</span></span> = -&gt;
   ambient = <span class="keyword">new</span> THREE.AmbientLight <span class="number">0x101030</span>
@@ -93,11 +90,12 @@ lastAnimated = +<span class="keyword">new</span> Date()
   scene.add directionalLight
 
 <span class="function"><span class="title">render</span></span> = -&gt;
-  animateCharacters()
+  animateCharacters(t)
 
   camera.lookAt scene.position
 
   renderer.render scene, camera
+  t += dt
 
 init()
 animate()</code></pre>

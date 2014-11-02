@@ -25,6 +25,12 @@ Game Loop
       
       document.body.appendChild renderer.domElement
 
+    resize = ->
+      renderer.setSize window.innerWidth, window.innerHeight
+      
+      camera.aspect  = window.innerWidth / window.innerHeight
+      camera.updateProjectionMatrix()        
+
     animate = ->
       requestAnimationFrame animate
 
@@ -39,11 +45,7 @@ Game Loop
     exports.start = ->  
       started = true
       
-      renderer.setSize window.innerWidth, window.innerHeight
-      
-      camera.aspect  = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()      
-      
+      resize()  
       animate()
 
       scene

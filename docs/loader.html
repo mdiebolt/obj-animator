@@ -52,11 +52,25 @@ texture = <span class="keyword">new</span> THREE.Texture()</code></pre>
               <p>The models hash keeps our 3D models in memory.
 Its structure looks like this.
 Object3D is the THREE.js scene primitive</p>
-<p>bartender:
-  idle: [Object3D, Object3D, Object3D, Object3D]
-  walk: [Object3D, ...]
-cactus:
-  idle: [...]</p>
+<p>characters:
+  bartender:</p>
+
+            </div>
+            <div class="content"><pre><code class="lang-coffeescript">idle: [Object3D, Object3D, Object3D, Object3D]</code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>  walk: [Object3D, ...]
+terrain:
+  cactus: { idle: [...] }
+items:
+  gun: { idle: [...] }</p>
 <p>Object3D
   name: &quot;bartender_idle_0&quot;</p>
 <p>Object3D
@@ -71,10 +85,10 @@ cactus:
         </li>
         
         
-        <li id="section-4">
+        <li id="section-5">
             <div class="annotation">
               <div class="pilwrap">
-                <a class="pilcrow" href="#section-4">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>Base path to our game&#39;s S3 bucket</p>
 
@@ -84,10 +98,10 @@ cactus:
         </li>
         
         
-        <li id="section-5">
+        <li id="section-6">
             <div class="annotation">
               <div class="pilwrap">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>We&#39;re sharing the same palette across all of our models.
 Load up one from an arbitrary model we use.</p>

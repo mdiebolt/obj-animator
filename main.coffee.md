@@ -33,9 +33,13 @@ Renderer
       framesElapsed += 1
       requestAnimationFrame animate
       
-      characters.forEach (c) ->
-        debugger
-      
+      if framesElapsed = 6000
+        framesElapsed = 0
+        characters.forEach (c) ->
+          if c.name is "bartender"
+            c.children[0].visible = !c.children[0].visible
+            c.children[1].visible = !c.children[1].visible
+
       render()
 
     addLights = ->

@@ -8,10 +8,10 @@ Main
 
     cachedModels = {}
 
-    Loader.fromObj("items", modelData.items)
-    Loader.fromObj("terrain", modelData.terrain)
-
-    manager = Loader.fromObj("characters", modelData.characters)
+    Loader.fromObj "items", modelData.items
+    Loader.fromObj "terrain", modelData.terrain
+    
+    manager = Loader.fromObj "characters", modelData.characters
 
     addCharacters = (scene) ->
       x = 0
@@ -21,8 +21,7 @@ Main
         actions = cachedModels.characters[name]
         
         if idle = actions.idle[0]
-          idle.position.setX(x)
-          idle.position.setZ(z)
+          idle.position.set x, 0, z
   
           x += 10
           z += 10
@@ -37,8 +36,7 @@ Main
         actions = cachedModels.items[name]
         
         if idle = actions.idle[0]
-          idle.position.setX(x)
-          idle.position.setZ(z)
+          idle.position.set x, 0, z
   
           x -= 10
           z += 10

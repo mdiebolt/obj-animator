@@ -9,6 +9,8 @@ Game Loop
     t = 0
     dt = 1 / 60
     started = false
+    
+    updateFn = null
 
     aspectRatio = window.innerWidth / window.innerHeight
 
@@ -41,8 +43,9 @@ Game Loop
 
       renderer.render scene, camera
       t += dt
+      updateFn?(t)
 
-    exports.start = ->  
+    exports.start = (updateFn) ->  
       started = true
       
       resize()  
@@ -50,5 +53,5 @@ Game Loop
 
       scene
 
-    exports.update = (updateFn) ->
-      updateFn(t) if started
+    exports.update = (fn) ->
+      updateFn = fn

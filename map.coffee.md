@@ -7,7 +7,6 @@ Generate a simple map, populating it with a cube floor and characters.
     modelData = require "./characters"
 
     CUBE_SIZE = 10
-    mapCubes = []
 
     cubeMesh = ->
       geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
@@ -18,32 +17,30 @@ Generate a simple map, populating it with a cube floor and characters.
 
       return new THREE.Mesh geometry, material    
 
-    addCube = (position) ->
-      cube = cubeMesh()
-      cube.position.set position.x, position.y, position.z
-      mapCubes.push cube
-      scene.add cube
+    cube = cubeMesh()
+
+    addCubeAt = (position) ->
+      clone = cube.clone()
+      clone.position.set position.x, position.y, position.z
+      scene.add clone
 
 Create a basic floor of dimension `size`
 
     module.exports = ->
-
-      generateGrid: (width, depth, cb) ->
-        Loader.fromMesh
-          name: "floor" 
-          type: "terrain"
-          mesh: cubeMesh()
-        
+      generateGrid: (width, depth, cb) ->        
         [0...width].forEach (x) ->
           [0...depth].forEach (z) ->
-            addCube new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
-
-        cb mapCubes
+            addCubeAt new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
 
       populateItems: (cb) ->
         Loader.fromObj("items", modelData.items).onLoad cb
         
       populateTerrain: (cb) ->
+        Loader.fromMesh
+          name: "floor" 
+          type: "terrain"
+          mesh: cube
+
         Loader.fromObj("terrain", modelData.terrain).onLoad cb
 
 Load all the characters. Provide a callback that receives an array

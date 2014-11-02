@@ -67,7 +67,9 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
   x = <span class="number">90</span>
   z = <span class="number">0</span>
 
-  <span class="keyword">for</span> name, actions <span class="keyword">of</span> cachedModels.items
+  Object.keys(cachedModels.items).forEach (name) -&gt;
+    actions = cachedModels.items[name]
+
     idle = actions.idle[<span class="number">0</span>]
 
     idle.position.setX(x)

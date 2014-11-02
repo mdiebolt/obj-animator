@@ -109,39 +109,43 @@ Load up one from an arbitrary model we use.</p>
               <p>Load a model by name, passing in an optional position.</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = (objects) -&gt;
-  objects.forEach (attrs) -&gt;
-    position = attrs.position
+            <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = (models) -&gt;
+  <span class="comment">###
+    name: "bartender"
+    actions: 
+      idle: []
+      walk: []
+  ###</span>
+  <span class="keyword">for</span> name, actions <span class="keyword">of</span> models
+    <span class="comment">###
+      actionName: "idle"
+      modelNames: ["idle_0", "idle_1"]
+    ###</span>
+    <span class="keyword">for</span> actionName, modelNames <span class="keyword">of</span> actions
+      loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
+      loader.crossOrigin = <span class="literal">true</span>
+      loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj"</span>, (defaultModel) -&gt;
+        defaultModel.traverse (child) -&gt;
+          <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
+            child.material.map = texture
 
-    parent = <span class="keyword">new</span> THREE.Object3D()
-    parent.position.set position.x, position.y, position.z
-    parent.name = attrs.name
-    parent.userData.animations = attrs.animations
-
-    loader = <span class="keyword">new</span> THREE.OBJLoader(manager)
-    loader.crossOrigin = <span class="literal">true</span>
-    loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{attrs.name}</span>.obj"</span>, (defaultModel) -&gt;
-      defaultModel.traverse (child) -&gt;
-        <span class="keyword">if</span> child <span class="keyword">instanceof</span> THREE.Mesh
-          child.material.map = texture
-
-          <span class="comment"># TODO: default this in the character base class</span>
-          <span class="keyword">for</span> animationName, frames <span class="keyword">of</span> (attrs.animations || {})
-            frames.forEach (frame) -&gt;
-              loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{frame}</span>.obj"</span>, (frameModel) -&gt;
-                frameModel.name = frame
-                frameModel.visible = <span class="literal">false</span>
+            <span class="comment"># TODO: default this in the character base class</span>
+            <span class="keyword">for</span> animationName, frames <span class="keyword">of</span> (attrs.animations || {})
+              frames.forEach (frame) -&gt;
+                loader.load <span class="string">"<span class="subst">#{BUCKET_PATH}</span>/<span class="subst">#{frame}</span>.obj"</span>, (frameModel) -&gt;
+                  frameModel.name = frame
+                  frameModel.visible = <span class="literal">false</span>
 
 
-                frameModel.traverse (c) -&gt;
-                  <span class="keyword">if</span> c <span class="keyword">instanceof</span> THREE.Mesh
-                    c.material.map = texture
+                  frameModel.traverse (c) -&gt;
+                    <span class="keyword">if</span> c <span class="keyword">instanceof</span> THREE.Mesh
+                      c.material.map = texture
 
-                    parent.add frameModel
+                      parent.add frameModel
 
-          parent.add defaultModel
-          characters[attrs.name] = parent
-          scene.add parent
+            parent.add defaultModel
+            characters[attrs.name] = parent
+            scene.add parent
 
   <span class="keyword">return</span> manager</code></pre>
 </div>

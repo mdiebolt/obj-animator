@@ -1,5 +1,5 @@
-Renderer
-========
+Main
+====
 
     require "core"
     require "./lib/obj_renderer"

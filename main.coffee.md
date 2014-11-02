@@ -31,10 +31,10 @@ Renderer
 
       Map.populateItems (modelData) ->
         console.log "items", modelData
-      
+
       Map.populateTerrain (modelData) ->
         console.log "terrain", modelData
-  
+
       Map.populateCharacters (modelData) ->
         console.log "characters", modelData
         characters = modelData.characters

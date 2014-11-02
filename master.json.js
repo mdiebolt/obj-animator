@@ -8,7 +8,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "globals.coffee.md": {
       "path": "globals.coffee.md",
-      "content": "Globals\n=======\n\nPut all these gross guys in here.\n\n    aspectRatio = 800 / 600\n\n    window.renderer = new THREE.WebGLRenderer()\n    window.scene = new THREE.Scene()\n    window.camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000)\n\n\n    THREE.Object3D.prototype.clear = ->\n      @children.forEach (child) ->\n        scene.remove(child)\n",
+      "content": "Globals\n=======\n\nPut all these gross guys in here.\n\n    aspectRatio = 800 / 600\n\n    window.renderer = new THREE.WebGLRenderer()\n    window.scene = new THREE.Scene()\n    window.camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000)\n",
       "mode": "100644",
       "type": "blob"
     },
@@ -57,7 +57,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "globals": {
       "path": "globals",
-      "content": "(function() {\n  var aspectRatio;\n\n  aspectRatio = 800 / 600;\n\n  window.renderer = new THREE.WebGLRenderer();\n\n  window.scene = new THREE.Scene();\n\n  window.camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000);\n\n  THREE.Object3D.prototype.clear = function() {\n    return this.children.forEach(function(child) {\n      return scene.remove(child);\n    });\n  };\n\n}).call(this);\n",
+      "content": "(function() {\n  var aspectRatio;\n\n  aspectRatio = 800 / 600;\n\n  window.renderer = new THREE.WebGLRenderer();\n\n  window.scene = new THREE.Scene();\n\n  window.camera = new THREE.PerspectiveCamera(45, aspectRatio, 1, 2000);\n\n}).call(this);\n",
       "type": "blob"
     },
     "lib/obj_renderer": {

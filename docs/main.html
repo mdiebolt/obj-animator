@@ -53,15 +53,14 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
   Object.keys(cachedModels.characters).forEach (name) -&gt; 
     actions = cachedModels.characters[name]
 
-    idle = actions.idle[<span class="number">0</span>]
+    <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>]
+      idle.position.setX(x)
+      idle.position.setZ(z)
 
-    idle.position.setX(x)
-    idle.position.setZ(z)
+      x += <span class="number">10</span>
+      z += <span class="number">10</span>
 
-    x += <span class="number">10</span>
-    z += <span class="number">10</span>
-
-    scene.add idle
+      scene.add idle
 
 <span class="function"><span class="title">addItems</span></span> = (scene) -&gt;
   x = <span class="number">90</span>
@@ -70,27 +69,22 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
   Object.keys(cachedModels.items).forEach (name) -&gt;
     actions = cachedModels.items[name]
 
-    idle = actions.idle[<span class="number">0</span>]
+    <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>]
+      idle.position.setX(x)
+      idle.position.setZ(z)
 
-    idle.position.setX(x)
-    idle.position.setZ(z)
+      x -= <span class="number">10</span>
+      z += <span class="number">10</span>
 
-    x -= <span class="number">10</span>
-    z += <span class="number">10</span>
-
-    scene.add idle
+      scene.add idle
 
 manager.onLoad (loadedData) -&gt;
   extend cachedModels, loadedData
   console.log cachedModels
 
-  <span class="comment"># TODO: figure out why some cachedModel animation states are empty</span>
-  <span class="comment"># even though THREE js manager has fired its onload event</span>
-  setTimeout -&gt;
-    core.init {}, (scene, t, dt) -&gt;
-      addCharacters scene
-      addItems scene
-  , <span class="number">1000</span></code></pre>
+  core.init {}, (scene, t, dt) -&gt;
+    addCharacters scene
+    addItems scene</code></pre>
 </div>
         </li>
         

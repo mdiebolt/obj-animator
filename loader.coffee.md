@@ -34,12 +34,12 @@ Load a model by name, passing in an optional position.
 
         parent = new THREE.Object3D()
         parent.position.set position.x, position.y, position.z
+        parent.name = attrs.name
+        parent.userData.animations = attrs.animations
 
         loader = new THREE.OBJLoader(manager)
         loader.crossOrigin = true
         loader.load "#{BUCKET_PATH}/#{attrs.name}.obj", (defaultModel) ->
-          parent.name = attrs.name
-          parent.userData.animations = attrs.animations
           defaultModel.traverse (child) ->
             if child instanceof THREE.Mesh
               child.material.map = texture

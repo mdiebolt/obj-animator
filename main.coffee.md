@@ -18,7 +18,7 @@ Main
 
       keyValues cachedModels.characters, (name, actions) ->         
         if idle = actions.idle[0]
-          idle.position.set x, 0, z
+          idle.position.set x, -5, z
   
           x += 10
           z += 10
@@ -31,7 +31,7 @@ Main
 
       keyValues cachedModels.items, (name, actions) ->
         if idle = actions.idle[0]
-          idle.position.set x, 0, z
+          idle.position.set x, -5, z
   
           x -= 10
           z += 10

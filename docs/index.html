@@ -50,7 +50,7 @@ Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain)
 
 manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.characters)
 
-<span class="function"><span class="title">cubeMesh</span></span> = -&gt;
+<span class="function"><span class="title">cubeModel</span></span> = -&gt;
   geometry = <span class="keyword">new</span> THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
 
   material = <span class="keyword">new</span> THREE.MeshBasicMaterial
@@ -58,7 +58,7 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
     wireframe: <span class="literal">true</span>
 
   <span class="keyword">if</span> cachedModels.terrain?.floor?.idle?
-    cube = cachedModels.terrain.floor.idle
+    cube = cachedModels.terrain.floor.idle[<span class="number">0</span>]
   <span class="keyword">else</span>
     container = <span class="keyword">new</span> THREE.Object3D()
     mesh = <span class="keyword">new</span> THREE.Mesh geometry, material
@@ -68,17 +68,17 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
     cachedModels.terrain.floor ||= {}
     cachedModels.terrain.floor.idle = [container] 
 
-    cube = container
+    cube = cachedModels.terrain.floor.idle[<span class="number">0</span>]
 
   cube
 
 <span class="function"><span class="title">addMapCubes</span></span> = (scene) -&gt;
   [<span class="number">0.</span>.<span class="number">.10</span>].forEach (x) -&gt;
     [<span class="number">0.</span>.<span class="number">.10</span>].forEach (z) -&gt;
-      {cx, cy, cz} = <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
+      p = <span class="keyword">new</span> THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / <span class="number">2</span>, z * CUBE_SIZE)
 
-      clone = cubeMesh().clone()
-      clone.position.set(cx, cy, cz)       
+      clone = cubeModel().clone()
+      clone.position.set(p.x, p.y, p.z)
 
       scene.add clone
 

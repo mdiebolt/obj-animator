@@ -38,7 +38,17 @@ Main
         cube = container
 
       cube
-    
+
+    addMapCubes = (scene) ->
+      [0...10].forEach (x) ->
+        [0...10].forEach (z) ->
+          {cx, cy, cz} = new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
+          
+          clone = cubeMesh().clone()
+          clone.position.set(cx, cy, cz)       
+      
+          scene.add clone
+
     addCharacters = (scene) ->
       x = 0
       z = 0        
@@ -54,16 +64,6 @@ Main
         
         scene.add idle    
   
-    addMapCubes = (scene) ->
-      [0...10].forEach (x) ->
-        [0...10].forEach (z) ->
-          {cx, cy, cz} = new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
-          
-          clone = cubeMesh().clone()
-          clone.position.set(cx, cy, cz)       
-      
-          scene.add clone
-
     manager.onLoad (loadedData) ->
       # TODO: merge here instead of overwrite 
       cachedModels = loadedData 

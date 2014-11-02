@@ -5,12 +5,12 @@ Game Loop
 
     lights = require "./lights"
     util = require "util"
-    
+
     t = 0
     dt = 1 / 60
     started = false
 
-    aspectRatio = 800 / 600
+    aspectRatio = window.innerWidth / window.innerHeight
 
     renderer = new THREE.WebGLRenderer()
     scene = new THREE.Scene()
@@ -19,13 +19,13 @@ Game Loop
     do ->
       util.applyStylesheet require("./style")
       camera.position.set 0, 100, 200
-      
+
       scene.add lights.ambient()
       scene.add lights.directional()
-      
-      renderer.setSize 800, 600 #window.innerWidth, window.innerHeight
-      document.body.appendChild renderer.domElement 
-      
+
+      renderer.setSize window.innerWidth, window.innerHeight
+      document.body.appendChild renderer.domElement
+
     animate = ->
       requestAnimationFrame animate
 
@@ -36,12 +36,12 @@ Game Loop
 
       renderer.render scene, camera
       t += dt
-      
+
     exports.start = ->
       started = true
       animate()
-      
+
       scene
-      
+
     exports.update = (updateFn) ->
       updateFn(t) if started

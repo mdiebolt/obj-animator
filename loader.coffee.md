@@ -9,7 +9,22 @@ Pass in the characters collection when the loading manager finishes
       cb? characters
 
     texture = new THREE.Texture()
-    characters = {}
+    
+```
+  {
+    bartender:
+      idle: [Object3D, Object3D, Object3D, Object3D]
+      walk: [Object3D, ...]
+  }
+  
+  Object3D
+    name: "bartender_idle_0"
+  
+  Object3D
+    name: "bartender_idle_1"
+```
+
+    models = {}
 
 Base path to our game's S3 bucket
 

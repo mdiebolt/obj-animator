@@ -8,67 +8,59 @@ Renderer
     util = require "util"
     util.applyStylesheet require("./style")
 
-    Map = require "./map"
+    Loader = require "./loader"
+    gameLoop = require "./game_loop"
+    
+    cubeMesh = ->
+      geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
 
-    t = 0
-    dt = 1 / 60
+      material = new THREE.MeshBasicMaterial
+        color: 0xfffff
+        wireframe: true
 
-    container = document.createElement "div"
-    document.body.appendChild container
+      return new THREE.Mesh geometry, material
 
-    container.appendChild renderer.domElement
-    renderer.setSize 800, 600 #window.innerWidth, window.innerHeight
+    cube = cubeMesh()
 
-    camera.position.set 0, 100, 200
+    addCubeAt = (position) ->
+      clone = cube.clone()
+      clone.position.set position.x, position.y, position.z
+      scene.add clone
 
     characters = {}
 
-    init = ->
-      addLights()
+    CUBE_SIZE = 10
+    cubePositions = [0...width].map (x) ->
+      [0...depth].map (z) ->
+        new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
+ 
+    Loader.fromObj("items", modelData.items).onLoad (modelData) ->
+      console.log "items", modelData
+ 
+    Loader.fromMesh
+      name: "floor"
+      type: "terrain"
+      mesh: cube
 
-      Map.generateGrid 10, 10, (mapCubes) ->
-        console.log mapCubes
+    Loader.fromObj("terrain", modelData.terrain).onLoad (modelData) ->
+      console.log "terrain", modelData
 
-      Map.populateItems (modelData) ->
-        console.log "items", modelData
+    Loader.fromObj("characters", modelData.characters).onLoad cb (modelData) ->
+      console.log "characters", modelData
+      characters = modelData.characters
 
-      Map.populateTerrain (modelData) ->
-        console.log "terrain", modelData
+      setTimeout ->
+        x = 0
+        z = 0
+        for name, actions of characters
+          idle = actions.idle[0]
+          idle.position.setX(x)
+          idle.position.setZ(z)
+          scene.add(idle)
+          x += 10
+          z += 10
+          gameLoop.start()
+      , 1500
 
-      Map.populateCharacters (modelData) ->
-        console.log "characters", modelData
-        characters = modelData.characters
-
-        setTimeout ->
-          x = 0
-          z = 0
-          for name, actions of characters
-            idle = actions.idle[0]
-            idle.position.setX(x)
-            idle.position.setZ(z)
-            scene.add(idle)
-            x += 10
-            z += 10
-        , 1500
-
-    animate = ->
-      requestAnimationFrame animate
-
-      render()
-
-    addLights = ->
-      ambient = new THREE.AmbientLight 0x101030
-      scene.add ambient
-
-      directionalLight = new THREE.DirectionalLight 0xffeedd
-      directionalLight.position.set 0, 0, 10
-      scene.add directionalLight
-
-    render = ->
-      camera.lookAt scene.position
-
-      renderer.render scene, camera
-      t += dt
-
-    init()
-    animate()
+    gameLoop.update (dt) ->
+      console.log dt

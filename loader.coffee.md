@@ -10,7 +10,7 @@ Pass in the characters collection when the loading manager finishes
 
     texture = new THREE.Texture()
     
-
+<!--
 {
   bartender:
     idle: [Object3D, Object3D, Object3D, Object3D]
@@ -22,7 +22,7 @@ Object3D
 
 Object3D
   name: "bartender_idle_1"
-
+-->
 
     models = {}
 

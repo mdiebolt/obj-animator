@@ -51,7 +51,7 @@ Loader.fromObj <span class="string">"characters"</span>, modelData.characters
 
   keyValues cachedModels.characters, (name, actions) -&gt;         
     <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>]
-      idle.position.set x, <span class="number">0</span>, z
+      idle.position.set x, -<span class="number">5</span>, z
 
       x += <span class="number">10</span>
       z += <span class="number">10</span>
@@ -64,7 +64,7 @@ Loader.fromObj <span class="string">"characters"</span>, modelData.characters
 
   keyValues cachedModels.items, (name, actions) -&gt;
     <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>]
-      idle.position.set x, <span class="number">0</span>, z
+      idle.position.set x, -<span class="number">5</span>, z
 
       x -= <span class="number">10</span>
       z += <span class="number">10</span>

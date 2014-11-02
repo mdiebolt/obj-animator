@@ -14,7 +14,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "main.coffee.md": {
       "path": "main.coffee.md",
-      "content": "Main\n====\n\n    core = require \"core\"\n\n    Loader = require \"./loader\"\n    modelData = require \"./models\"\n\n    cachedModels = {}\n\n    Loader.fromObj \"items\", modelData.items\n    Loader.fromObj \"terrain\", modelData.terrain\n    Loader.fromObj \"characters\", modelData.characters\n\n    addCharacters = (scene) ->\n      x = 0\n      z = 0\n\n      keyValues cachedModels.characters, (name, actions) ->         \n        if idle = actions.idle[0]\n          idle.position.set x, 0, z\n  \n          x += 10\n          z += 10\n  \n          scene.add idle\n\n    addItems = (scene) ->\n      x = 90\n      z = 0\n\n      keyValues cachedModels.items, (name, actions) ->\n        if idle = actions.idle[0]\n          idle.position.set x, 0, z\n  \n          x -= 10\n          z += 10\n  \n          scene.add idle\n\n    Loader.finished (loadedData) ->\n      extend cachedModels, loadedData\n\n      core.init {}, (scene, t, dt) ->\n        addCharacters scene\n        addItems scene\n",
+      "content": "Main\n====\n\n    core = require \"core\"\n\n    Loader = require \"./loader\"\n    modelData = require \"./models\"\n\n    cachedModels = {}\n\n    Loader.fromObj \"items\", modelData.items\n    Loader.fromObj \"terrain\", modelData.terrain\n    Loader.fromObj \"characters\", modelData.characters\n\n    addCharacters = (scene) ->\n      x = 0\n      z = 0\n\n      keyValues cachedModels.characters, (name, actions) ->         \n        if idle = actions.idle[0]\n          idle.position.set x, -5, z\n  \n          x += 10\n          z += 10\n  \n          scene.add idle\n\n    addItems = (scene) ->\n      x = 90\n      z = 0\n\n      keyValues cachedModels.items, (name, actions) ->\n        if idle = actions.idle[0]\n          idle.position.set x, -5, z\n  \n          x -= 10\n          z += 10\n  \n          scene.add idle\n\n    Loader.finished (loadedData) ->\n      extend cachedModels, loadedData\n\n      core.init {}, (scene, t, dt) ->\n        addCharacters scene\n        addItems scene\n",
       "mode": "100644",
       "type": "blob"
     },
@@ -26,7 +26,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "pixie.cson": {
       "path": "pixie.cson",
-      "content": "version: \"0.1.0\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  util: \"distri/util:v0.1.0\"\n  core: \"distri/tactics-core:v0.1.8\"\n",
+      "content": "version: \"0.1.0\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  util: \"distri/util:v0.1.0\"\n  core: \"distri/tactics-core:v0.2.0\"\n",
       "mode": "100644",
       "type": "blob"
     }
@@ -44,7 +44,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "main": {
       "path": "main",
-      "content": "(function() {\n  var Loader, addCharacters, addItems, cachedModels, core, modelData;\n\n  core = require(\"core\");\n\n  Loader = require(\"./loader\");\n\n  modelData = require(\"./models\");\n\n  cachedModels = {};\n\n  Loader.fromObj(\"items\", modelData.items);\n\n  Loader.fromObj(\"terrain\", modelData.terrain);\n\n  Loader.fromObj(\"characters\", modelData.characters);\n\n  addCharacters = function(scene) {\n    var x, z;\n    x = 0;\n    z = 0;\n    return keyValues(cachedModels.characters, function(name, actions) {\n      var idle;\n      if (idle = actions.idle[0]) {\n        idle.position.set(x, 0, z);\n        x += 10;\n        z += 10;\n        return scene.add(idle);\n      }\n    });\n  };\n\n  addItems = function(scene) {\n    var x, z;\n    x = 90;\n    z = 0;\n    return keyValues(cachedModels.items, function(name, actions) {\n      var idle;\n      if (idle = actions.idle[0]) {\n        idle.position.set(x, 0, z);\n        x -= 10;\n        z += 10;\n        return scene.add(idle);\n      }\n    });\n  };\n\n  Loader.finished(function(loadedData) {\n    extend(cachedModels, loadedData);\n    return core.init({}, function(scene, t, dt) {\n      addCharacters(scene);\n      return addItems(scene);\n    });\n  });\n\n}).call(this);\n",
+      "content": "(function() {\n  var Loader, addCharacters, addItems, cachedModels, core, modelData;\n\n  core = require(\"core\");\n\n  Loader = require(\"./loader\");\n\n  modelData = require(\"./models\");\n\n  cachedModels = {};\n\n  Loader.fromObj(\"items\", modelData.items);\n\n  Loader.fromObj(\"terrain\", modelData.terrain);\n\n  Loader.fromObj(\"characters\", modelData.characters);\n\n  addCharacters = function(scene) {\n    var x, z;\n    x = 0;\n    z = 0;\n    return keyValues(cachedModels.characters, function(name, actions) {\n      var idle;\n      if (idle = actions.idle[0]) {\n        idle.position.set(x, -5, z);\n        x += 10;\n        z += 10;\n        return scene.add(idle);\n      }\n    });\n  };\n\n  addItems = function(scene) {\n    var x, z;\n    x = 90;\n    z = 0;\n    return keyValues(cachedModels.items, function(name, actions) {\n      var idle;\n      if (idle = actions.idle[0]) {\n        idle.position.set(x, -5, z);\n        x -= 10;\n        z += 10;\n        return scene.add(idle);\n      }\n    });\n  };\n\n  Loader.finished(function(loadedData) {\n    extend(cachedModels, loadedData);\n    return core.init({}, function(scene, t, dt) {\n      addCharacters(scene);\n      return addItems(scene);\n    });\n  });\n\n}).call(this);\n",
       "type": "blob"
     },
     "models": {
@@ -54,7 +54,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "pixie": {
       "path": "pixie",
-      "content": "module.exports = {\"version\":\"0.1.0\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"util\":\"distri/util:v0.1.0\",\"core\":\"distri/tactics-core:v0.1.8\"}};",
+      "content": "module.exports = {\"version\":\"0.1.0\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"util\":\"distri/util:v0.1.0\",\"core\":\"distri/tactics-core:v0.2.0\"}};",
       "type": "blob"
     }
   },
@@ -279,7 +279,7 @@ window["mdiebolt/obj-animator:master"]({
         },
         "main.coffee.md": {
           "path": "main.coffee.md",
-          "content": "Tactics Core\n============\n\nData structures that make up the core of Tactis Game.\n\n    {applyStylesheet} = require \"util\"\n\n    Threesome = require \"./lib/threesome\"\n\n    module.exports =\n      Character: require \"./character\"\n      Name: require \"./names\"\n\n      init: (data, update) ->\n        applyStylesheet require(\"./style\")\n\n        Threesome.init(data, update)\n",
+          "content": "Tactics Core\n============\n\nData structures that make up the core of Tactis Game.\n\n    {applyStylesheet} = require \"util\"\n\n    Threesome = require \"./lib/threesome\"\n\n    module.exports =\n      Character: require \"./character\"\n      Name: require \"./names\"\n      Loader: require \"./data_loader\"\n      init: (data, update) ->\n        applyStylesheet require(\"./style\")\n\n        Threesome.init(data, update)\n",
           "mode": "100644",
           "type": "blob"
         },
@@ -291,7 +291,7 @@ window["mdiebolt/obj-animator:master"]({
         },
         "pixie.cson": {
           "path": "pixie.cson",
-          "content": "version: \"0.1.8\"\nentryPoint: \"main\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  cornerstone: \"distri/cornerstone:v0.2.6\"\n  spreadsheet: \"distri/gdocs-spreadsheet:v0.1.0\"\n  util: \"distri/util:v0.1.0\"\n",
+          "content": "version: \"0.2.0\"\nentryPoint: \"main\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  cornerstone: \"distri/cornerstone:v0.2.6\"\n  spreadsheet: \"distri/gdocs-spreadsheet:v0.1.0\"\n  util: \"distri/util:v0.1.0\"\n",
           "mode": "100644",
           "type": "blob"
         },
@@ -303,7 +303,7 @@ window["mdiebolt/obj-animator:master"]({
         },
         "test/engine.coffee": {
           "path": "test/engine.coffee",
-          "content": "Engine = require \"../lib/engine\"\n\ndescribe \"engine\", ->\n  it \"should start and stop\", (done) ->\n    engine = Engine({},\n      update: ->\n        engine.stop()\n        done()\n    )\n\n    engine.start()\n\n  it \"should update about 60 times a second\", (done) ->\n    c = 0\n\n    engine = Engine {},\n      update: ->\n        c += 1\n\n    engine.start()\n\n    setTimeout ->\n      console.log c\n      assert c > 50\n      assert c < 70\n      engine.stop()\n      done()\n    , 1000\n",
+          "content": "Engine = require \"../lib/engine\"\n\ndescribe \"engine\", ->\n  it \"should start and stop\", (done) ->\n    engine = Engine({},\n      update: ->\n        engine.stop()\n        done()\n    )\n\n    engine.start()\n\n  it \"should update about 60 times a second\", (done) ->\n    c = 0\n\n    engine = Engine {},\n      update: ->\n        c += 1\n\n    engine.start()\n\n    setTimeout ->\n      console.log c\n      assert c > 58\n      assert c < 62\n      engine.stop()\n      done()\n    , 1000\n",
           "mode": "100644",
           "type": "blob"
         },
@@ -374,7 +374,7 @@ window["mdiebolt/obj-animator:master"]({
         },
         "main": {
           "path": "main",
-          "content": "(function() {\n  var Threesome, applyStylesheet;\n\n  applyStylesheet = require(\"util\").applyStylesheet;\n\n  Threesome = require(\"./lib/threesome\");\n\n  module.exports = {\n    Character: require(\"./character\"),\n    Name: require(\"./names\"),\n    init: function(data, update) {\n      applyStylesheet(require(\"./style\"));\n      return Threesome.init(data, update);\n    }\n  };\n\n}).call(this);\n",
+          "content": "(function() {\n  var Threesome, applyStylesheet;\n\n  applyStylesheet = require(\"util\").applyStylesheet;\n\n  Threesome = require(\"./lib/threesome\");\n\n  module.exports = {\n    Character: require(\"./character\"),\n    Name: require(\"./names\"),\n    Loader: require(\"./data_loader\"),\n    init: function(data, update) {\n      applyStylesheet(require(\"./style\"));\n      return Threesome.init(data, update);\n    }\n  };\n\n}).call(this);\n",
           "type": "blob"
         },
         "names": {
@@ -384,7 +384,7 @@ window["mdiebolt/obj-animator:master"]({
         },
         "pixie": {
           "path": "pixie",
-          "content": "module.exports = {\"version\":\"0.1.8\",\"entryPoint\":\"main\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"cornerstone\":\"distri/cornerstone:v0.2.6\",\"spreadsheet\":\"distri/gdocs-spreadsheet:v0.1.0\",\"util\":\"distri/util:v0.1.0\"}};",
+          "content": "module.exports = {\"version\":\"0.2.0\",\"entryPoint\":\"main\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"cornerstone\":\"distri/cornerstone:v0.2.6\",\"spreadsheet\":\"distri/gdocs-spreadsheet:v0.1.0\",\"util\":\"distri/util:v0.1.0\"}};",
           "type": "blob"
         },
         "test/character": {
@@ -394,7 +394,7 @@ window["mdiebolt/obj-animator:master"]({
         },
         "test/engine": {
           "path": "test/engine",
-          "content": "(function() {\n  var Engine;\n\n  Engine = require(\"../lib/engine\");\n\n  describe(\"engine\", function() {\n    it(\"should start and stop\", function(done) {\n      var engine;\n      engine = Engine({}, {\n        update: function() {\n          engine.stop();\n          return done();\n        }\n      });\n      return engine.start();\n    });\n    return it(\"should update about 60 times a second\", function(done) {\n      var c, engine;\n      c = 0;\n      engine = Engine({}, {\n        update: function() {\n          return c += 1;\n        }\n      });\n      engine.start();\n      return setTimeout(function() {\n        console.log(c);\n        assert(c > 50);\n        assert(c < 70);\n        engine.stop();\n        return done();\n      }, 1000);\n    });\n  });\n\n}).call(this);\n",
+          "content": "(function() {\n  var Engine;\n\n  Engine = require(\"../lib/engine\");\n\n  describe(\"engine\", function() {\n    it(\"should start and stop\", function(done) {\n      var engine;\n      engine = Engine({}, {\n        update: function() {\n          engine.stop();\n          return done();\n        }\n      });\n      return engine.start();\n    });\n    return it(\"should update about 60 times a second\", function(done) {\n      var c, engine;\n      c = 0;\n      engine = Engine({}, {\n        update: function() {\n          return c += 1;\n        }\n      });\n      engine.start();\n      return setTimeout(function() {\n        console.log(c);\n        assert(c > 58);\n        assert(c < 62);\n        engine.stop();\n        return done();\n      }, 1000);\n    });\n  });\n\n}).call(this);\n",
           "type": "blob"
         },
         "test/loading": {
@@ -441,14 +441,14 @@ window["mdiebolt/obj-animator:master"]({
       "progenitor": {
         "url": "http://www.danielx.net/editor/"
       },
-      "version": "0.1.8",
+      "version": "0.2.0",
       "entryPoint": "main",
       "remoteDependencies": [
         "https://code.jquery.com/jquery-1.10.1.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js"
       ],
       "repository": {
-        "branch": "v0.1.8",
+        "branch": "v0.2.0",
         "default_branch": "master",
         "full_name": "distri/tactics-core",
         "homepage": null,

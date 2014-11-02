@@ -43,8 +43,7 @@ cachedModels = {}
 
 Loader.fromObj <span class="string">"items"</span>, modelData.items
 Loader.fromObj <span class="string">"terrain"</span>, modelData.terrain
-
-manager = Loader.fromObj <span class="string">"characters"</span>, modelData.characters
+Loader.fromObj <span class="string">"characters"</span>, modelData.characters
 
 <span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
   x = <span class="number">0</span>
@@ -72,7 +71,7 @@ manager = Loader.fromObj <span class="string">"characters"</span>, modelData.cha
 
       scene.add idle
 
-manager.onLoad (loadedData) -&gt;
+Loader.finished (loadedData) -&gt;
   extend cachedModels, loadedData
 
   core.init {}, (scene, t, dt) -&gt;

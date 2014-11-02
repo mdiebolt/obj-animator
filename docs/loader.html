@@ -122,14 +122,13 @@ exports.<span class="function"><span class="title">fromObj</span></span> = (name
   <span class="keyword">return</span> manager
 
 exports.<span class="function"><span class="title">fromMesh</span></span> = (data={}) -&gt;
-  {name, mesh} = data
+  {mesh, name, type} = data
 
   obj3D = <span class="keyword">new</span> THREE.Object3D()
   obj3D.name = name
   obj3D.add mesh
-  obj3D.name = data.name
 
-  models[data.type][name] =
+  models[type][name] =
     idle: [obj3D]
 
   <span class="keyword">return</span> manager</code></pre>

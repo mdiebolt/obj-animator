@@ -44,7 +44,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "characters.coffee.md": {
       "path": "characters.coffee.md",
-      "content": "Characters\n==========\n\nCharacter data for rendering\n \n    module.exports =\n      bartender:\n        idle: [\"bartender\"]\n        wink: [\"bartender_wink_0\"]\n      robo_sheriff:\n        idle: [\"robot_sheriff\"]\n      cactus:\n        idle: [\"cactus\"]\n      arrow:\n        idle: [\"arrow\"]\n      beam_sword: \n        idle: [\"beam_sword_idle_0\"]\n        grow: [\n          \"beam_sword_grow_0\"\n          \"beam_sword_grow_1\"\n          \"beam_sword_grow_2\"\n          \"beam_sword_grow_3\"\n        ]\n      branding_iron: \n        idle: [\"branding_iron\"]\n      character:\n        idle: [\"character\"]\n      gun: \n        idle: [\"gun\"]\n      hoverboard:\n        idle: [\"hoverboard\"]\n      jetpack_bandit:\n        idle: [\"jetpack_bandit\"]",
+      "content": "Characters\n==========\n\nCharacter data for rendering\n \n    module.exports =\n      bartender:\n        idle: [\"bartender\"]\n        wink: [\"bartender_wink_0\"]\n      robo_sheriff:\n        idle: [\"robo_sheriff\"]\n      cactus:\n        idle: [\"cactus\"]\n      arrow:\n        idle: [\"arrow\"]\n      beam_sword: \n        idle: [\"beam_sword_idle_0\"]\n        grow: [\n          \"beam_sword_grow_0\"\n          \"beam_sword_grow_1\"\n          \"beam_sword_grow_2\"\n          \"beam_sword_grow_3\"\n        ]\n      branding_iron: \n        idle: [\"branding_iron\"]\n      character:\n        idle: [\"character\"]\n      gun: \n        idle: [\"gun\"]\n      hoverboard:\n        idle: [\"hoverboard\"]\n      jetpack_bandit:\n        idle: [\"jetpack_bandit\"]",
       "mode": "100644"
     }
   },
@@ -86,7 +86,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "characters": {
       "path": "characters",
-      "content": "(function() {\n  module.exports = {\n    bartender: {\n      idle: [\"bartender\"],\n      wink: [\"bartender_wink_0\"]\n    },\n    robo_sheriff: {\n      idle: [\"robot_sheriff\"]\n    },\n    cactus: {\n      idle: [\"cactus\"]\n    },\n    arrow: {\n      idle: [\"arrow\"]\n    },\n    beam_sword: {\n      idle: [\"beam_sword_idle_0\"],\n      grow: [\"beam_sword_grow_0\", \"beam_sword_grow_1\", \"beam_sword_grow_2\", \"beam_sword_grow_3\"]\n    },\n    branding_iron: {\n      idle: [\"branding_iron\"]\n    },\n    character: {\n      idle: [\"character\"]\n    },\n    gun: {\n      idle: [\"gun\"]\n    },\n    hoverboard: {\n      idle: [\"hoverboard\"]\n    },\n    jetpack_bandit: {\n      idle: [\"jetpack_bandit\"]\n    }\n  };\n\n}).call(this);\n",
+      "content": "(function() {\n  module.exports = {\n    bartender: {\n      idle: [\"bartender\"],\n      wink: [\"bartender_wink_0\"]\n    },\n    robo_sheriff: {\n      idle: [\"robo_sheriff\"]\n    },\n    cactus: {\n      idle: [\"cactus\"]\n    },\n    arrow: {\n      idle: [\"arrow\"]\n    },\n    beam_sword: {\n      idle: [\"beam_sword_idle_0\"],\n      grow: [\"beam_sword_grow_0\", \"beam_sword_grow_1\", \"beam_sword_grow_2\", \"beam_sword_grow_3\"]\n    },\n    branding_iron: {\n      idle: [\"branding_iron\"]\n    },\n    character: {\n      idle: [\"character\"]\n    },\n    gun: {\n      idle: [\"gun\"]\n    },\n    hoverboard: {\n      idle: [\"hoverboard\"]\n    },\n    jetpack_bandit: {\n      idle: [\"jetpack_bandit\"]\n    }\n  };\n\n}).call(this);\n",
       "type": "blob"
     }
   },

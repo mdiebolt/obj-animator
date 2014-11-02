@@ -10,8 +10,7 @@ Main
 
     Loader.fromObj "items", modelData.items
     Loader.fromObj "terrain", modelData.terrain
-    
-    manager = Loader.fromObj "characters", modelData.characters
+    Loader.fromObj "characters", modelData.characters
 
     addCharacters = (scene) ->
       x = 0
@@ -39,7 +38,7 @@ Main
   
           scene.add idle
 
-    manager.onLoad (loadedData) ->
+    Loader.finished (loadedData) ->
       extend cachedModels, loadedData
 
       core.init {}, (scene, t, dt) ->

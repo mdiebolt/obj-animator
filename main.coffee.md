@@ -16,6 +16,9 @@ Renderer
     renderer.setSize 800, 600 #window.innerWidth, window.innerHeight
 
     camera.position.set 0, 100, 200
+    
+    characters = []
+    framesElapsed = 0
 
     init = ->
       addLights()
@@ -23,11 +26,16 @@ Renderer
       map.generateGrid 10, 10, (mapCubes) ->
         console.log mapCubes
 
-      map.populateCharacters (characters) ->
-        console.log characters
+      map.populateCharacters (c) ->
+        characters = c
 
     animate = ->
+      framesElapsed += 1
       requestAnimationFrame animate
+      
+      characters.forEach (c) ->
+        debugger
+      
       render()
 
     addLights = ->

@@ -15,16 +15,6 @@ Base path to our game's S3 bucket
 
     BUCKET_PATH = "https://s3.amazonaws.com/distri-tactics"
 
-Let us know how far along things are when loading a .obj model.
-
-    onProgress = (xhr) ->
-      if xhr.lengthComputable
-        percentComplete = xhr.loaded / xhr.total * 100
-        console.log "#{Math.round(percentComplete, 2)}% downloaded"
-
-    onError = (xhr) ->
-      console.error xhr
-
 We're sharing the same palette across all of our models.
 Load up one from an arbitrary model we use.
 
@@ -58,20 +48,16 @@ Load a model by name, passing in an optional position.
                 for animationName, frames of animation
                   frames.forEach (frame) ->
                     loader.load "#{BUCKET_PATH}/#{frame}.obj", (frameModel) ->
+                      frameModel.name = "#{animationName}_#{frame}"
+                    
                       frameModel.traverse (c) ->
                         if c instanceof THREE.Mesh
                           c.material.map = texture
 
                           parent.add frameModel
 
-                      , onProgress
-                      , onError
-
               parent.add defaultModel
               characters.push parent
               scene.add parent
-
-          , onProgress
-          , onError
 
       return manager

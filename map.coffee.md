@@ -4,7 +4,7 @@ Map
 Generate a simple map, populating it with a cube floor and characters.
 
     Loader = require "./loader"
-    modelData = require "./characters"
+    modelData = require "./models"
 
     CUBE_SIZE = 10
 

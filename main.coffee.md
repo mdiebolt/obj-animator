@@ -17,7 +17,7 @@ Main
 
     manager = Loader.fromObj("characters", modelData.characters)
 
-    cubeMesh = ->
+    cubeModel = ->
       geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
 
       material = new THREE.MeshBasicMaterial
@@ -25,7 +25,7 @@ Main
         wireframe: true
 
       if cachedModels.terrain?.floor?.idle?
-        cube = cachedModels.terrain.floor.idle
+        cube = cachedModels.terrain.floor.idle[0]
       else
         container = new THREE.Object3D()
         mesh = new THREE.Mesh geometry, material
@@ -35,17 +35,17 @@ Main
         cachedModels.terrain.floor ||= {}
         cachedModels.terrain.floor.idle = [container] 
         
-        cube = container
+        cube = cachedModels.terrain.floor.idle[0]
 
       cube
 
     addMapCubes = (scene) ->
       [0...10].forEach (x) ->
         [0...10].forEach (z) ->
-          {cx, cy, cz} = new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
+          p = new THREE.Vector3(x * CUBE_SIZE, -CUBE_SIZE / 2, z * CUBE_SIZE)
           
-          clone = cubeMesh().clone()
-          clone.position.set(cx, cy, cz)       
+          clone = cubeModel().clone()
+          clone.position.set(p.x, p.y, p.z)
       
           scene.add clone
 

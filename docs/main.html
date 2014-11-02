@@ -45,8 +45,7 @@ Loader.fromObj <span class="string">"items"</span>, modelData.items
 Loader.fromObj <span class="string">"terrain"</span>, modelData.terrain
 Loader.fromObj <span class="string">"characters"</span>, modelData.characters
 
-core.Loader.characters().<span class="keyword">then</span> (data) -&gt;
-  console.log data
+core.Loader.get()
 
 <span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
   x = <span class="number">0</span>
@@ -75,11 +74,15 @@ core.Loader.characters().<span class="keyword">then</span> (data) -&gt;
       scene.add idle
 
 Loader.finished (loadedData) -&gt;
-  extend cachedModels, loadedData
+  core.Loader.get().<span class="keyword">then</span> (spreadsheetData) -&gt;
+    console.log loadedData
+    console.log spreadsheetData
 
-  core.init {}, (scene, t, dt) -&gt;
-    addCharacters scene
-    addItems scene</code></pre>
+    extend cachedModels, loadedData
+
+    core.init {}, (scene, t, dt) -&gt;
+      addCharacters scene
+      addItems scene</code></pre>
 </div>
         </li>
         

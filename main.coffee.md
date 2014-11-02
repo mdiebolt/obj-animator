@@ -18,7 +18,7 @@ Renderer
     camera.position.set 0, 100, 200
     
     characters = []
-    framesElapsed = 0
+    lastAnimated = +new Date()
 
     init = ->
       addLights()
@@ -30,17 +30,20 @@ Renderer
         characters = c
 
     animate = ->
-      framesElapsed += 1
       requestAnimationFrame animate
       
-      if framesElapsed = 6000
-        framesElapsed = 0
+      render()
+
+    animateCharacters = ->
+      now = +new Date()
+      
+      if now - lastAnimated > 1000
+        lastAnimated = now
+    
         characters.forEach (c) ->
           if c.name is "bartender"
             c.children[0].visible = !c.children[0].visible
             c.children[1].visible = !c.children[1].visible
-
-      render()
 
     addLights = ->
       ambient = new THREE.AmbientLight 0x101030
@@ -51,6 +54,8 @@ Renderer
       scene.add directionalLight
 
     render = ->
+      animateCharacters()
+    
       camera.lookAt scene.position
 
       renderer.render scene, camera

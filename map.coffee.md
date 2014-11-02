@@ -36,7 +36,7 @@ Create a basic floor of dimension `size`
         cb mapCubes
 
 Load all the characters. Provide a callback that receives an array
-of the characters when they're done loading.
+of the characters when they're done loading. 
 
       populateCharacters: (cb) ->
         Loader.fromObj(characterData).onLoad cb

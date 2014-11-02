@@ -73,6 +73,7 @@ Load a model by name, passing in an optional position.
       obj3D.add geometry
       obj3D.name = data.name
       
-      models[name].idle = [obj3D]
+      models[name] =
+        idle: [obj3D]
       
       return manager 

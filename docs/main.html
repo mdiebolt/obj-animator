@@ -41,10 +41,10 @@ modelData = require <span class="string">"./models"</span>
 
 cachedModels = {}
 
-Loader.fromObj(<span class="string">"items"</span>, modelData.items)
-Loader.fromObj(<span class="string">"terrain"</span>, modelData.terrain)
+Loader.fromObj <span class="string">"items"</span>, modelData.items
+Loader.fromObj <span class="string">"terrain"</span>, modelData.terrain
 
-manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.characters)
+manager = Loader.fromObj <span class="string">"characters"</span>, modelData.characters
 
 <span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
   x = <span class="number">0</span>
@@ -54,8 +54,7 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
     actions = cachedModels.characters[name]
 
     <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>]
-      idle.position.setX(x)
-      idle.position.setZ(z)
+      idle.position.set x, <span class="number">0</span>, z
 
       x += <span class="number">10</span>
       z += <span class="number">10</span>
@@ -70,8 +69,7 @@ manager = Loader.fromObj(<span class="string">"characters"</span>, modelData.cha
     actions = cachedModels.items[name]
 
     <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>]
-      idle.position.setX(x)
-      idle.position.setZ(z)
+      idle.position.set x, <span class="number">0</span>, z
 
       x -= <span class="number">10</span>
       z += <span class="number">10</span>

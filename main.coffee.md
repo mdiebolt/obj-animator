@@ -12,8 +12,7 @@ Main
     Loader.fromObj "terrain", modelData.terrain
     Loader.fromObj "characters", modelData.characters
     
-    core.Loader.characters().then (data) ->
-      console.log data
+    core.Loader.get()
 
     addCharacters = (scene) ->
       x = 0
@@ -42,8 +41,12 @@ Main
           scene.add idle
 
     Loader.finished (loadedData) ->
-      extend cachedModels, loadedData
-
-      core.init {}, (scene, t, dt) ->
-        addCharacters scene
-        addItems scene
+      core.Loader.get().then (spreadsheetData) ->
+        console.log loadedData
+        console.log spreadsheetData
+      
+        extend cachedModels, loadedData
+  
+        core.init {}, (scene, t, dt) ->
+          addCharacters scene
+          addItems scene

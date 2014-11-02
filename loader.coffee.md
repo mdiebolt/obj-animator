@@ -74,7 +74,7 @@ Load up one from an arbitrary model we use.
               actionFrames.push obj3D
 
       return cache
-    
+        
     exports.finished = (cb) ->
       manager.onLoad cb
         

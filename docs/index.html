@@ -73,16 +73,15 @@ core.Loader.get()
 
       scene.add idle
 
-Loader.finished (loadedData) -&gt;
-  core.Loader.get().<span class="keyword">then</span> (spreadsheetData) -&gt;
-    console.log loadedData
-    console.log spreadsheetData
+$.<span class="keyword">when</span>(Loader.finished(), core.Loader.get()).<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
+  console.log modelData
+  console.log spreadsheetData
 
-    extend cachedModels, loadedData
+  extend cachedModels, modelData
 
-    core.init {}, (scene, t, dt) -&gt;
-      addCharacters scene
-      addItems scene</code></pre>
+  core.init {}, (scene, t, dt) -&gt;
+    addCharacters scene
+    addItems scene</code></pre>
 </div>
         </li>
         

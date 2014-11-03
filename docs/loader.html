@@ -114,7 +114,9 @@ Its structure looks like this.</p>
 Load up one from an arbitrary model we use.</p>
 
             </div>
-            <div class="content"><pre><code class="lang-coffeescript"><span class="keyword">do</span> -&gt;
+            <div class="content"><pre><code class="lang-coffeescript">deferred = $.Deferred()
+
+<span class="keyword">do</span> -&gt;
   loader = <span class="keyword">new</span> THREE.ImageLoader(manager)
   loader.crossOrigin = <span class="literal">true</span>
 
@@ -142,8 +144,11 @@ exports.<span class="function"><span class="title">fromObj</span></span> = (name
 
   <span class="keyword">return</span> cache
 
-exports.<span class="function"><span class="title">finished</span></span> = (cb) -&gt;
-  manager.onLoad cb</code></pre>
+exports.<span class="function"><span class="title">finished</span></span> = -&gt;
+  manager.onLoad -&gt;
+    deferred.resolveWith <span class="keyword">this</span>, [models]
+
+  deferred</code></pre>
 </div>
         </li>
         

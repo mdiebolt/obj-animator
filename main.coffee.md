@@ -10,6 +10,8 @@ Main
 
     cachedModels = {}
     spreadsheetAttributes = {}
+    
+    addedToScene = false
 
     Loader.fromObj "items", modelData.items
     Loader.fromObj "terrain", modelData.terrain
@@ -49,7 +51,7 @@ Main
       spreadsheetAttributes.Characters.forEach (character) ->
         if character.name is "Bartender"
           bartender ||= GameObject(extend character, {cachedModels: cachedModels})
-          bartender.move(0.1, 0.1)
+          bartender.move(0, 0.1)
 
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->
@@ -60,7 +62,10 @@ Main
       extend spreadsheetAttributes, spreadsheetData
       
       core.init {}, (scene, t, dt) ->
-        addCharacters scene
-        addItems scene
+        unless addedToScene
+          addCharacters scene
+          addItems scene
+          
+          addedToScene = true
         
         updateCharacters()

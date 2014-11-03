@@ -195,6 +195,11 @@
       "content": "version: \"0.1.0\"\nremoteDependencies: [\n  \"https://code.jquery.com/jquery-1.10.1.min.js\"\n  \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"\n]\ndependencies:\n  util: \"distri/util:v0.1.0\"\n  core: \"distri/tactics-core:v0.2.1\"\n",
       "mode": "100644",
       "type": "blob"
+    },
+    "game_object.coffee.md": {
+      "path": "game_object.coffee.md",
+      "content": "Game Object\n===========\n\nManage character data and its state\n\n    GameObject = (I={}) ->\n      defaults I,\n        active: true\n        state: \"idle\"\n      \n      self = \n        move: (x, z) ->\n          keyValues I.cachedModels.characters, (name, actions) ->\n            if name is I.name\n              if idle = actions.idle[0]\n                x = idle.position.x\n                z = idle.position.z\n                \n                idle.position.setX x\n                idle.position.setZ z",
+      "mode": "100644"
     }
   },
   "distribution": {
@@ -221,6 +226,11 @@
     "pixie": {
       "path": "pixie",
       "content": "module.exports = {\"version\":\"0.1.0\",\"remoteDependencies\":[\"https://code.jquery.com/jquery-1.10.1.min.js\",\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js\"],\"dependencies\":{\"util\":\"distri/util:v0.1.0\",\"core\":\"distri/tactics-core:v0.2.1\"}};",
+      "type": "blob"
+    },
+    "game_object": {
+      "path": "game_object",
+      "content": "(function() {\n  var GameObject;\n\n  GameObject = function(I) {\n    var self;\n    if (I == null) {\n      I = {};\n    }\n    defaults(I, {\n      active: true,\n      state: \"idle\"\n    });\n    return self = {\n      move: function(x, z) {\n        return keyValues(I.cachedModels.characters, function(name, actions) {\n          var idle;\n          if (name === I.name) {\n            if (idle = actions.idle[0]) {\n              x = idle.position.x;\n              z = idle.position.z;\n              idle.position.setX(x);\n              return idle.position.setZ(z);\n            }\n          }\n        });\n      }\n    };\n  };\n\n}).call(this);\n",
       "type": "blob"
     }
   },

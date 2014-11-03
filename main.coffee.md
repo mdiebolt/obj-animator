@@ -7,6 +7,7 @@ Main
     modelData = require "./models"
 
     cachedModels = {}
+    characterAttributes = {}
 
     Loader.fromObj "items", modelData.items
     Loader.fromObj "terrain", modelData.terrain
@@ -40,11 +41,13 @@ Main
   
           scene.add idle
 
-    $.when(Loader.finished(), core.Loader.get()).then (modelData, spreadsheetData) ->
+    $.when(Loader.finished(), core.Loader.get())
+    .then (modelData, spreadsheetData) ->
       console.log modelData
       console.log spreadsheetData
     
       extend cachedModels, modelData
+      extend characterAttributes, spreadsheetData
 
       core.init {}, (scene, t, dt) ->
         addCharacters scene

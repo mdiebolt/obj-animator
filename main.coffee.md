@@ -5,9 +5,11 @@ Main
 
     Loader = require "./loader"
     modelData = require "./models"
+    
+    GameObject = require "./game_object"
 
     cachedModels = {}
-    characterAttributes = {}
+    spreadsheetAttributes = {}
 
     Loader.fromObj "items", modelData.items
     Loader.fromObj "terrain", modelData.terrain
@@ -41,14 +43,23 @@ Main
   
           scene.add idle
 
+    updateCharacters = ->
+      spreadsheetAttributes.Characters.forEach (character) ->
+        if character.name is "Bartender"
+          attrs = extend character, {cachedModels: cachedModels}
+          bartender = GameObject(character)
+          bartender.move(1, 1)
+
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->
       console.log modelData
       console.log spreadsheetData
     
       extend cachedModels, modelData
-      extend characterAttributes, spreadsheetData
-
+      extend spreadsheetAttributes, spreadsheetData
+      
       core.init {}, (scene, t, dt) ->
         addCharacters scene
         addItems scene
+        
+        updateCharacters()

@@ -17,6 +17,8 @@ Main
     
     core.Loader.get()
 
+    bartender = null
+
     addCharacters = (scene) ->
       x = 0
       z = 0
@@ -46,9 +48,8 @@ Main
     updateCharacters = ->
       spreadsheetAttributes.Characters.forEach (character) ->
         if character.name is "Bartender"
-          attrs = extend character, {cachedModels: cachedModels}
-          bartender = GameObject(character)
-          bartender.move(1, 1)
+          bartender ||= GameObject(extend character, {cachedModels: cachedModels})
+          bartender.move(0.1, 0.1)
 
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->

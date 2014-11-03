@@ -3,7 +3,7 @@ Game Object
 
 Manage character data and its state
 
-    GameObject = (I={}) ->
+    module.exports = (I={}) ->
       defaults I,
         active: true
         state: "idle"
@@ -18,3 +18,4 @@ Manage character data and its state
                 
                 idle.position.setX x
                 idle.position.setZ z
+                

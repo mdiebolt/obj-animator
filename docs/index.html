@@ -40,6 +40,7 @@ Loader = require <span class="string">"./loader"</span>
 modelData = require <span class="string">"./models"</span>
 
 cachedModels = {}
+characterAttributes = {}
 
 Loader.fromObj <span class="string">"items"</span>, modelData.items
 Loader.fromObj <span class="string">"terrain"</span>, modelData.terrain
@@ -73,11 +74,13 @@ core.Loader.get()
 
       scene.add idle
 
-$.<span class="keyword">when</span>(Loader.finished(), core.Loader.get()).<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
+$.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
+.<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
   console.log modelData
   console.log spreadsheetData
 
   extend cachedModels, modelData
+  extend characterAttributes, spreadsheetData
 
   core.init {}, (scene, t, dt) -&gt;
     addCharacters scene

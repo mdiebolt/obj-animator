@@ -62,6 +62,8 @@ Main
       extend spreadsheetAttributes, spreadsheetData
       
       core.init {}, (scene, t, dt) ->
+        # Need this hack to prevent adding stuff to the scene each frame
+        # adding to the scene each frame resets the model position
         unless addedToScene
           addCharacters scene
           addItems scene

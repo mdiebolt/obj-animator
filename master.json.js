@@ -32,7 +32,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "game_object.coffee.md": {
       "path": "game_object.coffee.md",
-      "content": "Game Object\n===========\n\nManage character data and its state\n\n    GameObject = (I={}) ->\n      defaults I,\n        active: true\n        state: \"idle\"\n      \n      self = \n        move: (x, z) ->\n          keyValues I.cachedModels.characters, (name, actions) ->\n            if name is I.name\n              if idle = actions.idle[0]\n                x = idle.position.x\n                z = idle.position.z\n                \n                idle.position.setX x\n                idle.position.setZ z",
+      "content": "Game Object\n===========\n\nManage character data and its state\n\n    module.exports = (I={}) ->\n      defaults I,\n        active: true\n        state: \"idle\"\n      \n      self = \n        move: (x, z) ->\n          keyValues I.cachedModels.characters, (name, actions) ->\n            if name is I.name\n              if idle = actions.idle[0]\n                x = idle.position.x\n                z = idle.position.z\n                \n                idle.position.setX x\n                idle.position.setZ z\n                ",
       "mode": "100644"
     }
   },
@@ -64,7 +64,7 @@ window["mdiebolt/obj-animator:master"]({
     },
     "game_object": {
       "path": "game_object",
-      "content": "(function() {\n  var GameObject;\n\n  GameObject = function(I) {\n    var self;\n    if (I == null) {\n      I = {};\n    }\n    defaults(I, {\n      active: true,\n      state: \"idle\"\n    });\n    return self = {\n      move: function(x, z) {\n        return keyValues(I.cachedModels.characters, function(name, actions) {\n          var idle;\n          if (name === I.name) {\n            if (idle = actions.idle[0]) {\n              x = idle.position.x;\n              z = idle.position.z;\n              idle.position.setX(x);\n              return idle.position.setZ(z);\n            }\n          }\n        });\n      }\n    };\n  };\n\n}).call(this);\n",
+      "content": "(function() {\n  module.exports = function(I) {\n    var self;\n    if (I == null) {\n      I = {};\n    }\n    defaults(I, {\n      active: true,\n      state: \"idle\"\n    });\n    return self = {\n      move: function(x, z) {\n        return keyValues(I.cachedModels.characters, function(name, actions) {\n          var idle;\n          if (name === I.name) {\n            if (idle = actions.idle[0]) {\n              x = idle.position.x;\n              z = idle.position.z;\n              idle.position.setX(x);\n              return idle.position.setZ(z);\n            }\n          }\n        });\n      }\n    };\n  };\n\n}).call(this);\n",
       "type": "blob"
     }
   },

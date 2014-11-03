@@ -95,6 +95,8 @@ $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
   extend spreadsheetAttributes, spreadsheetData
 
   core.init {}, (scene, t, dt) -&gt;
+    <span class="comment"># Need this hack to prevent adding stuff to the scene each frame</span>
+    <span class="comment"># adding to the scene each frame resets the model position</span>
     <span class="keyword">unless</span> addedToScene
       addCharacters scene
       addItems scene

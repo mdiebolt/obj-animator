@@ -48,7 +48,7 @@ Main
           scene.add idle
 
     updateCharacters = ->
-      spreadsheetAttributes.Characters.forEach (character) ->
+      spreadsheetAttributes.characters.forEach (character) ->
         if character.name is "Bartender"
           bartender ||= GameObject(extend character, {cachedModels: cachedModels})
           bartender.move(0, 0.1)

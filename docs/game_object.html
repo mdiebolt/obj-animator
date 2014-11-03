@@ -45,11 +45,11 @@
       keyValues I.cachedModels.characters, (name, actions) -&gt;
         <span class="keyword">if</span> name <span class="keyword">is</span> I.name.toLowerCase()
           <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>]
+            <span class="keyword">debugger</span>
             x = idle.position.x + byX
             z = idle.position.z + byZ
 
-            idle.position.setX x
-            idle.position.setZ z</code></pre>
+            idle.position.set x, <span class="number">5</span>, z</code></pre>
 </div>
         </li>
         

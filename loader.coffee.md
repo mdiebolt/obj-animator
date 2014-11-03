@@ -47,6 +47,8 @@ Base path to our game's S3 bucket
 We're sharing the same palette across all of our models.
 Load up one from an arbitrary model we use.
 
+    deferred = $.Deferred()
+
     do ->
       loader = new THREE.ImageLoader(manager)
       loader.crossOrigin = true
@@ -75,6 +77,9 @@ Load up one from an arbitrary model we use.
 
       return cache
         
-    exports.finished = (cb) ->
-      manager.onLoad cb
+    exports.finished = ->
+      manager.onLoad ->
+        deferred.resolveWith this, [models]
+      
+      deferred
         

@@ -40,13 +40,12 @@ Main
   
           scene.add idle
 
-    Loader.finished (loadedData) ->
-      core.Loader.get().then (spreadsheetData) ->
-        console.log loadedData
-        console.log spreadsheetData
-      
-        extend cachedModels, loadedData
-  
-        core.init {}, (scene, t, dt) ->
-          addCharacters scene
-          addItems scene
+    $.when(Loader.finished(), core.Loader.get()).then (modelData, spreadsheetData) ->
+      console.log modelData
+      console.log spreadsheetData
+    
+      extend cachedModels, modelData
+
+      core.init {}, (scene, t, dt) ->
+        addCharacters scene
+        addItems scene

@@ -104,8 +104,7 @@ $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
   extend cachedModels, modelData
   extend spreadsheetAttributes, spreadsheetData
 
-  <span class="comment"># TODO: fix t. Right now it only returns 0</span>
-  core.init {}, (scene, _, dt) -&gt;
+  core.init {}, (scene, t, dt) -&gt;
     <span class="comment"># Need this hack to prevent adding stuff to the scene each frame</span>
     <span class="comment"># adding to the scene each frame resets the model position</span>
     <span class="keyword">unless</span> addedToScene
@@ -114,8 +113,7 @@ $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
 
       addedToScene = <span class="literal">true</span>
 
-    updateCharacters scene, t, dt
-    t += dt</code></pre>
+    updateCharacters scene, t, dt</code></pre>
 </div>
         </li>
         

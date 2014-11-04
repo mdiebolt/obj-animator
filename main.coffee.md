@@ -47,11 +47,14 @@ Main
 
           scene.add idle
 
-    updateCharacters = ->
+    updateCharacters = (scene) ->
       spreadsheetAttributes.characters.forEach (character) ->
         if character.name is "Bartender"
           bartender ||= GameObject(extend character, {cachedModels: cachedModels})
           bartender.move(0, 0.1)
+        
+      scene.traverse (child) ->
+        console.log child.name
         
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->
@@ -70,4 +73,4 @@ Main
 
           addedToScene = true
 
-        updateCharacters()
+        updateCharacters scene

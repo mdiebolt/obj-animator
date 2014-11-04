@@ -93,8 +93,7 @@ bartender = <span class="literal">null</span>
 
       obj = idleFrames.wrap((t / <span class="number">0.25</span>).floor())
       child.children[<span class="number">0</span>].geometry.dynamic = <span class="literal">true</span>
-      child.children[<span class="number">0</span>].geometry = obj.children[<span class="number">0</span>].geometry
-      child.children[<span class="number">0</span>].geometry.verticesNeedUpdate = <span class="literal">true</span>
+      child.children[<span class="number">0</span>] = obj.children[<span class="number">0</span>]
 
 $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
 .<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;

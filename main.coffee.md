@@ -8,6 +8,7 @@ Main
 
     GameObject = require "./game_object"
 
+    t = 0
     cachedModels = {}
     spreadsheetAttributes = {}
 
@@ -47,14 +48,20 @@ Main
 
           scene.add idle
 
-    updateCharacters = (scene) ->
+    updateCharacters = (scene, t, dt) ->
       spreadsheetAttributes.characters.forEach (character) ->
         if character.name is "Bartender"
           bartender ||= GameObject(extend character, {cachedModels: cachedModels})
           bartender.move(0, 0.1)
         
-      scene.traverse (child) ->
-        console.log child.name
+      scene.children.forEach (child) ->
+        if child.name is "robo_sheriff"
+          idleFrames = cachedModels.characters.robo_sheriff.idle
+          
+          obj = idleFrames.wrap((t / 0.25).floor())
+          child.children[0].geometry.dynamic = true
+          child.children[0].geometry = obj.children[0].geometry
+          child.children[0].geometry.verticesNeedUpdate = true
         
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->
@@ -64,7 +71,8 @@ Main
       extend cachedModels, modelData
       extend spreadsheetAttributes, spreadsheetData
 
-      core.init {}, (scene, t, dt) ->
+      # TODO: fix t. Right now it only returns 0
+      core.init {}, (scene, _, dt) ->
         # Need this hack to prevent adding stuff to the scene each frame
         # adding to the scene each frame resets the model position
         unless addedToScene
@@ -73,4 +81,5 @@ Main
 
           addedToScene = true
 
-        updateCharacters scene
+        updateCharacters scene, t, dt
+        t += dt

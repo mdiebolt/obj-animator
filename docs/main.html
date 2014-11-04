@@ -80,11 +80,14 @@ bartender = <span class="literal">null</span>
 
       scene.add idle
 
-<span class="function"><span class="title">updateCharacters</span></span> = -&gt;
+<span class="function"><span class="title">updateCharacters</span></span> = (scene) -&gt;
   spreadsheetAttributes.characters.forEach (character) -&gt;
     <span class="keyword">if</span> character.name <span class="keyword">is</span> <span class="string">"Bartender"</span>
       bartender ||= GameObject(extend character, {cachedModels: cachedModels})
       bartender.move(<span class="number">0</span>, <span class="number">0.1</span>)
+
+  scene.traverse (child) -&gt;
+    console.log child.name
 
 $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
 .<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
@@ -103,7 +106,7 @@ $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
 
       addedToScene = <span class="literal">true</span>
 
-    updateCharacters()</code></pre>
+    updateCharacters scene</code></pre>
 </div>
         </li>
         

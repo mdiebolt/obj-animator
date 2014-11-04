@@ -60,8 +60,7 @@ Main
 
           obj = idleFrames.wrap((t / 0.25).floor())
           child.children[0].geometry.dynamic = true
-          child.children[0].geometry = obj.children[0].geometry
-          child.children[0].geometry.verticesNeedUpdate = true
+          child.children[0] = obj.children[0]
 
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->

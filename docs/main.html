@@ -41,6 +41,7 @@ modelData = require <span class="string">"./models"</span>
 
 GameObject = require <span class="string">"./game_object"</span>
 
+t = <span class="number">0</span>
 cachedModels = {}
 spreadsheetAttributes = {}
 
@@ -80,14 +81,20 @@ bartender = <span class="literal">null</span>
 
       scene.add idle
 
-<span class="function"><span class="title">updateCharacters</span></span> = (scene) -&gt;
+<span class="function"><span class="title">updateCharacters</span></span> = (scene, t, dt) -&gt;
   spreadsheetAttributes.characters.forEach (character) -&gt;
     <span class="keyword">if</span> character.name <span class="keyword">is</span> <span class="string">"Bartender"</span>
       bartender ||= GameObject(extend character, {cachedModels: cachedModels})
       bartender.move(<span class="number">0</span>, <span class="number">0.1</span>)
 
-  scene.traverse (child) -&gt;
-    console.log child.name
+  scene.children.forEach (child) -&gt;
+    <span class="keyword">if</span> child.name <span class="keyword">is</span> <span class="string">"robo_sheriff"</span>
+      idleFrames = cachedModels.characters.robo_sheriff.idle
+
+      obj = idleFrames.wrap((t / <span class="number">0.25</span>).floor())
+      child.children[<span class="number">0</span>].geometry.dynamic = <span class="literal">true</span>
+      child.children[<span class="number">0</span>].geometry = obj.children[<span class="number">0</span>].geometry
+      child.children[<span class="number">0</span>].geometry.verticesNeedUpdate = <span class="literal">true</span>
 
 $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
 .<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
@@ -97,7 +104,8 @@ $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
   extend cachedModels, modelData
   extend spreadsheetAttributes, spreadsheetData
 
-  core.init {}, (scene, t, dt) -&gt;
+  <span class="comment"># TODO: fix t. Right now it only returns 0</span>
+  core.init {}, (scene, _, dt) -&gt;
     <span class="comment"># Need this hack to prevent adding stuff to the scene each frame</span>
     <span class="comment"># adding to the scene each frame resets the model position</span>
     <span class="keyword">unless</span> addedToScene
@@ -106,7 +114,8 @@ $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
 
       addedToScene = <span class="literal">true</span>
 
-    updateCharacters scene</code></pre>
+    updateCharacters scene, t, dt
+    t += dt</code></pre>
 </div>
         </li>
         

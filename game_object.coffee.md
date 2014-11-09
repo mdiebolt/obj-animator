@@ -24,7 +24,8 @@ Manage character data and its state
           state = I.cachedModels.characters[characterName][name]
           
           frame = state.wrap (time / 0.25).floor()
-          debugger
-          I.obj3D.children[0].geometry.verticies = frame.children[0].geometry.verticies
-          I.obj3D.children[0].geometry.verticiesNeedUpdate = true
+          I.obj3D.children[0] = frame.children[0]
+          debugger 
+          #I.obj3D.children[0].geometry.verticies = frame.children[0].geometry.verticies
+          #I.obj3D.children[0].geometry.verticiesNeedUpdate = true
           

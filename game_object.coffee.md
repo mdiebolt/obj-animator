@@ -25,7 +25,5 @@ Manage character data and its state
           
           frame = state.wrap (time / 0.25).floor()
           I.obj3D.children[0] = frame.children[0]
-          debugger 
-          #I.obj3D.children[0].geometry.verticies = frame.children[0].geometry.verticies
-          #I.obj3D.children[0].geometry.verticiesNeedUpdate = true
+          I.obj3D.children[0].geometry.verticiesNeedUpdate = true
           

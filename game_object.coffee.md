@@ -25,5 +25,4 @@ Manage character data and its state
           
           frame = state.wrap (time / 0.25).floor()
           I.obj3D.children[0] = frame.children[0]
-          I.obj3D.children[0].geometry.verticiesNeedUpdate = true
           

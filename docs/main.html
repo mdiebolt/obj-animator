@@ -89,11 +89,7 @@ bartender = <span class="literal">null</span>
 
   scene.children.forEach (child) -&gt;
     <span class="keyword">if</span> child.name <span class="keyword">is</span> <span class="string">"robo_sheriff"</span>
-      idleFrames = cachedModels.characters.robo_sheriff.idle
-
-      obj = idleFrames.wrap((t / <span class="number">0.25</span>).floor())
-      child.children[<span class="number">0</span>].geometry.dynamic = <span class="literal">true</span>
-      child.children[<span class="number">0</span>] = obj.children[<span class="number">0</span>]
+      roboSheriff.setAnimation <span class="string">"idle"</span>, t
 
 $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
 .<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;

@@ -87,7 +87,7 @@ roboSheriff = <span class="literal">null</span>
     <span class="keyword">if</span> character.name <span class="keyword">is</span> <span class="string">"Bartender"</span>
       attrs = extend character, 
         cachedModels: cachedModels
-        obj3D: scene.getObjectByName <span class="string">"bartender"</span>
+        obj3D: <span class="keyword">new</span> THREE.Obj3D
 
       bartender ||= GameObject attrs
       bartender.move(<span class="number">0</span>, <span class="number">0.1</span>)
@@ -95,7 +95,7 @@ roboSheriff = <span class="literal">null</span>
     <span class="keyword">if</span> character.name <span class="keyword">is</span> <span class="string">"Robo Sheriff"</span>
       attrs = extend character,
         cachedModels: cachedModels
-        obj3D: scene.getObjectByName <span class="string">"robo_sheriff"</span>
+        obj3D: <span class="keyword">new</span> THREE.Obj3D
 
       roboSheriff ||= GameObject attrs 
 

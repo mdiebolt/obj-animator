@@ -44,7 +44,7 @@
     move: (byX, byZ) -&gt;
       keyValues I.cachedModels.characters, (name, actions) -&gt;
         <span class="keyword">if</span> name <span class="keyword">is</span> I.name.toLowerCase()
-          <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>]
+          <span class="keyword">if</span> idle = actions.idle[<span class="number">0</span>] 
             x = idle.position.x + byX
             z = idle.position.z + byZ
 
@@ -56,7 +56,7 @@
       state = I.cachedModels.characters[characterName][name]
 
       frame = state.wrap (time / <span class="number">0.25</span>).floor()
-      I.obj3D.geometry = frame</code></pre>
+      I.obj3D.children[<span class="number">0</span>].geometry.verticies = frame.children[<span class="number">0</span>].geometry.verticies</code></pre>
 </div>
         </li>
         

@@ -12,7 +12,7 @@ Manage character data and its state
         move: (byX, byZ) ->
           keyValues I.cachedModels.characters, (name, actions) ->
             if name is I.name.toLowerCase()
-              if idle = actions.idle[0]
+              if idle = actions.idle[0] 
                 x = idle.position.x + byX
                 z = idle.position.z + byZ
 
@@ -24,5 +24,5 @@ Manage character data and its state
           state = I.cachedModels.characters[characterName][name]
           
           frame = state.wrap (time / 0.25).floor()
-          I.obj3D.geometry = frame 
+          I.obj3D.children[0].geometry.verticies = frame.children[0].geometry.verticies
           

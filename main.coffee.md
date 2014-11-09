@@ -56,11 +56,7 @@ Main
 
       scene.children.forEach (child) ->
         if child.name is "robo_sheriff"
-          idleFrames = cachedModels.characters.robo_sheriff.idle
-
-          obj = idleFrames.wrap((t / 0.25).floor())
-          child.children[0].geometry.dynamic = true
-          child.children[0] = obj.children[0]
+          roboSheriff.setAnimation "idle", t
 
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->

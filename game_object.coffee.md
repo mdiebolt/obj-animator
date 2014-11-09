@@ -18,3 +18,8 @@ Manage character data and its state
 
                 idle.position.setX x
                 idle.position.setZ z
+        
+        setAnimation: (name, time=0) ->
+          state = I.cachedModels.characters[I.name][name]
+          
+          

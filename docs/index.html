@@ -54,6 +54,7 @@ Loader.fromObj <span class="string">"characters"</span>, modelData.characters
 core.Loader.get()
 
 bartender = <span class="literal">null</span>
+roboSheriff = <span class="literal">null</span>
 
 <span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
   x = <span class="number">0</span>
@@ -87,9 +88,10 @@ bartender = <span class="literal">null</span>
       bartender ||= GameObject(extend character, {cachedModels: cachedModels})
       bartender.move(<span class="number">0</span>, <span class="number">0.1</span>)
 
-  scene.children.forEach (child) -&gt;
-    <span class="keyword">if</span> child.name <span class="keyword">is</span> <span class="string">"robo_sheriff"</span>
-      roboSheriff.setAnimation <span class="string">"idle"</span>, t
+    <span class="keyword">if</span> character.name <span class="keyword">is</span> <span class="string">"Robo Sheriff"</span>
+      roboSheriff ||= GameObject(extend character, {cachedModels: cachedModels}) 
+
+  roboSheriff?.setAnimation <span class="string">"idle"</span>, t
 
 $.<span class="keyword">when</span>(Loader.finished(), core.Loader.get())
 .<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;

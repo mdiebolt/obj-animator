@@ -54,7 +54,7 @@ Main
         if character.name is "Bartender"
           attrs = extend character, 
             cachedModels: cachedModels
-            obj3D: new THREE.Obj3D
+            obj3D: new THREE.Object3D
             
           bartender ||= GameObject attrs
           bartender.move(0, 0.1)
@@ -62,7 +62,7 @@ Main
         if character.name is "Robo Sheriff"
           attrs = extend character,
             cachedModels: cachedModels
-            obj3D: new THREE.Obj3D
+            obj3D: new THREE.Object3D
             
           roboSheriff ||= GameObject attrs 
     

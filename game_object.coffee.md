@@ -24,5 +24,6 @@ Manage character data and its state
           state = I.cachedModels.characters[characterName][name]
           
           frame = state.wrap (time / 0.25).floor()
+          debugger 
           I.obj3D.children[0] = frame.children[0]
           

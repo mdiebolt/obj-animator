@@ -1,7 +1,7 @@
 version: "0.1.0"
 remoteDependencies: [
   "https://code.jquery.com/jquery-1.10.1.min.js"
-  "https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js"
+  "https://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.js"
 ]
 dependencies:
   util: "distri/util:v0.1.0"

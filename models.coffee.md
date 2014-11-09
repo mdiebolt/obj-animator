@@ -10,7 +10,7 @@ and their actions (animation states).
           idle: ["bartender"]
           wink: ["bartender_wink_0"]
         robo_sheriff:
-          idle: ["robo_sheriff", "jetpack_bandit"] #"robo_sheriff_idle_1"]
+          idle: ["robo_sheriff", "robo_sheriff_idle_1"]
         bandit:
           idle: ["jetpack_bandit"]
       terrain:

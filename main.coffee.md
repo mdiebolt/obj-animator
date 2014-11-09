@@ -22,51 +22,28 @@ Main
 
     bartender = null
     roboSheriff = null
+    roboSheriff2 = null
 
     addCharacters = (scene) ->
-      x = 0
-      z = 0
+      roboSheriff = GameObject
+        name: "Robo Sheriff"
+        cachedModels: cachedModels
 
-      keyValues cachedModels.characters, (name, actions) ->
-        if idle = actions.idle[0]
-          idle.position.set x, 5, z
+      scene.add roboSheriff.I.obj3D
 
-          x += 10
-          z += 10
+      roboSheriff2 = GameObject
+        name: "Robo Sheriff"
+        cachedModels: cachedModels
+        position:
+          x: 20
+          y: 0
+          z: 20
 
-          scene.add idle
-
-    addItems = (scene) ->
-      x = 90
-      z = 0
-
-      keyValues cachedModels.items, (name, actions) ->
-        if idle = actions.idle[0]
-          idle.position.set x, 5, z
-
-          x -= 10
-          z += 10
-
-          scene.add idle
+      scene.add roboSheriff2.I.obj3D
 
     updateCharacters = (scene, t, dt) ->
-      spreadsheetAttributes.characters.forEach (character) ->
-        if character.name is "Bartender"
-          attrs = extend character, 
-            cachedModels: cachedModels
-            obj3D: new THREE.Object3D
-            
-          bartender ||= GameObject attrs
-          bartender.move(0, 0.1)
-        
-        if character.name is "Robo Sheriff"
-          attrs = extend character,
-            cachedModels: cachedModels
-            obj3D: new THREE.Object3D
-            
-          roboSheriff ||= GameObject attrs 
-    
-      roboSheriff?.setAnimation "idle", t
+      roboSheriff.setAnimation("idle", t)
+      roboSheriff2.setAnimation("idle", t + 0.125)
 
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->
@@ -81,7 +58,6 @@ Main
         # adding to the scene each frame resets the model position
         unless addedToScene
           addCharacters scene
-          addItems scene
 
           addedToScene = true
 

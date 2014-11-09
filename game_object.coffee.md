@@ -20,8 +20,9 @@ Manage character data and its state
                 idle.position.setZ z
         
         setAnimation: (name, time=0) ->
-          state = I.cachedModels.characters[I.name][name]
+          characterName = I.name.dasherize().underscore()
+          state = I.cachedModels.characters[characterName][name]
           
-          frame = state.wrap (t / 0.25).floor()
+          frame = state.wrap (time / 0.25).floor()
           I.obj3D.geometry = frame
           

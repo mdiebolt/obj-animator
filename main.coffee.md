@@ -21,6 +21,7 @@ Main
     core.Loader.get()
 
     bartender = null
+    roboSheriff = null
 
     addCharacters = (scene) ->
       x = 0
@@ -53,10 +54,11 @@ Main
         if character.name is "Bartender"
           bartender ||= GameObject(extend character, {cachedModels: cachedModels})
           bartender.move(0, 0.1)
-
-      scene.children.forEach (child) ->
-        if child.name is "robo_sheriff"
-          roboSheriff.setAnimation "idle", t
+        
+        if character.name is "Robo Sheriff"
+          roboSheriff ||= GameObject(extend character, {cachedModels: cachedModels}) 
+    
+      roboSheriff?.setAnimation "idle", t
 
     $.when(Loader.finished(), core.Loader.get())
     .then (modelData, spreadsheetData) ->

@@ -22,4 +22,6 @@ Manage character data and its state
         setAnimation: (name, time=0) ->
           state = I.cachedModels.characters[I.name][name]
           
+          frame = state.wrap (t / 0.25).floor()
+          I.obj3D.geometry = frame
           

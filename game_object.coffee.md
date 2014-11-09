@@ -24,5 +24,5 @@ Manage character data and its state
           state = I.cachedModels.characters[characterName][name]
           
           frame = state.wrap (time / 0.25).floor()
-          I.obj3D.geometry = frame
+          I.obj3D.geometry = frame 
           

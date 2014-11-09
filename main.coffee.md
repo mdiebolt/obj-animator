@@ -50,13 +50,22 @@ Main
           scene.add idle
 
     updateCharacters = (scene, t, dt) ->
+      debugger 
       spreadsheetAttributes.characters.forEach (character) ->
         if character.name is "Bartender"
-          bartender ||= GameObject(extend character, {cachedModels: cachedModels})
+          attrs = extend character, 
+            cachedModels: cachedModels
+            obj3D: scene.getObjectByName "bartender"
+            
+          bartender ||= GameObject attrs
           bartender.move(0, 0.1)
         
         if character.name is "Robo Sheriff"
-          roboSheriff ||= GameObject(extend character, {cachedModels: cachedModels}) 
+          attrs = extend character,
+            cachedModels: cachedModels
+            obj3D: scene.getObjectByName "robo_sheriff"
+            
+          roboSheriff ||= GameObject attrs 
     
       roboSheriff?.setAnimation "idle", t
 

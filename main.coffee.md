@@ -50,7 +50,6 @@ Main
           scene.add idle
 
     updateCharacters = (scene, t, dt) ->
-      debugger 
       spreadsheetAttributes.characters.forEach (character) ->
         if character.name is "Bartender"
           attrs = extend character, 

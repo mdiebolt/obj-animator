@@ -52,7 +52,10 @@
             idle.position.setZ z
 
     setAnimation: (name, time=<span class="number">0</span>) -&gt;
-      state = I.cachedModels.characters[I.name][name]</code></pre>
+      state = I.cachedModels.characters[I.name][name]
+
+      frame = state.wrap (t / <span class="number">0.25</span>).floor()
+      I.obj3D.geometry = frame</code></pre>
 </div>
         </li>
         

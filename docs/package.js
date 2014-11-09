@@ -168,7 +168,7 @@
   "source": {
     "game_object.coffee.md": {
       "path": "game_object.coffee.md",
-      "content": "Game Object\n===========\n\nManage character data and its state\n\n    module.exports = (I={}) ->\n      defaults I,\n        active: true\n        state: \"idle\"\n      \n      self = \n        move: (byX, byZ) ->\n          keyValues I.cachedModels.characters, (name, actions) ->\n            if name is I.name.toLowerCase()\n              if idle = actions.idle[0]\n                x = idle.position.x + byX\n                z = idle.position.z + byZ\n                \n                idle.position.setX x\n                idle.position.setZ z\n                ",
+      "content": "Game Object\n===========\n\nManage character data and its state\n\n    module.exports = (I={}) ->\n      defaults I,\n        active: true\n        state: \"idle\"\n\n      self =\n        move: (byX, byZ) ->\n          keyValues I.cachedModels.characters, (name, actions) ->\n            if name is I.name.toLowerCase()\n              if idle = actions.idle[0]\n                x = idle.position.x + byX\n                z = idle.position.z + byZ\n\n                idle.position.setX x\n                idle.position.setZ z\n",
       "mode": "100644",
       "type": "blob"
     },

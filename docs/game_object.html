@@ -56,9 +56,10 @@
       state = I.cachedModels.characters[characterName][name]
 
       frame = state.wrap (time / <span class="number">0.25</span>).floor()
-      <span class="keyword">debugger</span>
-      I.obj3D.children[<span class="number">0</span>].geometry.verticies = frame.children[<span class="number">0</span>].geometry.verticies
-      I.obj3D.children[<span class="number">0</span>].geometry.verticiesNeedUpdate = <span class="literal">true</span></code></pre>
+      I.obj3D.children[<span class="number">0</span>] = frame.children[<span class="number">0</span>]
+      <span class="keyword">debugger</span> 
+      <span class="comment">#I.obj3D.children[0].geometry.verticies = frame.children[0].geometry.verticies</span>
+      <span class="comment">#I.obj3D.children[0].geometry.verticiesNeedUpdate = true</span></code></pre>
 </div>
         </li>
         

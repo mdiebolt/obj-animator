@@ -5,6 +5,7 @@ Manage character data and its state
 
     module.exports = (I={}) ->
       defaults I,
+        tOffset: 0
         active: true
         state: "idle"
         obj3D: new THREE.Object3D
@@ -36,5 +37,13 @@ Manage character data and its state
           # Need our own mesh copy
           mesh = frame.children[0]
           ourMesh = new THREE.Mesh(mesh.geometry, mesh.material)
+          ourMesh.userData = self
 
           I.obj3D.add ourMesh
+
+        update: (t, dt) ->
+          # Update position
+          # Update animations
+          self.setAnimation("idle", t + I.tOffset)
+          # etc.
+          I.obj3D.position.copy I.position

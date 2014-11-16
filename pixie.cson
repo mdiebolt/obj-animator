@@ -5,4 +5,4 @@ remoteDependencies: [
 ]
 dependencies:
   util: "distri/util:v0.1.0"
-  "tactics-core": "distri/tactics-core:v0.2.3-pre.0"
+  "tactics-core": "distri/tactics-core:v0.2.3-pre.2"

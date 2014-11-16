@@ -1,7 +1,7 @@
 Main
 ====
 
-    core = require "core"
+    TacticsCore = require "tactics-core"
 
     Loader = require "./loader"
     modelData = require "./models"
@@ -18,7 +18,7 @@ Main
     Loader.fromObj "terrain", modelData.terrain
     Loader.fromObj "characters", modelData.characters
 
-    core.Loader.get()
+    TacticsCore.Loader.get()
 
     bartender = null
     roboSheriff = null
@@ -45,7 +45,7 @@ Main
       roboSheriff.setAnimation("idle", t)
       roboSheriff2.setAnimation("idle", t + 0.125)
 
-    $.when(Loader.finished(), core.Loader.get())
+    $.when(Loader.finished(), TacticsCore.Loader.get())
     .then (modelData, spreadsheetData) ->
       console.log modelData
       console.log spreadsheetData
@@ -53,12 +53,19 @@ Main
       extend cachedModels, modelData
       extend spreadsheetAttributes, spreadsheetData
 
-      core.init {}, (scene, t, dt) ->
-        # Need this hack to prevent adding stuff to the scene each frame
-        # adding to the scene each frame resets the model position
-        unless addedToScene
-          addCharacters scene
+      TacticsCore.init
+        data: {}
+        update: (scene, t, dt) ->
+          # Need this hack to prevent adding stuff to the scene each frame
+          # adding to the scene each frame resets the model position
+          unless addedToScene
+            addCharacters scene
+  
+            addedToScene = true
+  
+          updateCharacters scene, t, dt
+        click: (results) ->
+          if results[0]
+            {object} = results[0]
 
-          addedToScene = true
-
-        updateCharacters scene, t, dt
+            object.material.color.setRGB rand(), rand(), rand()

@@ -54,9 +54,13 @@ Main
       extend cachedModels, modelData
       extend spreadsheetAttributes, spreadsheetData
 
+      activeCharacter = null
+      theScene = null
+
       TacticsCore.init
         data: {}
         update: (scene, t, dt) ->
+          theScene = scene
           # Need this hack to prevent adding stuff to the scene each frame
           # adding to the scene each frame resets the model position
           unless addedToScene
@@ -67,14 +71,20 @@ Main
           characters.invoke "update", t, dt
 
         clickObjectsFn: ->
-          characters.map (character) -> character.I.obj3D
+          if activeCharacter
+            theScene.children
+          else
+            characters.map (character) -> character.I.obj3D
         click: (results) ->
-          console.log results
           if results[0]
+            console.log results[0]
+
             {object} = results[0]
 
-            gameObject = object.userData
+            console.log object
 
-            console.log gameObject.I.position
-            
-            gameObject.I.position.x += 20
+            if character = object.userData.character
+              activeCharacter = character
+            else
+              # Move to location
+              activeCharacter?.I.position.copy(object.position).setY(0)

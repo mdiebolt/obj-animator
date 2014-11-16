@@ -11,6 +11,7 @@ Manage character data and its state
         obj3D: new THREE.Object3D
         position: new THREE.Vector3(I.position?.x ? 0, I.position?.y ? 0, I.position?.z ? 0)
 
+      I.position = new THREE.Vector3(I.position.x, I.position.y, I.position.z)
       I.obj3D.position.copy I.position
 
       self =
@@ -37,7 +38,7 @@ Manage character data and its state
           # Need our own mesh copy
           mesh = frame.children[0]
           ourMesh = new THREE.Mesh(mesh.geometry, mesh.material)
-          ourMesh.userData = self
+          ourMesh.userData.character = self
 
           I.obj3D.add ourMesh
 

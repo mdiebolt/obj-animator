@@ -69,8 +69,8 @@ Main
             addedToScene = true
 
           characters.invoke "update", t, dt
-
         clickObjectsFn: ->
+
           if activeCharacter
             theScene.children
           else

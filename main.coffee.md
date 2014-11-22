@@ -1,7 +1,7 @@
 Main
 ====
 
-    core = require "core"
+    TacticsCore = require "tactics-core"
 
     Loader = require "./loader"
     modelData = require "./models"
@@ -18,57 +18,35 @@ Main
     Loader.fromObj "terrain", modelData.terrain
     Loader.fromObj "characters", modelData.characters
 
-    core.Loader.get()
+    TacticsCore.Loader.get()
 
     bartender = null
     roboSheriff = null
+    roboSheriff2 = null
+    
+    characters = []
 
     addCharacters = (scene) ->
-      x = 0
-      z = 0
+      roboSheriff = GameObject
+        name: "Robo Sheriff"
+        cachedModels: cachedModels
 
-      keyValues cachedModels.characters, (name, actions) ->
-        if idle = actions.idle[0]
-          idle.position.set x, 5, z
+      characters.push roboSheriff
+      scene.add roboSheriff.I.obj3D
 
-          x += 10
-          z += 10
+      roboSheriff2 = GameObject
+        name: "Robo Sheriff"
+        cachedModels: cachedModels
+        tOffset: 0.125
+        position:
+          x: 20
+          y: 0
+          z: 20
 
-          scene.add idle
+      characters.push roboSheriff2
+      scene.add roboSheriff2.I.obj3D      
 
-    addItems = (scene) ->
-      x = 90
-      z = 0
-
-      keyValues cachedModels.items, (name, actions) ->
-        if idle = actions.idle[0]
-          idle.position.set x, 5, z
-
-          x -= 10
-          z += 10
-
-          scene.add idle
-
-    updateCharacters = (scene, t, dt) ->
-      spreadsheetAttributes.characters.forEach (character) ->
-        if character.name is "Bartender"
-          attrs = extend character, 
-            cachedModels: cachedModels
-            obj3D: new THREE.Object3D
-            
-          bartender ||= GameObject attrs
-          bartender.move(0, 0.1)
-        
-        if character.name is "Robo Sheriff"
-          attrs = extend character,
-            cachedModels: cachedModels
-            obj3D: new THREE.Object3D
-            
-          roboSheriff ||= GameObject attrs 
-    
-      roboSheriff?.setAnimation "idle", t
-
-    $.when(Loader.finished(), core.Loader.get())
+    $.when(Loader.finished(), TacticsCore.Loader.get())
     .then (modelData, spreadsheetData) ->
       console.log modelData
       console.log spreadsheetData
@@ -76,13 +54,37 @@ Main
       extend cachedModels, modelData
       extend spreadsheetAttributes, spreadsheetData
 
-      core.init {}, (scene, t, dt) ->
-        # Need this hack to prevent adding stuff to the scene each frame
-        # adding to the scene each frame resets the model position
-        unless addedToScene
-          addCharacters scene
-          addItems scene
+      activeCharacter = null
+      theScene = null
 
-          addedToScene = true
+      TacticsCore.init
+        data: {}
+        update: (scene, t, dt) ->
+          theScene = scene
+          # Need this hack to prevent adding stuff to the scene each frame
+          # adding to the scene each frame resets the model position
+          unless addedToScene
+            addCharacters scene
+  
+            addedToScene = true
 
-        updateCharacters scene, t, dt
+          characters.invoke "update", t, dt
+        clickObjectsFn: ->
+
+          if activeCharacter
+            theScene.children
+          else
+            characters.map (character) -> character.I.obj3D
+        click: (results) ->
+          if results[0]
+            console.log results[0]
+
+            {object} = results[0]
+
+            console.log object
+
+            if character = object.userData.character
+              activeCharacter = character
+            else
+              # Move to location
+              activeCharacter?.I.position.copy(object.position).setY(0)
